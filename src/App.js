@@ -7,12 +7,12 @@ const Navigation = lazy(() =>
 const Home = lazy(() => import("./pages/home/home.component"));
 
 const randomLoaderTexts = [
-  "Warming up AI engines. One moment.",
-  "Initiating system. Please wait.",
-  "Bringing AI online. Standby.",
-  "Initializing. This won't take long.",
-  "Getting AI ready. Hang tight.",
-  "Starting up AI process. Please wait.",
+  "The greatest wealth is health.",
+  "Happiness is the best medicine.",
+  "Wellness starts with you.",
+  "Healthcare is about caring, not just curing.",
+  "Wellness is a journey, not a destination.",
+  "Medicine is a science, and healing is an art.",
 ];
 
 const App = () => {
@@ -24,18 +24,6 @@ const App = () => {
   if (textElement) {
     textElement.innerHTML = randomLoaderText;
   }
-
-  const [paused, setPaused] = useState(false);
-  const audio = document.getElementById("audio-bg");
-
-  const handleClick = () => {
-    if (paused) {
-      audio.play();
-    } else {
-      audio.pause();
-    }
-    setPaused(!paused);
-  };
 
   if (circleLoader) {
     setTimeout(() => {
@@ -49,10 +37,7 @@ const App = () => {
       <Fragment>
         <Suspense>
           <Routes>
-            <Route
-              path="/"
-              element={<Navigation audio={audio} handleClick={handleClick} />}
-            >
+            <Route path="/" element={<Navigation />}>
               <Route index element={<Home />} />
             </Route>
           </Routes>
