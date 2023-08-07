@@ -24,10 +24,15 @@
   --main-font-bold: "spacemono-bold", sans-serif;
   --sub-font: "monument-regular", sans-serif;
   --label-font: "marvinvisions-bold", sans-serif;
-  --primary-color: #140c50;
-  --secondary-color: #1d1571;
+  --primary-color: #0b007b;
+  /* --secondary-color: #1d1571;
   --color-body-text: #b2beff;
-  --color-logo-text: #ffb4a1;
+  --color-logo-text: #ffb4a1; */
+  --color-preload-text: #ccd4ff;
+  --secondary-color: #ff9503;
+  --color-green: #2ec209;
+  --color-black: #2f3138;
+  --color-white: #fbfbfb;
 }
 
 * {

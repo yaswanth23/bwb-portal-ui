@@ -5,14 +5,14 @@ import "./navigation.styles.css";
 const Navigation = () => {
   return (
     <Fragment>
-      <div className="bg">
-        <div className="logo-container">
-          <Link to="/" className="logo">
-            Nesh
-          </Link>
-        </div>
-        <Outlet />
+      {/* <div className="bg"> */}
+      <div className="logo-container">
+        <Link to="/" className="logo">
+          bharatwellbeing
+        </Link>
       </div>
+      <Outlet />
+      {/* </div> */}
     </Fragment>
   );
 };
