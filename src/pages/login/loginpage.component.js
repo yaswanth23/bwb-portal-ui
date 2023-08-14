@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-// import { Helmet } from "react-helmet-async";
+import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import "./login.styles.css";
 
@@ -17,7 +17,6 @@ const LoginForm = ({ onLogin }) => {
 
   const handleVerifyLogin = async (event) => {
     event.preventDefault();
-    validate(mobileNumber);
 
     // if (formErrorMessage) {
     //   return;
@@ -43,7 +42,6 @@ const LoginForm = ({ onLogin }) => {
 
       const data = await response.json();
       if (response.ok) {
-        console.log("-->data", data);
         onLogin();
       } else {
         if (data.status === "error") {
@@ -58,21 +56,24 @@ const LoginForm = ({ onLogin }) => {
   };
 
   const handleMobileNumberChange = (event) => {
-    setMobileNumber(event.target.value);
+    const newMobileNumber = +event.target.value;
+    if (!isNaN(newMobileNumber)) {
+      if (newMobileNumber.toString().length <= 10) {
+        setMobileNumber(newMobileNumber.toString());
+      }
+    }
   };
 
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
   };
 
-  const validate = (value) => {
-    if (value.length < 10 || value.match(/^[0-9]+$/) === null) {
-      setFormErrorMessage("Please enter a valid mobile number");
-    }
-  };
-
   return (
     <>
+      <Helmet>
+        <title>Login | BharatWellbeing</title>
+        <meta name="description" content="Login | BharatWellbeing" />
+      </Helmet>
       <div className="login-page-container">
         <div className="lp-logo-container">
           <Link to="/" className="lp-logo">

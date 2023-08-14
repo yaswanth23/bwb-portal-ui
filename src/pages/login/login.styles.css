@@ -61,7 +61,7 @@
   background-color: #e6e9ff;
 }
 .lp-form-password-inp {
-  margin-top: 1.5rem;
+  margin: 1.5rem 0 0.5rem 0;
 }
 .lp-form-submit-button {
   margin-top: 1.4rem;
@@ -78,7 +78,7 @@
   text-transform: uppercase;
 }
 .lp-form-error-message {
-  font-size: 0.85rem;
-  font-weight: 600;
+  font-size: 0.8rem;
+  font-weight: bold;
   color: var(--error-color);
 }
