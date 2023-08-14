@@ -18,10 +18,6 @@ const LoginForm = ({ onLogin }) => {
   const handleVerifyLogin = async (event) => {
     event.preventDefault();
 
-    // if (formErrorMessage) {
-    //   return;
-    // }
-
     const apiEndpoint =
       "https://qar5m2k5ra.execute-api.ap-south-1.amazonaws.com/dev/api/v1/pharmacy/user/login";
     const requestData = {
