@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
+import MedicineBanner from "../../assets/images/medicines_banner.png";
 import "./login.styles.css";
 
 const LoginForm = ({ onLogin }) => {
@@ -9,6 +10,12 @@ const LoginForm = ({ onLogin }) => {
   const [formErrorMessage, setFormErrorMessage] = useState("");
 
   useEffect(() => {
+    const imageList = [MedicineBanner];
+    imageList.forEach((image) => {
+      const newImage = new Image();
+      newImage.src = image;
+      window[image] = newImage;
+    });
     document.body.style.backgroundColor = "#fbfbfb";
     return () => {
       document.body.style.backgroundColor = "#fbfbfb";
@@ -75,6 +82,9 @@ const LoginForm = ({ onLogin }) => {
           <Link to="/" className="lp-logo">
             <span className="lp-sub-logo-name">bharat</span>wellbeing
           </Link>
+        </div>
+        <div className="lp-image-container">
+          <img className="lp-image-main" alt="medicines" src={MedicineBanner} />
         </div>
         <div className="lp-form-container">
           <div className="lp-form-sub-container">

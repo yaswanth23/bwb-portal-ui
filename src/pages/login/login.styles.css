@@ -1,8 +1,10 @@
 .login-page-container {
   background-color: #e6e9ff;
   min-height: 100vh;
+  display: flex;
 }
 .lp-logo-container {
+  position: absolute;
   padding: 2rem 4rem;
   display: flex;
   justify-content: space-between;
@@ -26,9 +28,17 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
 }
 .lp-form-sub-container {
   width: 21rem;
+}
+.lp-image-container {
+  display: flex;
+  justify-content: center;
+}
+.lp-image-main {
+  object-fit: contain;
 }
 .lp-form-header,
 .login-page-container,
