@@ -1,5 +1,7 @@
 import { Fragment, lazy, Suspense, useState } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { selectIsUserLoggedIn } from "./store/user/user.selector";
 
 // const Navigation = lazy(() =>
 //   import("./routes/navigation/navigation.component")
@@ -18,7 +20,7 @@ const LoginPage = lazy(() => import("./pages/login/loginpage.component"));
 
 const App = () => {
   // const [loading, setLoading] = useState(true);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const isUserLoggedIn = useSelector(selectIsUserLoggedIn);
   // const circleLoader = document.getElementById("preloader");
   // const randomIndex = Math.floor(Math.random() * randomLoaderTexts.length);
   // const randomLoaderText = randomLoaderTexts[randomIndex];
@@ -34,10 +36,6 @@ const App = () => {
   //   }, 6000);
   // }
 
-  const handleLogin = () => {
-    setIsLoggedIn(true);
-  };
-
   return (
     // !loading && (
     <Fragment>
@@ -45,17 +43,11 @@ const App = () => {
         <Routes>
           <Route
             path="/"
-            element={
-              isLoggedIn ? (
-                <Navigate to="/home" />
-              ) : (
-                <LoginPage onLogin={handleLogin} />
-              )
-            }
+            element={isUserLoggedIn ? <Navigate to="/home" /> : <LoginPage />}
           />
           <Route
             path="/home"
-            element={isLoggedIn ? <Home /> : <Navigate to="/" />}
+            element={isUserLoggedIn ? <Home /> : <Navigate to="/" />}
           />
           {/* <Route path="/" element={<Navigation />}>
             <Route index element={<Home />} />
