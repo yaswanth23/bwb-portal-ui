@@ -43,7 +43,6 @@ const LoginForm = ({ onLogin }) => {
 
       const data = await response.json();
       if (response.ok) {
-        const data = await response.json();
         console.log("-->data", data);
         onLogin();
       } else {

@@ -4,7 +4,7 @@ import "./homepage.styles.css";
 const HomePage = () => {
   return (
     <Fragment>
-      <div>home page</div>
+      <div>welcome to home page</div>
     </Fragment>
   );
 };
