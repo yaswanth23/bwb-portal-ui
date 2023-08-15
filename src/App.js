@@ -1,5 +1,5 @@
 import { Fragment, lazy, Suspense } from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectIsUserLoggedIn } from "./store/user/user.selector";
 
@@ -39,21 +39,17 @@ const App = () => {
   return (
     // !loading && (
     <Fragment>
+      {/* <Suspense>
+        {isUserLoggedIn ? <Home /> : null} */}
       <Suspense>
         <Routes>
           <Route
             path="/"
-            element={isUserLoggedIn ? <Navigate to="/home" /> : <LoginPage />}
-          />
-          <Route
-            path="/home"
-            element={isUserLoggedIn ? <Home /> : <Navigate to="/" />}
-          />
-          {/* <Route path="/" element={<Navigation />}>
-            <Route index element={<Home />} />
-          </Route> */}
+            element={isUserLoggedIn ? <Home /> : <LoginPage />}
+          ></Route>
         </Routes>
       </Suspense>
+      {/* </Suspense> */}
     </Fragment>
     // )
   );

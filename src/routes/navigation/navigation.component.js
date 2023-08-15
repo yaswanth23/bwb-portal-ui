@@ -17,7 +17,6 @@ const Navigation = () => {
           <span className="sub-logo-name">bharat</span>wellbeing
         </Link>
       </div>
-      <Outlet />
     </Fragment>
   );
 };

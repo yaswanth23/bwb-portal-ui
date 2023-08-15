@@ -1,5 +1,7 @@
 import { Fragment, memo, useEffect } from "react";
+import Sidebar from "../../components/sidebar/sidebar.component";
 import "./homepage.styles.css";
+import { Outlet } from "react-router-dom";
 
 const HomePage = () => {
   useEffect(() => {
@@ -8,9 +10,15 @@ const HomePage = () => {
       document.body.style.backgroundColor = "#fbfbfb";
     };
   }, []);
+
   return (
     <Fragment>
-      <div>welcome to home page</div>
+      <div className="hp-container">
+        <Sidebar />
+        <div className="hp-content-container">
+          <Outlet />
+        </div>
+      </div>
     </Fragment>
   );
 };
