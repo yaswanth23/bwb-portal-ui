@@ -44,7 +44,7 @@
   } */
 }
 .sb-nav-item {
-  margin: 1.5rem 2rem 1rem 0;
+  margin: 1.2rem 2rem 1rem 0;
 }
 .sb-nav-item a {
   text-decoration: none;
@@ -69,7 +69,6 @@
   background-color: var(--color-preload-text);
   .sb-nav-link-text {
     color: var(--primary-color);
-    font-weight: bolder;
   }
   .sb-nav-link-icon {
     fill: var(--primary-color);
@@ -81,6 +80,5 @@
 .sb-nav-link-text {
   font-family: var(--main-font);
   color: var(--color-preload-text);
-  font-weight: bolder;
   text-transform: uppercase;
 }
