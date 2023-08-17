@@ -1,13 +1,38 @@
-import { memo } from "react";
+import { memo, useState } from "react";
+import { useDispatch } from "react-redux";
+import { changeIsLoggedOutUser } from "../../store/user/user.action";
 import "./navbar.styles.css";
 
 import user_b from "../../assets/icons/user-blue.svg";
 
 const Navbar = () => {
+  const dispatch = useDispatch();
+  const [isDropdownVisible, setIsDropdownVisible] = useState(false);
+
+  const toggleDropdown = () => {
+    setIsDropdownVisible(!isDropdownVisible);
+  };
+
+  const handleLogout = () => {
+    dispatch(changeIsLoggedOutUser());
+  };
+
   return (
     <>
       <div className="navbar-container">
-        <img src={user_b} className="user-link-icon" alt="user-profile" />
+        <div className="user-icon-container">
+          <img
+            src={user_b}
+            className="user-link-icon"
+            alt="user-profile"
+            onClick={toggleDropdown}
+          />
+          {isDropdownVisible && (
+            <div className="nv-dropdown-menu">
+              <span onClick={handleLogout}>Log out</span>
+            </div>
+          )}
+        </div>
       </div>
     </>
   );
