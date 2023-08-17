@@ -1,3 +1,6 @@
 .hp-container {
   display: flex;
 }
+.hp-content-container {
+  width: 78%;
+}
