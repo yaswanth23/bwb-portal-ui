@@ -6,6 +6,8 @@ import budget_b from "../../assets/icons/budget-blue.svg";
 import budget_w from "../../assets/icons/budget-white.svg";
 import home_b from "../../assets/icons/home-blue.svg";
 import home_w from "../../assets/icons/home-white.svg";
+import plane_b from "../../assets/icons/plane-blue.svg";
+import plane_w from "../../assets/icons/plane-white.svg";
 
 const Sidebar = () => {
   const [activeLinkIdx, setActiveLinkIdx] = useState(1);
@@ -57,6 +59,22 @@ const Sidebar = () => {
                   alt="book-diagnostics-icon"
                 />
                 <span className="sb-nav-link-text">Book Diagnostics</span>
+              </Link>
+            </li>
+            <li className="sb-nav-item">
+              <Link
+                to="/"
+                onClick={() => setActiveLinkIdx(3)}
+                className={`sb-nav-link ${
+                  3 === activeLinkIdx ? "active" : null
+                }`}
+              >
+                <img
+                  src={3 === activeLinkIdx ? plane_b : plane_w}
+                  className="sb-nav-link-icon"
+                  alt="transactions-icon"
+                />
+                <span className="sb-nav-link-text">Transactions</span>
               </Link>
             </li>
           </ul>
