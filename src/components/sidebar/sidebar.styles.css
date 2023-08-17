@@ -15,7 +15,7 @@
 }
 .sb-logo {
   font-family: var(--main-font);
-  font-size: 24px;
+  font-size: 1.5rem;
   letter-spacing: -1px;
   color: var(--color-preload-text);
   line-height: 2.8rem;
