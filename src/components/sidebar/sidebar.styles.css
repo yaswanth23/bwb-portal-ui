@@ -1,6 +1,6 @@
 .sb-container {
   background-color: var(--primary-color);
-  width: 22%;
+  width: 20%;
   max-height: 100vh;
   overflow-y: auto;
 }
