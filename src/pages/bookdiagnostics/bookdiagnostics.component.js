@@ -6,7 +6,7 @@ import "./bookdiagnostics.styles.css";
 const BookDiagnosticsPage = () => {
   const [pincodes, setPincodes] = useState(null);
   const [inputPincodeValue, setInputPincodeValue] = useState("");
-  const [selectedPincode, setSelectedPincode] = useState("");
+  const [selectedPincode, setSelectedPincode] = useState("Select Pincode");
   const [openPincodeDropdown, setOpenPincodeDropdown] = useState(false);
   const limit = 10;
 
@@ -87,7 +87,7 @@ const BookDiagnosticsPage = () => {
               }
               onClick={() => setOpenPincodeDropdown(!openPincodeDropdown)}
             >
-              {selectedPincode ? selectedPincode : "Select Pincode"}
+              {selectedPincode}
               <BiChevronDown
                 size={25}
                 className={openPincodeDropdown && "bdp-chevron-rotate"}
