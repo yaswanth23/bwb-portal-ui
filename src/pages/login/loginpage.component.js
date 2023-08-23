@@ -104,7 +104,7 @@ const LoginForm = () => {
                   type="text"
                   required
                   name="mobileNumber"
-                  value={mobileNumber}
+                  value={mobileNumber == 0 ? "" : mobileNumber}
                   onChange={handleMobileNumberChange}
                   className="lp-form-input-field"
                   placeholder="Enter Mobile Number"
