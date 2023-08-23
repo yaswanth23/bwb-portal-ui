@@ -156,7 +156,7 @@ const BookDiagnosticsPage = () => {
             </div>
             <ul
               className={
-                openPincodeDropdown ? "bdp-u-list" : "bdp-u-list close"
+                openPincodeDropdown ? "bdp-ul-s-list" : "bdp-ul-s-list close"
               }
             >
               <div className="bdp-u-s-list">
@@ -208,7 +208,7 @@ const BookDiagnosticsPage = () => {
             </div>
             <ul
               className={
-                openDiagnosticDropdown ? "bdp-u-list" : "bdp-u-list close"
+                openDiagnosticDropdown ? "bdp-ul-d-list" : "bdp-ul-d-list close"
               }
             >
               <div className="bdp-u-s-list">

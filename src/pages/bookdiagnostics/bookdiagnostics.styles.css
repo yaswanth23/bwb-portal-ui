@@ -17,8 +17,7 @@
   width: 30rem;
   margin: 1.5rem 1rem;
 }
-.bdp-search-main,
-.bdp-diagnostics-main {
+.bdp-search-main {
   background-color: var(--color-white);
   width: 100%;
   padding: 0.5rem;
@@ -31,6 +30,22 @@
   color: var(--color-grey);
   cursor: pointer;
 }
+.bdp-diagnostics-main {
+  background-color: var(--color-white);
+  width: 100%;
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid var(--primary-color);
+  border-radius: 0.5rem;
+  color: var(--color-grey);
+  cursor: pointer;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
 .bdp-search-main.selected,
 .bdp-diagnostics-main.selected {
   color: black;
@@ -42,15 +57,32 @@
 .bdp-diagnostics-label {
   font-size: 1rem;
 }
-.bdp-u-list {
+.bdp-ul-s-list {
   background-color: var(--color-white);
   margin-top: 0.5rem;
   border-radius: 0.5rem;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
   max-height: 15rem;
   overflow-y: auto;
+  position: absolute;
+  z-index: 10;
+  width: 20rem;
 }
-.bdp-u-list.close {
+.bdp-ul-s-list.close {
+  max-height: 0;
+}
+.bdp-ul-d-list {
+  background-color: var(--color-white);
+  margin-top: 0.5rem;
+  border-radius: 0.5rem;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  max-height: 15rem;
+  overflow-y: auto;
+  position: absolute;
+  z-index: 10;
+  width: 30rem;
+}
+.bdp-ul-d-list.close {
   max-height: 0;
 }
 .bdp-s-list {
