@@ -8,6 +8,11 @@ const BookDiagnosticsPage = () => {
   const [inputPincodeValue, setInputPincodeValue] = useState("");
   const [selectedPincode, setSelectedPincode] = useState("Select Pincode");
   const [openPincodeDropdown, setOpenPincodeDropdown] = useState(false);
+  const [diagnostics, setDiagnostics] = useState(null);
+  const [inputDiagnosticValue, setInputDiagnosticValue] = useState("");
+  const [selectedDiagnostics, setSelectedDiagnostics] =
+    useState("Select Test Name");
+  const [openDiagnosticDropdown, setOpenDiagnosticDropdown] = useState(false);
   const limit = 10;
 
   useEffect(() => {
@@ -39,6 +44,34 @@ const BookDiagnosticsPage = () => {
   }, [inputPincodeValue]);
 
   useEffect(() => {
+    if (inputDiagnosticValue !== "") {
+      fetch(
+        `https://qar5m2k5ra.execute-api.ap-south-1.amazonaws.com/dev/api/v1/search/diagnostics/${inputDiagnosticValue}`,
+        {
+          method: "GET",
+          headers: {
+            Authorization:
+              "eyJhbGciOiJIUzUxMiJ9.eyJzZWNyZXQiOiJiZmE3MzhhNjdkOGU5NGNmNDI4ZTdjZWE5Y2E1YzY3YiJ9.o4k544e1-NWMTBT28lOmEJe_D4TMOuwb11_rXLWb_SNhd6Oq70lWWqVdHzenEr1mhnVTDAtcOufnc4CMlIxUiw",
+            "Content-Type": "application/json",
+          },
+        }
+      )
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          return response.json();
+        })
+        .then((data) => {
+          setDiagnostics(data.data);
+        })
+        .catch((error) => {
+          console.error("There was a problem with the fetch operation:", error);
+        });
+    }
+  }, [inputDiagnosticValue]);
+
+  useEffect(() => {
     fetch(
       `https://qar5m2k5ra.execute-api.ap-south-1.amazonaws.com/dev/api/v1/get/pincodes?page=1&limit=${limit}`,
       {
@@ -62,6 +95,30 @@ const BookDiagnosticsPage = () => {
       .catch((error) => {
         console.error("There was a problem with the fetch operation:", error);
       });
+
+    fetch(
+      `https://qar5m2k5ra.execute-api.ap-south-1.amazonaws.com/dev/api/v1/get/diagnostics?page=1&limit=${limit}`,
+      {
+        method: "GET",
+        headers: {
+          Authorization:
+            "eyJhbGciOiJIUzUxMiJ9.eyJzZWNyZXQiOiJiZmE3MzhhNjdkOGU5NGNmNDI4ZTdjZWE5Y2E1YzY3YiJ9.o4k544e1-NWMTBT28lOmEJe_D4TMOuwb11_rXLWb_SNhd6Oq70lWWqVdHzenEr1mhnVTDAtcOufnc4CMlIxUiw",
+          "Content-Type": "application/json",
+        },
+      }
+    )
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setDiagnostics(data.data);
+      })
+      .catch((error) => {
+        console.error("There was a problem with the fetch operation:", error);
+      });
   }, []);
 
   const handleInputPincode = (event) => {
@@ -71,6 +128,10 @@ const BookDiagnosticsPage = () => {
         setInputPincodeValue(newPincode.toString());
       }
     }
+  };
+
+  const handleInputDiagnostic = (event) => {
+    setInputDiagnosticValue(event.target.value);
   };
 
   return (
@@ -125,6 +186,58 @@ const BookDiagnosticsPage = () => {
                   }}
                 >
                   {item?.pincode}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="bdp-diagnostics-container">
+            <span className="bdp-diagnostics-label">Lab Tests</span>
+            <div
+              className={
+                !selectedDiagnostics
+                  ? "bdp-diagnostics-main"
+                  : "bdp-diagnostics-main selected"
+              }
+              onClick={() => setOpenDiagnosticDropdown(!openDiagnosticDropdown)}
+            >
+              {selectedDiagnostics}
+              <BiChevronDown
+                size={25}
+                className={openDiagnosticDropdown && "bdp-chevron-rotate"}
+              />
+            </div>
+            <ul
+              className={
+                openDiagnosticDropdown ? "bdp-u-list" : "bdp-u-list close"
+              }
+            >
+              <div className="bdp-u-s-list">
+                <AiOutlineSearch size={18} className="bdp-u-search-icon" />
+                <input
+                  type="text"
+                  value={inputDiagnosticValue == 0 ? "" : inputDiagnosticValue}
+                  onChange={handleInputDiagnostic}
+                  placeholder="Enter Test Name"
+                  className="bdp-u-search-text"
+                />
+              </div>
+              {diagnostics?.map((item) => (
+                <li
+                  key={item.testId}
+                  className={
+                    item?.attributeValue == selectedDiagnostics
+                      ? "bdp-s-list p-selected"
+                      : "bdp-s-list"
+                  }
+                  onClick={() => {
+                    if (item?.attributeValue !== selectedDiagnostics) {
+                      setSelectedDiagnostics(item?.attributeValue);
+                      setOpenDiagnosticDropdown(false);
+                      setInputDiagnosticValue("");
+                    }
+                  }}
+                >
+                  {item?.attributeValue}
                 </li>
               ))}
             </ul>

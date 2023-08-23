@@ -11,7 +11,6 @@ import plane_w from "../../assets/icons/plane-white.svg";
 
 const Sidebar = () => {
   const location = useLocation();
-  console.log(location.pathname);
   const [activeLinkIdx, setActiveLinkIdx] = useState(1);
 
   useEffect(() => {
