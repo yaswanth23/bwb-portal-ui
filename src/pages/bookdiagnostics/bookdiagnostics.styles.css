@@ -27,6 +27,9 @@
 .bdp-search-main.selected {
   color: black;
 }
+.bdp-chevron-rotate {
+  transform: rotate(180deg);
+}
 .bdp-search-label {
   font-size: 1rem;
 }

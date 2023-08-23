@@ -1,5 +1,5 @@
 import { Fragment, memo, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import "./sidebar.styles.css";
 
 import budget_b from "../../assets/icons/budget-blue.svg";
@@ -10,14 +10,19 @@ import plane_b from "../../assets/icons/plane-blue.svg";
 import plane_w from "../../assets/icons/plane-white.svg";
 
 const Sidebar = () => {
+  const location = useLocation();
+  console.log(location.pathname);
   const [activeLinkIdx, setActiveLinkIdx] = useState(1);
 
   useEffect(() => {
+    if (location.pathname === "/book-diagnostics") {
+      setActiveLinkIdx(2);
+    }
     document.body.style.backgroundColor = "#fbfbfb";
     return () => {
       document.body.style.backgroundColor = "#fbfbfb";
     };
-  }, []);
+  }, [location.pathname]);
 
   return (
     <Fragment>

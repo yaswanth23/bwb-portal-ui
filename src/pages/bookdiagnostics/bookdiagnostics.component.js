@@ -88,7 +88,10 @@ const BookDiagnosticsPage = () => {
               onClick={() => setOpenPincodeDropdown(!openPincodeDropdown)}
             >
               {selectedPincode ? selectedPincode : "Select Pincode"}
-              <BiChevronDown size={25} />
+              <BiChevronDown
+                size={25}
+                className={openPincodeDropdown && "bdp-chevron-rotate"}
+              />
             </div>
             <ul
               className={
@@ -117,6 +120,7 @@ const BookDiagnosticsPage = () => {
                     if (item?.pincode !== selectedPincode) {
                       setSelectedPincode(item?.pincode);
                       setOpenPincodeDropdown(false);
+                      setInputPincodeValue("");
                     }
                   }}
                 >
