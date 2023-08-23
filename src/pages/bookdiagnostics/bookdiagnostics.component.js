@@ -200,7 +200,9 @@ const BookDiagnosticsPage = () => {
               }
               onClick={() => setOpenDiagnosticDropdown(!openDiagnosticDropdown)}
             >
-              {selectedDiagnostics}
+              <div className="bdp-diagnostics-tests-text">
+                {selectedDiagnostics}
+              </div>
               <BiChevronDown
                 size={25}
                 className={openDiagnosticDropdown && "bdp-chevron-rotate"}

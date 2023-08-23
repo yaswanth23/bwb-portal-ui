@@ -117,7 +117,14 @@
   padding: 0.5rem;
   outline: none;
   border: none;
+  width: 100%;
 }
 .bdp-u-search-text::placeholder {
   color: var(--color-grey);
+}
+.bdp-diagnostics-tests-text {
+  width: 27rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
