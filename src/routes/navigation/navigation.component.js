@@ -1,15 +1,8 @@
-import { Fragment, memo, useEffect } from "react";
-import { Outlet, Link } from "react-router-dom";
+import { Fragment, memo } from "react";
+import { Link } from "react-router-dom";
 import "./navigation.styles.css";
 
 const Navigation = () => {
-  useEffect(() => {
-    document.body.style.backgroundColor = "#fbfbfb";
-    return () => {
-      document.body.style.backgroundColor = "#fbfbfb";
-    };
-  }, []);
-
   return (
     <Fragment>
       <div className="logo-container">

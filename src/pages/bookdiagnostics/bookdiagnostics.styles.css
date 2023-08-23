@@ -1,10 +1,11 @@
 .bdp-container {
   margin: 3rem;
-  background-color: var(--color-white);
+  border-radius: 0.5rem;
 }
 .bdp-first-container {
-  border: 1px solid var(--color-preload-text);
   border-radius: 0.5rem;
+  padding: 1rem;
+  background-color: var(--color-white);
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 }
 .bdp-search-container {

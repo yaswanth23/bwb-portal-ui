@@ -18,9 +18,9 @@ const Sidebar = () => {
     if (location.pathname === "/book-diagnostics") {
       setActiveLinkIdx(2);
     }
-    document.body.style.backgroundColor = "#fbfbfb";
+    document.body.style.backgroundColor = "#f2f2f2";
     return () => {
-      document.body.style.backgroundColor = "#fbfbfb";
+      document.body.style.backgroundColor = "#f2f2f2";
     };
   }, [location.pathname]);
 
