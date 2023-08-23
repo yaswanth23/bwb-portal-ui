@@ -47,7 +47,7 @@ const Sidebar = () => {
             </li>
             <li className="sb-nav-item">
               <Link
-                to="/"
+                to="/book-diagnostics"
                 onClick={() => setActiveLinkIdx(2)}
                 className={`sb-nav-link ${
                   2 === activeLinkIdx ? "active" : null
