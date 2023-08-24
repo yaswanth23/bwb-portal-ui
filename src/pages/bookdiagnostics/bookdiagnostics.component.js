@@ -1,7 +1,9 @@
 import { memo, useState, useEffect } from "react";
 import { BiChevronDown } from "react-icons/bi";
 import { AiOutlineSearch } from "react-icons/ai";
-import "./bookdiagnostics.styles.css";
+import "./bookDiagnostics.styles.css";
+
+import DiagnosticDetailsCard from "./diagnosticdetails/diagnosticDetails.component";
 
 const BookDiagnosticsPage = () => {
   const [pincodes, setPincodes] = useState(null);
@@ -12,6 +14,8 @@ const BookDiagnosticsPage = () => {
   const [inputDiagnosticValue, setInputDiagnosticValue] = useState("");
   const [selectedDiagnostics, setSelectedDiagnostics] =
     useState("Select Test Name");
+  const [selectedDiagnosticsTestId, setSelectedDiagnosticsTestId] =
+    useState("");
   const [openDiagnosticDropdown, setOpenDiagnosticDropdown] = useState(false);
   const limit = 10;
 
@@ -138,111 +142,127 @@ const BookDiagnosticsPage = () => {
     <>
       <div className="bdp-container">
         <div className="bdp-first-container">
-          <div className="bdp-search-container">
-            <span className="bdp-search-label">Pincode</span>
-            <div
-              className={
-                !selectedPincode
-                  ? "bdp-search-main"
-                  : "bdp-search-main selected"
-              }
-              onClick={() => setOpenPincodeDropdown(!openPincodeDropdown)}
-            >
-              {selectedPincode}
-              <BiChevronDown
-                size={25}
-                className={openPincodeDropdown && "bdp-chevron-rotate"}
-              />
-            </div>
-            <ul
-              className={
-                openPincodeDropdown ? "bdp-ul-s-list" : "bdp-ul-s-list close"
-              }
-            >
-              <div className="bdp-u-s-list">
-                <AiOutlineSearch size={18} className="bdp-u-search-icon" />
-                <input
-                  type="text"
-                  value={inputPincodeValue == 0 ? "" : inputPincodeValue}
-                  onChange={handleInputPincode}
-                  placeholder="Enter pincode"
-                  className="bdp-u-search-text"
+          <div className="bdp-first-sub-one-container">
+            <div className="bdp-search-container">
+              <span className="bdp-search-label">Pincode</span>
+              <div
+                className={
+                  !selectedPincode
+                    ? "bdp-search-main"
+                    : "bdp-search-main selected"
+                }
+                onClick={() => setOpenPincodeDropdown(!openPincodeDropdown)}
+              >
+                {selectedPincode}
+                <BiChevronDown
+                  size={25}
+                  className={openPincodeDropdown && "bdp-chevron-rotate"}
                 />
               </div>
-              {pincodes?.map((item) => (
-                <li
-                  key={item.id}
-                  className={
-                    item?.pincode == selectedPincode
-                      ? "bdp-s-list p-selected"
-                      : "bdp-s-list"
-                  }
-                  onClick={() => {
-                    if (item?.pincode !== selectedPincode) {
-                      setSelectedPincode(item?.pincode);
-                      setOpenPincodeDropdown(false);
-                      setInputPincodeValue("");
+              <ul
+                className={
+                  openPincodeDropdown ? "bdp-ul-s-list" : "bdp-ul-s-list close"
+                }
+              >
+                <div className="bdp-u-s-list">
+                  <AiOutlineSearch size={18} className="bdp-u-search-icon" />
+                  <input
+                    type="text"
+                    value={inputPincodeValue == 0 ? "" : inputPincodeValue}
+                    onChange={handleInputPincode}
+                    placeholder="Enter pincode"
+                    className="bdp-u-search-text"
+                  />
+                </div>
+                {pincodes?.map((item) => (
+                  <li
+                    key={item.id}
+                    className={
+                      item?.pincode == selectedPincode
+                        ? "bdp-s-list p-selected"
+                        : "bdp-s-list"
                     }
-                  }}
-                >
-                  {item?.pincode}
-                </li>
-              ))}
-            </ul>
+                    onClick={() => {
+                      if (item?.pincode !== selectedPincode) {
+                        setSelectedPincode(item?.pincode);
+                        setOpenPincodeDropdown(false);
+                        setInputPincodeValue("");
+                      }
+                    }}
+                  >
+                    {item?.pincode}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="bdp-diagnostics-container">
+              <span className="bdp-diagnostics-label">Lab Tests</span>
+              <div
+                className={
+                  !selectedDiagnostics
+                    ? "bdp-diagnostics-main"
+                    : "bdp-diagnostics-main selected"
+                }
+                onClick={() =>
+                  setOpenDiagnosticDropdown(!openDiagnosticDropdown)
+                }
+              >
+                <div className="bdp-diagnostics-tests-text">
+                  {selectedDiagnostics}
+                </div>
+                <BiChevronDown
+                  size={25}
+                  className={openDiagnosticDropdown && "bdp-chevron-rotate"}
+                />
+              </div>
+              <ul
+                className={
+                  openDiagnosticDropdown
+                    ? "bdp-ul-d-list"
+                    : "bdp-ul-d-list close"
+                }
+              >
+                <div className="bdp-u-s-list">
+                  <AiOutlineSearch size={18} className="bdp-u-search-icon" />
+                  <input
+                    type="text"
+                    value={
+                      inputDiagnosticValue == 0 ? "" : inputDiagnosticValue
+                    }
+                    onChange={handleInputDiagnostic}
+                    placeholder="Enter Test Name"
+                    className="bdp-u-search-text"
+                  />
+                </div>
+                {diagnostics?.map((item) => (
+                  <li
+                    key={item.testId}
+                    className={
+                      item?.attributeValue == selectedDiagnostics
+                        ? "bdp-s-list p-selected"
+                        : "bdp-s-list"
+                    }
+                    onClick={() => {
+                      if (item?.attributeValue !== selectedDiagnostics) {
+                        setSelectedDiagnostics(item?.attributeValue);
+                        setSelectedDiagnosticsTestId(item?.testId);
+                        setOpenDiagnosticDropdown(false);
+                        setInputDiagnosticValue("");
+                      }
+                    }}
+                  >
+                    {item?.attributeValue}
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
-          <div className="bdp-diagnostics-container">
-            <span className="bdp-diagnostics-label">Lab Tests</span>
-            <div
-              className={
-                !selectedDiagnostics
-                  ? "bdp-diagnostics-main"
-                  : "bdp-diagnostics-main selected"
-              }
-              onClick={() => setOpenDiagnosticDropdown(!openDiagnosticDropdown)}
-            >
-              <div className="bdp-diagnostics-tests-text">
-                {selectedDiagnostics}
-              </div>
-              <BiChevronDown
-                size={25}
-                className={openDiagnosticDropdown && "bdp-chevron-rotate"}
+          <div className="bdp-first-sub-two-container">
+            {selectedDiagnosticsTestId && (
+              <DiagnosticDetailsCard
+                diagnosticTestId={selectedDiagnosticsTestId}
               />
-            </div>
-            <ul
-              className={
-                openDiagnosticDropdown ? "bdp-ul-d-list" : "bdp-ul-d-list close"
-              }
-            >
-              <div className="bdp-u-s-list">
-                <AiOutlineSearch size={18} className="bdp-u-search-icon" />
-                <input
-                  type="text"
-                  value={inputDiagnosticValue == 0 ? "" : inputDiagnosticValue}
-                  onChange={handleInputDiagnostic}
-                  placeholder="Enter Test Name"
-                  className="bdp-u-search-text"
-                />
-              </div>
-              {diagnostics?.map((item) => (
-                <li
-                  key={item.testId}
-                  className={
-                    item?.attributeValue == selectedDiagnostics
-                      ? "bdp-s-list p-selected"
-                      : "bdp-s-list"
-                  }
-                  onClick={() => {
-                    if (item?.attributeValue !== selectedDiagnostics) {
-                      setSelectedDiagnostics(item?.attributeValue);
-                      setOpenDiagnosticDropdown(false);
-                      setInputDiagnosticValue("");
-                    }
-                  }}
-                >
-                  {item?.attributeValue}
-                </li>
-              ))}
-            </ul>
+            )}
           </div>
         </div>
       </div>

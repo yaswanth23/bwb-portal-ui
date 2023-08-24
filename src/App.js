@@ -6,7 +6,7 @@ import { selectIsUserLoggedIn } from "./store/user/user.selector";
 const Home = lazy(() => import("./routes/home/home.component"));
 const LoginPage = lazy(() => import("./pages/login/loginpage.component"));
 const BookDiagnosticsPage = lazy(() =>
-  import("./pages/bookdiagnostics/bookdiagnostics.component")
+  import("./pages/bookdiagnostics/bookDiagnostics.component")
 );
 
 // const randomLoaderTexts = [

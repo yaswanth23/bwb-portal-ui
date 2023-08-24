@@ -1,0 +1,52 @@
+.dd-first-container {
+  display: flex;
+}
+.dd-first-types-main {
+  display: flex;
+  align-items: baseline;
+  width: 55%;
+}
+.dd-first-temperature-main {
+  display: flex;
+  align-items: baseline;
+  width: 45%;
+}
+.dd-first-types-main h3,
+.dd-first-temperature-main h3,
+.dd-second-remarks-main h3,
+.dd-third-schedule-main h3,
+.dd-third-tat-main h3 {
+  margin-left: 0.5rem;
+}
+.dd-first-types-main p,
+.dd-first-temperature-main p,
+.dd-third-schedule-main p,
+.dd-third-tat-main p {
+  margin-left: 0.5rem;
+  word-wrap: break-word;
+}
+.dd-second-container {
+  margin-top: 1.5rem;
+}
+.dd-second-remarks-main {
+  display: flex;
+  align-items: baseline;
+}
+.dd-second-remarks-main p {
+  margin-left: 0.5rem;
+  width: 90%;
+}
+.dd-third-container {
+  margin-top: 1.5rem;
+  display: flex;
+}
+.dd-third-schedule-main {
+  display: flex;
+  align-items: baseline;
+  width: 55%;
+}
+.dd-third-tat-main {
+  display: flex;
+  align-items: center;
+  width: 45%;
+}
