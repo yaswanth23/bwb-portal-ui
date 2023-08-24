@@ -257,13 +257,13 @@ const BookDiagnosticsPage = () => {
               </ul>
             </div>
           </div>
-          <div className="bdp-first-sub-two-container">
-            {selectedDiagnosticsTestId && (
+          {selectedDiagnosticsTestId && (
+            <div className="bdp-first-sub-two-container">
               <DiagnosticDetailsCard
                 diagnosticTestId={selectedDiagnosticsTestId}
               />
-            )}
-          </div>
+            </div>
+          )}
         </div>
       </div>
     </>
