@@ -264,6 +264,11 @@ const BookDiagnosticsPage = () => {
               />
             </div>
           )}
+          <div className="bdp-first-patient-details-container">
+            <div className="bdp-first-patient-details-label">
+              <h3>Patient Details</h3>
+            </div>
+          </div>
         </div>
       </div>
     </>
