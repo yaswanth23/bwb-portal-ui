@@ -1,7 +1,7 @@
 import { memo, useState, useEffect } from "react";
 import { BiChevronDown } from "react-icons/bi";
 import { AiOutlineSearch } from "react-icons/ai";
-import "./bookDiagnostics.styles.css";
+import "./bookdiagnostics.styles.css";
 
 import DiagnosticDetailsCard from "./diagnosticdetails/diagnosticDetails.component";
 
