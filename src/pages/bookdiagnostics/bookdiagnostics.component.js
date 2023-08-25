@@ -170,7 +170,11 @@ const BookDiagnosticsPage = () => {
   };
 
   const addTestsToCart = () => {
-    if (!isAddToCartToggle) {
+    if (
+      !isAddToCartToggle &&
+      selectedPincode !== "Select Pincode" &&
+      selectedDiagnostics !== "Select Test Name"
+    ) {
       setIsAddToCartToggle(true);
     }
   };
