@@ -8,6 +8,7 @@ const LoginPage = lazy(() => import("./pages/login/loginpage.component"));
 const BookDiagnosticsPage = lazy(() =>
   import("./pages/bookdiagnostics/bookdiagnostics.component")
 );
+const CartPage = lazy(() => import("./pages/cartpage/cartpage.component"));
 
 // const randomLoaderTexts = [
 //   "The greatest wealth is health.",
@@ -44,10 +45,8 @@ const App = () => {
       <Suspense>
         <Routes>
           <Route path="/" element={isUserLoggedIn ? <Home /> : <LoginPage />}>
-            <Route
-              path="/book-diagnostics"
-              element={<BookDiagnosticsPage />}
-            ></Route>
+            <Route path="/book-diagnostics" element={<BookDiagnosticsPage />} />
+            <Route path="/cart" element={<CartPage />} />
           </Route>
         </Routes>
       </Suspense>

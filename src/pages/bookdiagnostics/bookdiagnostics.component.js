@@ -1,4 +1,5 @@
 import { memo, useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { BiChevronDown } from "react-icons/bi";
 import { AiOutlineSearch } from "react-icons/ai";
 import { BsCart3 } from "react-icons/bs";
@@ -7,6 +8,7 @@ import "./bookdiagnostics.styles.css";
 import DiagnosticDetailsCard from "./diagnosticdetails/diagnosticDetails.component";
 
 const BookDiagnosticsPage = () => {
+  const navigate = useNavigate();
   const [pincodes, setPincodes] = useState(null);
   const [inputPincodeValue, setInputPincodeValue] = useState("");
   const [selectedPincode, setSelectedPincode] = useState("Select Pincode");
@@ -176,6 +178,8 @@ const BookDiagnosticsPage = () => {
       selectedDiagnostics !== "Select Test Name"
     ) {
       setIsAddToCartToggle(true);
+    } else {
+      navigate("/cart");
     }
   };
 
