@@ -132,7 +132,7 @@
   white-space: nowrap;
 }
 .bdp-first-sub-two-container {
-  margin: 1rem;
+  margin: 1rem 1rem 0 1rem;
   padding: 1rem 0;
   /* border-top: 1px solid var(--primary-color);
   border-bottom: 1px solid var(--primary-color); */
@@ -200,4 +200,47 @@
 .bdp-p-gender-field {
   margin-right: 0.5rem;
   cursor: pointer;
+}
+.bdp-submit-button-container {
+  display: flex;
+}
+.bdp-submit-button-container {
+  margin: 1rem;
+}
+.bdp-submit-add-to-cart {
+  border: none;
+  text-decoration: none;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-size: 1rem;
+  font-weight: 600;
+  width: 17rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border-radius: 0.5rem;
+  height: 3rem;
+  color: var(--color-preload-text);
+  background: var(--primary-color);
+}
+.bdp-submit-add-to-cart-icon {
+  font-size: 1.5rem;
+  margin-right: 0.5rem;
+}
+.bdp-submit-clear-button {
+  text-decoration: none;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-size: 1rem;
+  font-weight: 600;
+  width: 17rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border-radius: 0.5rem;
+  height: 3rem;
+  background: var(--color-white);
+  margin-right: 2rem;
 }

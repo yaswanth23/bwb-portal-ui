@@ -1,6 +1,7 @@
 import { memo, useState, useEffect } from "react";
 import { BiChevronDown } from "react-icons/bi";
 import { AiOutlineSearch } from "react-icons/ai";
+import { BsCart3 } from "react-icons/bs";
 import "./bookdiagnostics.styles.css";
 
 import DiagnosticDetailsCard from "./diagnosticdetails/diagnosticDetails.component";
@@ -18,6 +19,7 @@ const BookDiagnosticsPage = () => {
     useState("");
   const [openDiagnosticDropdown, setOpenDiagnosticDropdown] = useState(false);
   const [diagnosticsData, setDiagnosticsData] = useState(null);
+  const [isAddToCartToggle, setIsAddToCartToggle] = useState(false);
   const limit = 10;
 
   useEffect(() => {
@@ -167,6 +169,22 @@ const BookDiagnosticsPage = () => {
     setInputDiagnosticValue(event.target.value);
   };
 
+  const addTestsToCart = () => {
+    if (!isAddToCartToggle) {
+      setIsAddToCartToggle(true);
+    }
+  };
+
+  const handleClearChanges = () => {
+    setInputPincodeValue("");
+    setSelectedPincode("Select Pincode");
+    setInputDiagnosticValue("");
+    setSelectedDiagnostics("Select Test Name");
+    setSelectedDiagnosticsTestId("");
+    setDiagnosticsData(null);
+    setIsAddToCartToggle(false);
+  };
+
   return (
     <>
       <div className="bdp-container">
@@ -296,6 +314,22 @@ const BookDiagnosticsPage = () => {
               <DiagnosticDetailsCard diagnosticsData={diagnosticsData} />
             </div>
           )}
+          <div className="bdp-submit-button-container">
+            <button
+              className="bdp-submit-clear-button"
+              onClick={handleClearChanges}
+            >
+              <span>clear</span>
+            </button>
+            <button className="bdp-submit-add-to-cart" onClick={addTestsToCart}>
+              <BsCart3 className="bdp-submit-add-to-cart-icon" />
+              {isAddToCartToggle ? (
+                <span>Go to cart</span>
+              ) : (
+                <span>Add to cart</span>
+              )}
+            </button>
+          </div>
         </div>
       </div>
     </>
