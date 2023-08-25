@@ -40,3 +40,33 @@
   background-color: var(--primary-color);
   color: var(--color-preload-text);
 }
+.cart-icon-container {
+  margin-right: 3rem;
+}
+.cart-icon-button {
+  border: none;
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+  background: transparent;
+}
+.navbar-cart-icon {
+  font-size: 1.3rem;
+  color: var(--primary-color);
+}
+.cart-counter {
+  font-size: 0.8rem;
+  line-height: 1.25rem;
+  position: absolute;
+  top: -0.763rem;
+  right: -0.85rem;
+  display: flex;
+  width: 1.313rem;
+  height: 1.313rem;
+  font-weight: 800;
+  justify-content: center;
+  align-items: center;
+  color: var(--primary-color);
+  border-radius: 100%;
+  background-color: var(--color-preload-text);
+}
