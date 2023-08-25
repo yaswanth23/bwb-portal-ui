@@ -6,8 +6,6 @@ import { MdSchedule } from "react-icons/md";
 import "./diagnosticDetails.styles.css";
 
 const DiagnosticDetails = ({ diagnosticsData }) => {
-  console.log(diagnosticsData);
-
   return (
     <>
       <div className="dd-container">
