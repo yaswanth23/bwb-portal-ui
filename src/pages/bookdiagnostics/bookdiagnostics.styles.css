@@ -8,6 +8,10 @@
   background-color: var(--color-white);
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 }
+.bdp-first-book-dignostics-label {
+  margin: 1rem;
+  border-bottom: 1px solid var(--primary-color);
+}
 .bdp-first-sub-one-container {
   display: flex;
 }

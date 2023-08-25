@@ -142,6 +142,9 @@ const BookDiagnosticsPage = () => {
     <>
       <div className="bdp-container">
         <div className="bdp-first-container">
+          <div className="bdp-first-book-dignostics-label">
+            <h3>Book Diagnostics</h3>
+          </div>
           <div className="bdp-first-sub-one-container">
             <div className="bdp-search-container">
               <span className="bdp-search-label">Pincode</span>
