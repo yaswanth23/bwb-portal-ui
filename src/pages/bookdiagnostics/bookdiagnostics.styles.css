@@ -143,6 +143,7 @@
 }
 .bdp-first-patient-details-label {
   border-bottom: 1px solid var(--primary-color);
+  cursor: default;
 }
 .bdp-first-patient-details-f-inputs,
 .bdp-first-patient-details-s-inputs {

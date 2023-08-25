@@ -50,3 +50,18 @@
   align-items: center;
   width: 45%;
 }
+.dd-fourth-container {
+  margin-top: 1rem;
+  display: flex;
+}
+.dd-fourth-mrp-main {
+  display: flex;
+  align-items: center;
+}
+.dd-fourth-mrp-symbol {
+  font-size: 3rem;
+}
+.dd-fourth-mrp-main p {
+  font-size: 2rem;
+  font-weight: 600;
+}

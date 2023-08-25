@@ -1,41 +1,12 @@
-import { memo, useState, useEffect } from "react";
+import { memo } from "react";
 import { GrTest, GrSchedules } from "react-icons/gr";
 import { BsThermometerHalf } from "react-icons/bs";
 import { CgNotes } from "react-icons/cg";
 import { MdSchedule } from "react-icons/md";
 import "./diagnosticDetails.styles.css";
 
-const DiagnosticDetails = ({ diagnosticTestId }) => {
-  const [diagnosticsData, setDiagnosticsData] = useState(null);
+const DiagnosticDetails = ({ diagnosticsData }) => {
   console.log(diagnosticsData);
-
-  useEffect(() => {
-    if (diagnosticTestId !== "") {
-      fetch(
-        `https://qar5m2k5ra.execute-api.ap-south-1.amazonaws.com/dev/api/v1/diagnostics/details/${diagnosticTestId}`,
-        {
-          method: "GET",
-          headers: {
-            Authorization:
-              "eyJhbGciOiJIUzUxMiJ9.eyJzZWNyZXQiOiJiZmE3MzhhNjdkOGU5NGNmNDI4ZTdjZWE5Y2E1YzY3YiJ9.o4k544e1-NWMTBT28lOmEJe_D4TMOuwb11_rXLWb_SNhd6Oq70lWWqVdHzenEr1mhnVTDAtcOufnc4CMlIxUiw",
-            "Content-Type": "application/json",
-          },
-        }
-      )
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error("Network response was not ok");
-          }
-          return response.json();
-        })
-        .then((data) => {
-          setDiagnosticsData(data.data);
-        })
-        .catch((error) => {
-          console.error("There was a problem with the fetch operation:", error);
-        });
-    }
-  }, [diagnosticTestId]);
 
   return (
     <>
@@ -80,6 +51,14 @@ const DiagnosticDetails = ({ diagnosticTestId }) => {
                   <MdSchedule size={22} />
                   <h3>TAT:</h3>
                   <p>{diagnosticsData.tat}</p>
+                </div>
+              )}
+            </div>
+            <div className="dd-fourth-container">
+              {diagnosticsData.mrp && (
+                <div className="dd-fourth-mrp-main">
+                  <span className="dd-fourth-mrp-symbol">&#8377;</span>
+                  <p>{diagnosticsData.mrp}</p>
                 </div>
               )}
             </div>
