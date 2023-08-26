@@ -178,7 +178,7 @@ const BookDiagnosticsPage = () => {
       selectedDiagnostics !== "Select Test Name"
     ) {
       setIsAddToCartToggle(true);
-    } else {
+    } else if (isAddToCartToggle) {
       navigate("/cart");
     }
   };
