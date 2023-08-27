@@ -47,6 +47,7 @@
 }
 .cp-cart-items-box-container {
   display: flex;
+  justify-content: space-between;
 }
 .cp-cart-items-icon {
   color: var(--primary-color);
@@ -65,4 +66,17 @@
 .cp-cart-items-info-price-box p {
   font-size: 1.2rem;
   font-weight: 600;
+}
+.cp-cart-items-info-price-box-container {
+  margin-left: 2.5rem;
+}
+.cp-cart-items-box-header-container {
+  display: flex;
+}
+.cp-cart-items-remove-icon {
+  font-size: 1.5rem;
+  color: #8093ff;
+  &:hover {
+    cursor: pointer;
+  }
 }
