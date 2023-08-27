@@ -1,6 +1,7 @@
 import { memo, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { FaHandHoldingHeart } from "react-icons/fa";
+import { BsPersonPlus } from "react-icons/bs";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import "./cartpage.styles.css";
 
@@ -121,6 +122,11 @@ const CartPage = () => {
                         </span>
                         <p>{item.mrp}</p>
                       </div>
+                      <div className="cp-cart-items-info-patient-box">
+                        <BsPersonPlus className="cp-cart-items-info-patient-box-ap-icon" />
+                        <p>1</p>
+                        <p>Patient</p>
+                      </div>
                     </div>
                   </div>
                 );
@@ -146,6 +152,11 @@ const CartPage = () => {
                     {cartItems.totalPrice}
                   </p>
                 </div>
+              </div>
+              <div className="cp-cart-items-checkout-box">
+                <button className="cp-cart-items-checkout-button">
+                  Proceed
+                </button>
               </div>
             </div>
           </div>

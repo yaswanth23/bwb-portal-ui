@@ -71,9 +71,18 @@
 }
 .cp-cart-items-info-price-box-container {
   margin-left: 2.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
 }
 .cp-cart-items-box-header-container {
   display: flex;
+  color: var(--primary-color);
+}
+.cp-cart-items-info-patient-box p {
+  color: var(--primary-color);
+  font-size: 0.7rem;
+  font-weight: 600;
 }
 .cp-cart-items-remove-icon {
   font-size: 1.5rem;
@@ -109,4 +118,36 @@
 }
 .cp-cart-items-pricing-box-two p {
   font-weight: 600;
+}
+.cp-cart-items-info-patient-box {
+  width: 6rem;
+  height: 2rem;
+  background-color: var(--color-preload-text);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0.2rem;
+}
+.cp-cart-items-info-patient-box-ap-icon {
+  font-size: 1.2rem;
+}
+.cp-cart-items-checkout-box {
+  margin-top: 2rem;
+}
+.cp-cart-items-checkout-button {
+  border: none;
+  text-decoration: none;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-size: 1rem;
+  font-weight: 600;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border-radius: 0.5rem;
+  height: 3rem;
+  color: var(--color-preload-text);
+  background: var(--primary-color);
 }
