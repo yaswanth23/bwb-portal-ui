@@ -29,9 +29,6 @@ const BookDiagnosticsPage = () => {
   const [isAddToCartToggle, setIsAddToCartToggle] = useState(false);
   const limit = 10;
 
-  console.log("pinocde", selectedPincode);
-  console.log("diagId", selectedDiagnosticsTestId);
-
   useEffect(() => {
     if (inputPincodeValue !== "" && inputPincodeValue != 0) {
       fetch(
