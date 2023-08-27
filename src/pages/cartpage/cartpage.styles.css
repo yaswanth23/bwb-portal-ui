@@ -42,7 +42,7 @@
 .cp-cart-items-main-box {
   margin: 1.5rem 0;
   width: 40rem;
-  height: 10rem;
+  /* height: 10rem; */
   padding: 1rem;
   border-radius: 0.5rem;
   border: 1px solid var(--primary-color);
