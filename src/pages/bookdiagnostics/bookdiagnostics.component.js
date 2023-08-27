@@ -3,12 +3,17 @@ import { useNavigate } from "react-router-dom";
 import { BiChevronDown } from "react-icons/bi";
 import { AiOutlineSearch } from "react-icons/ai";
 import { BsCart3 } from "react-icons/bs";
+import { useDispatch, useSelector } from "react-redux";
 import "./bookdiagnostics.styles.css";
 
 import DiagnosticDetailsCard from "./diagnosticdetails/diagnosticDetails.component";
+import { storeCartCount } from "../../store/cart/cart.action";
+import { selectUserData } from "../../store/user/user.selector";
 
 const BookDiagnosticsPage = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const userData = useSelector(selectUserData);
   const [pincodes, setPincodes] = useState(null);
   const [inputPincodeValue, setInputPincodeValue] = useState("");
   const [selectedPincode, setSelectedPincode] = useState("Select Pincode");
@@ -178,6 +183,7 @@ const BookDiagnosticsPage = () => {
       selectedDiagnostics !== "Select Test Name"
     ) {
       setIsAddToCartToggle(true);
+      dispatch(storeCartCount(userData.userId, userData.cartId));
     } else if (isAddToCartToggle) {
       navigate("/cart");
     }

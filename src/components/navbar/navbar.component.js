@@ -2,14 +2,16 @@ import { memo, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { BsCart3 } from "react-icons/bs";
+import { useSelector } from "react-redux";
 import "./navbar.styles.css";
 
 import user_b from "../../assets/icons/user-blue.svg";
 import { changeIsLoggedOutUser } from "../../store/user/user.action";
+import { selectCartCount } from "../../store/cart/cart.selector";
 
 const Navbar = () => {
   const dispatch = useDispatch();
-  const cartCount = 0;
+  const cartCount = useSelector(selectCartCount);
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
 
   const toggleDropdown = () => {
