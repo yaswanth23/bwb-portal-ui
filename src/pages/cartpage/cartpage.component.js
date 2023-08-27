@@ -126,7 +126,28 @@ const CartPage = () => {
                 );
               })}
             </div>
-            <div className="cp-cart-items-pricing-main"></div>
+            <div className="cp-cart-items-pricing-main">
+              <div className="cp-cart-items-pricing-box">
+                <div className="cp-cart-items-pricing-box-one">
+                  <p>Cart Value</p>
+                  <p className="cp-cart-items-pricing-box-one-tp">
+                    <span className="cp-cart-items-pricing-symbol-box-one">
+                      &#8377;
+                    </span>{" "}
+                    {cartItems.totalPrice}
+                  </p>
+                </div>
+                <div className="cp-cart-items-pricing-box-two">
+                  <p>Order Total</p>
+                  <p className="cp-cart-items-pricing-box-two-tp">
+                    <span className="cp-cart-items-pricing-symbol-box-two">
+                      &#8377;
+                    </span>{" "}
+                    {cartItems.totalPrice}
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         ) : (
           <div className="cp-empty-cart-main">
