@@ -1,18 +1,24 @@
-import { memo, useState } from "react";
-import { useDispatch } from "react-redux";
+import { memo, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { BsCart3 } from "react-icons/bs";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import "./navbar.styles.css";
 
 import user_b from "../../assets/icons/user-blue.svg";
 import { changeIsLoggedOutUser } from "../../store/user/user.action";
+import { storeCartCount } from "../../store/cart/cart.action";
 import { selectCartCount } from "../../store/cart/cart.selector";
+import { selectUserData } from "../../store/user/user.selector";
 
 const Navbar = () => {
   const dispatch = useDispatch();
   const cartCount = useSelector(selectCartCount);
+  const userData = useSelector(selectUserData);
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
+
+  useEffect(() => {
+    dispatch(storeCartCount(userData.userId, userData.cartId));
+  }, []);
 
   const toggleDropdown = () => {
     setIsDropdownVisible(!isDropdownVisible);
