@@ -29,6 +29,9 @@ const BookDiagnosticsPage = () => {
   const [isAddToCartToggle, setIsAddToCartToggle] = useState(false);
   const limit = 10;
 
+  console.log("pinocde", selectedPincode);
+  console.log("diagId", selectedDiagnosticsTestId);
+
   useEffect(() => {
     if (inputPincodeValue !== "" && inputPincodeValue != 0) {
       fetch(
@@ -183,7 +186,42 @@ const BookDiagnosticsPage = () => {
       selectedDiagnostics !== "Select Test Name"
     ) {
       setIsAddToCartToggle(true);
-      dispatch(storeCartCount(userData.userId, userData.cartId));
+
+      const requestData = {
+        userId: userData.userId,
+        cartId: userData.cartId,
+        cartItems: [
+          {
+            diagnosticTestId: selectedDiagnosticsTestId,
+            pincode: selectedPincode,
+          },
+        ],
+      };
+
+      fetch(
+        "https://qar5m2k5ra.execute-api.ap-south-1.amazonaws.com/dev/api/v1/cart/add/items",
+        {
+          method: "POST",
+          headers: {
+            Authorization:
+              "eyJhbGciOiJIUzUxMiJ9.eyJzZWNyZXQiOiJiZmE3MzhhNjdkOGU5NGNmNDI4ZTdjZWE5Y2E1YzY3YiJ9.o4k544e1-NWMTBT28lOmEJe_D4TMOuwb11_rXLWb_SNhd6Oq70lWWqVdHzenEr1mhnVTDAtcOufnc4CMlIxUiw",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(requestData),
+        }
+      )
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          return response.json();
+        })
+        .then((data) => {
+          dispatch(storeCartCount(userData.userId, userData.cartId));
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
     } else if (isAddToCartToggle) {
       navigate("/cart");
     }
