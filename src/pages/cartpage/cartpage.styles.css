@@ -74,6 +74,7 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
+  cursor: pointer;
 }
 .cp-cart-items-box-header-container {
   display: flex;
@@ -120,7 +121,7 @@
   font-weight: 600;
 }
 .cp-cart-items-info-patient-box {
-  width: 6rem;
+  width: 6.5rem;
   height: 2rem;
   background-color: var(--color-preload-text);
   display: flex;
@@ -135,6 +136,145 @@
   margin-top: 2rem;
 }
 .cp-cart-items-checkout-button {
+  border: none;
+  text-decoration: none;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-size: 1rem;
+  font-weight: 600;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border-radius: 0.5rem;
+  height: 3rem;
+  color: var(--color-preload-text);
+  background: var(--primary-color);
+}
+.cp-modal-container {
+  width: 30rem;
+}
+.cp-modal-header-main {
+  display: flex;
+  justify-content: space-between;
+}
+.cp-modal-cancel-icon {
+  font-size: 1.7rem;
+  &:hover {
+    cursor: pointer;
+  }
+}
+.cp-modal-form-container {
+  margin-top: 1rem;
+}
+.cp-modal-form-data-disp {
+  margin: 0.5rem 0;
+  border: 1px solid var(--primary-color);
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+}
+.cp-modal-form-remove-icon {
+  margin-left: 1rem;
+  font-size: 1.2rem;
+  color: #8093ff;
+  &:hover {
+    cursor: pointer;
+  }
+}
+.cp-modal-form-update-items {
+  display: flex;
+  align-items: flex-start;
+}
+.cp-modal-form-edit-icon {
+  font-size: 0.8rem;
+  font-weight: 700;
+  &:hover {
+    cursor: pointer;
+  }
+}
+.cp-modal-input-container {
+  margin-top: 1rem;
+  display: grid;
+}
+.cp-modal-form-input {
+  width: 60%;
+  height: 2rem;
+  margin-bottom: 1rem;
+  border: none;
+  border-bottom: 1px solid var(--primary-color);
+  outline: none;
+  background: transparent;
+  font-size: 1rem;
+  padding: 0.5rem;
+}
+.cp-modal-form-input-age {
+  width: 20%;
+  height: 2rem;
+  margin-bottom: 1rem;
+  border: none;
+  border-bottom: 1px solid var(--primary-color);
+  outline: none;
+  background: transparent;
+  font-size: 1rem;
+  padding: 0.5rem;
+}
+.cp-modal-form-gender-main {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+.cp-modal-form-gender-female,
+.cp-modal-form-gender-male {
+  margin: 0 0.5rem;
+  &:hover {
+    cursor: pointer;
+  }
+}
+.cp-modal-form-add-more-sec {
+  display: flex;
+  justify-content: flex-end;
+}
+.cp-modal-form-add-more-text {
+  text-transform: uppercase;
+  font-weight: 800;
+  color: #8093ff;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+.cp-modal-form-add-user-icon,
+.cp-modal-form-update-user-icon {
+  font-size: 1.4rem;
+  margin-right: 0.5rem;
+}
+.cp-modal-form-textarea {
+  margin-top: 1rem;
+  width: 100%;
+  font-size: 1rem;
+  border: "1px solid #000";
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+}
+.cp-modal-pincode-container {
+  margin-top: 1rem;
+  display: grid;
+}
+.cp-modal-form-add-input {
+  font-family: var(--main-font);
+  border: 1px solid var(--primary-color);
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  width: 70%;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+.cp-modal-confirm-booking-container {
+  margin-top: 1rem;
+}
+.cp-modal-confirm-booking-button {
   border: none;
   text-decoration: none;
   cursor: pointer;

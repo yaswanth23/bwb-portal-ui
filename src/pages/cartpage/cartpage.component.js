@@ -3,6 +3,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { FaHandHoldingHeart } from "react-icons/fa";
 import { BsPersonPlus } from "react-icons/bs";
 import { RiDeleteBin6Line } from "react-icons/ri";
+import { MdOutlineCancel } from "react-icons/md";
+import { AiOutlineUserAdd, AiOutlineEdit } from "react-icons/ai";
+import Modal from "react-modal";
 import "./cartpage.styles.css";
 
 import EmptyCartBanner from "../../assets/images/microscope.png";
@@ -14,6 +17,15 @@ const CartPage = () => {
   const userData = useSelector(selectUserData);
   const [cartItems, setCartItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [formData, setFormData] = useState([]);
+  const [name, setName] = useState("");
+  const [age, setAge] = useState("");
+  const [gender, setGender] = useState("");
+  const [editIndex, setEditIndex] = useState(-1);
+  const [address, setAddress] = useState("");
+  const [mobileNumber, setMobileNumber] = useState("");
+  const [pincode, setPincode] = useState("");
 
   useEffect(() => {
     fetch(
@@ -85,81 +97,314 @@ const CartPage = () => {
       });
   };
 
+  const openModal = () => {
+    setModalIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalIsOpen(false);
+  };
+
+  const handleNameChange = (e) => {
+    setName(e.target.value);
+  };
+
+  const handleAgeChange = (e) => {
+    setAge(e.target.value);
+  };
+
+  const handleGenderChange = (e) => {
+    setGender(e.target.value);
+  };
+
+  const handleAddMore = () => {
+    if (name && age && gender) {
+      if (editIndex === -1) {
+        const newEntry = { name, age, gender };
+        setFormData([...formData, newEntry]);
+      } else {
+        const updatedData = [...formData];
+        updatedData[editIndex] = { name, age, gender };
+        setFormData(updatedData);
+        setEditIndex(-1);
+      }
+      setName("");
+      setAge("");
+      setGender("");
+    } else {
+      alert("Please enter all the fields name, age and gender.");
+    }
+  };
+
+  const handleEdit = (index) => {
+    const entryToEdit = formData[index];
+    setName(entryToEdit.name);
+    setAge(entryToEdit.age);
+    setGender(entryToEdit.gender);
+    setEditIndex(index);
+  };
+
+  const handleDelete = (index) => {
+    const updatedData = [...formData];
+    updatedData.splice(index, 1);
+    setFormData(updatedData);
+  };
+
+  const handleAddressChange = (event) => {
+    setAddress(event.target.value);
+  };
+
+  const handleMobileNumberChange = (event) => {
+    const newMobileNumber = +event.target.value;
+    if (!isNaN(newMobileNumber)) {
+      if (newMobileNumber.toString().length <= 10) {
+        setMobileNumber(newMobileNumber.toString());
+      }
+    }
+  };
+
+  const handlePincodeChange = (event) => {
+    const newPincode = +event.target.value;
+    if (!isNaN(newPincode)) {
+      if (newPincode.toString().length <= 6) {
+        setPincode(newPincode.toString());
+      }
+    }
+  };
+
   return (
     <>
       <div className="cp-empty-cart-page-container">
         {isLoading ? (
           <div className="cp-cart-items-loading-container">Loading...</div>
-        ) : cartItems &&
-          cartItems.cartItems &&
-          cartItems.cartItems.length > 0 ? (
-          <div className="cp-cart-items-container">
-            <div className="cp-cart-items-main">
-              {cartItems.cartItems.map((item, index) => {
-                return (
-                  <div className="cp-cart-items-main-box" key={index}>
-                    <div className="cp-cart-items-box-container">
-                      <div className="cp-cart-items-box-header-container">
-                        <FaHandHoldingHeart
-                          size={25}
-                          className="cp-cart-items-icon"
-                        />
-                        <div className="cp-cart-items-info-box">
-                          <h3>{item.testName}</h3>
+        ) : cartItems && cartItems?.cartItems.length > 0 ? (
+          <>
+            <div className="cp-cart-items-container">
+              <div className="cp-cart-items-main">
+                {cartItems.cartItems.map((item, index) => {
+                  return (
+                    <div className="cp-cart-items-main-box" key={item.itemId}>
+                      <div className="cp-cart-items-box-container">
+                        <div className="cp-cart-items-box-header-container">
+                          <FaHandHoldingHeart
+                            size={25}
+                            className="cp-cart-items-icon"
+                          />
+                          <div className="cp-cart-items-info-box">
+                            <h3>{item.testName}</h3>
+                          </div>
+                        </div>
+                        <div>
+                          <RiDeleteBin6Line
+                            className="cp-cart-items-remove-icon"
+                            onClick={() => handleRemoveItem(item)}
+                          />
                         </div>
                       </div>
-                      <div>
-                        <RiDeleteBin6Line
-                          className="cp-cart-items-remove-icon"
-                          onClick={() => handleRemoveItem(item)}
-                        />
+                      <div
+                        className="cp-cart-items-info-price-box-container"
+                        onClick={openModal}
+                      >
+                        <div className="cp-cart-items-info-price-box">
+                          <span className="cp-cart-items-info-price-symbol">
+                            &#8377;
+                          </span>
+                          <p>{item.mrp}</p>
+                        </div>
+                        <div className="cp-cart-items-info-patient-box">
+                          <BsPersonPlus className="cp-cart-items-info-patient-box-ap-icon" />
+                          <p>{formData?.length}</p>
+                          <p>{formData?.length > 1 ? "Patients" : "Patient"}</p>
+                        </div>
                       </div>
                     </div>
-                    <div className="cp-cart-items-info-price-box-container">
-                      <div className="cp-cart-items-info-price-box">
-                        <span className="cp-cart-items-info-price-symbol">
-                          &#8377;
-                        </span>
-                        <p>{item.mrp}</p>
-                      </div>
-                      <div className="cp-cart-items-info-patient-box">
-                        <BsPersonPlus className="cp-cart-items-info-patient-box-ap-icon" />
-                        <p>1</p>
-                        <p>Patient</p>
-                      </div>
-                    </div>
+                  );
+                })}
+              </div>
+              <div className="cp-cart-items-pricing-main">
+                <div className="cp-cart-items-pricing-box">
+                  <div className="cp-cart-items-pricing-box-one">
+                    <p>Cart Value</p>
+                    <p className="cp-cart-items-pricing-box-one-tp">
+                      <span className="cp-cart-items-pricing-symbol-box-one">
+                        &#8377;
+                      </span>
+                      {""}
+                      {cartItems.totalPrice}
+                    </p>
                   </div>
-                );
-              })}
-            </div>
-            <div className="cp-cart-items-pricing-main">
-              <div className="cp-cart-items-pricing-box">
-                <div className="cp-cart-items-pricing-box-one">
-                  <p>Cart Value</p>
-                  <p className="cp-cart-items-pricing-box-one-tp">
-                    <span className="cp-cart-items-pricing-symbol-box-one">
-                      &#8377;
-                    </span>{""}
-                    {cartItems.totalPrice}
-                  </p>
+                  <div className="cp-cart-items-pricing-box-two">
+                    <p>Order Total</p>
+                    <p className="cp-cart-items-pricing-box-two-tp">
+                      <span className="cp-cart-items-pricing-symbol-box-two">
+                        &#8377;
+                      </span>
+                      {""}
+                      {cartItems.totalPrice}
+                    </p>
+                  </div>
                 </div>
-                <div className="cp-cart-items-pricing-box-two">
-                  <p>Order Total</p>
-                  <p className="cp-cart-items-pricing-box-two-tp">
-                    <span className="cp-cart-items-pricing-symbol-box-two">
-                      &#8377;
-                    </span>{""}
-                    {cartItems.totalPrice}
-                  </p>
+                <div className="cp-cart-items-checkout-box">
+                  <button
+                    className="cp-cart-items-checkout-button"
+                    onClick={openModal}
+                  >
+                    Proceed
+                  </button>
                 </div>
               </div>
-              <div className="cp-cart-items-checkout-box">
-                <button className="cp-cart-items-checkout-button">
-                  Proceed
-                </button>
-              </div>
             </div>
-          </div>
+            <Modal
+              isOpen={modalIsOpen}
+              onRequestClose={closeModal}
+              preventScroll={true}
+              style={{
+                overlay: {
+                  backgroundColor: "rgba(0, 0, 0, 0.6)",
+                },
+                content: {
+                  top: "50%",
+                  left: "50%",
+                  right: "auto",
+                  bottom: "auto",
+                  marginRight: "-50%",
+                  transform: "translate(-50%, -50%)",
+                },
+              }}
+              ariaHideApp={false}
+            >
+              <div className="cp-modal-container">
+                <div className="cp-modal-header-main">
+                  <h3>Patient Details</h3>
+                  <MdOutlineCancel
+                    className="cp-modal-cancel-icon"
+                    onClick={closeModal}
+                  />
+                </div>
+                <div className="cp-modal-form-container">
+                  <form>
+                    {formData.map((entry, index) => (
+                      <div key={index} className="cp-modal-form-data-disp">
+                        <div>
+                          <p>{entry.name}</p>
+                          <p>
+                            {entry.age}, {entry.gender}
+                          </p>
+                        </div>
+                        <div className="cp-modal-form-update-items">
+                          <span
+                            className="cp-modal-form-edit-icon"
+                            onClick={() => handleEdit(index)}
+                          >
+                            Edit
+                          </span>
+                          <RiDeleteBin6Line
+                            className="cp-modal-form-remove-icon"
+                            onClick={() => handleDelete(index)}
+                          />
+                        </div>
+                      </div>
+                    ))}
+                    <div className="cp-modal-input-container">
+                      <input
+                        type="text"
+                        placeholder="Name"
+                        value={name}
+                        required
+                        onChange={handleNameChange}
+                        className="cp-modal-form-input"
+                      />
+                      <input
+                        type="text"
+                        placeholder="Age"
+                        value={age}
+                        required
+                        onChange={handleAgeChange}
+                        className="cp-modal-form-input-age"
+                      />
+                      <label className="cp-modal-form-gender-main">
+                        Gender:
+                        <input
+                          type="radio"
+                          required
+                          value="Male"
+                          checked={gender === "Male"}
+                          onChange={handleGenderChange}
+                          className="cp-modal-form-gender-male"
+                        />
+                        Male
+                        <input
+                          type="radio"
+                          required
+                          value="Female"
+                          checked={gender === "Female"}
+                          onChange={handleGenderChange}
+                          className="cp-modal-form-gender-female"
+                        />
+                        Female
+                      </label>
+                      <div className="cp-modal-form-add-more-sec">
+                        <span
+                          onClick={handleAddMore}
+                          className="cp-modal-form-add-more-text"
+                        >
+                          {editIndex === -1 ? (
+                            <>
+                              <AiOutlineUserAdd className="cp-modal-form-add-user-icon" />
+                              Add New Patient
+                            </>
+                          ) : (
+                            <>
+                              <AiOutlineEdit className="cp-modal-form-update-user-icon" />
+                              Update Details
+                            </>
+                          )}
+                        </span>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+                {formData?.length > 0 && (
+                  <>
+                    <div className="cp-modal-address-container">
+                      <textarea
+                        placeholder="Address"
+                        value={address}
+                        onChange={handleAddressChange}
+                        required
+                        className="cp-modal-form-textarea"
+                        rows={4}
+                        cols={50}
+                      />
+                    </div>
+                    <div className="cp-modal-pincode-container">
+                      <input
+                        type="text"
+                        placeholder="Mobile Number"
+                        value={mobileNumber}
+                        required
+                        onChange={handleMobileNumberChange}
+                        className="cp-modal-form-add-input"
+                      />
+                      <input
+                        type="text"
+                        placeholder="Pincode"
+                        value={pincode}
+                        required
+                        onChange={handlePincodeChange}
+                        className="cp-modal-form-add-input"
+                      />
+                    </div>
+                    <div className="cp-modal-confirm-booking-container">
+                      <button className="cp-modal-confirm-booking-button">
+                        Confirm Booking
+                      </button>
+                    </div>
+                  </>
+                )}
+              </div>
+            </Modal>
+          </>
         ) : (
           <div className="cp-empty-cart-main">
             <div className="cp-empty-cart-img">
