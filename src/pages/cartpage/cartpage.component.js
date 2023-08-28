@@ -139,7 +139,7 @@ const CartPage = () => {
                   <p className="cp-cart-items-pricing-box-one-tp">
                     <span className="cp-cart-items-pricing-symbol-box-one">
                       &#8377;
-                    </span>{" "}
+                    </span>{""}
                     {cartItems.totalPrice}
                   </p>
                 </div>
@@ -148,7 +148,7 @@ const CartPage = () => {
                   <p className="cp-cart-items-pricing-box-two-tp">
                     <span className="cp-cart-items-pricing-symbol-box-two">
                       &#8377;
-                    </span>{" "}
+                    </span>{""}
                     {cartItems.totalPrice}
                   </p>
                 </div>
