@@ -26,6 +26,7 @@ const CartPage = () => {
   const [address, setAddress] = useState("");
   const [mobileNumber, setMobileNumber] = useState("");
   const [pincode, setPincode] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     fetch(
@@ -172,12 +173,83 @@ const CartPage = () => {
     }
   };
 
+  const confirmBookingHandler = () => {
+    if (
+      mobileNumber &&
+      mobileNumber !== 0 &&
+      pincode &&
+      pincode !== 0 &&
+      address &&
+      address !== ""
+    ) {
+      setErrorMessage("");
+      const requestData = {
+        userId: userData.userId,
+        cartId: userData.cartId,
+        cartItems: cartItems.cartItems,
+        patientDetails: formData,
+        address: address,
+        mobileNumber: mobileNumber,
+        pincode: pincode,
+        totalPrice: cartItems.totalPrice,
+      };
+
+      fetch(
+        "https://qar5m2k5ra.execute-api.ap-south-1.amazonaws.com/dev/api/v1/booking/diagnostics",
+        {
+          method: "POST",
+          headers: {
+            Authorization:
+              "eyJhbGciOiJIUzUxMiJ9.eyJzZWNyZXQiOiJiZmE3MzhhNjdkOGU5NGNmNDI4ZTdjZWE5Y2E1YzY3YiJ9.o4k544e1-NWMTBT28lOmEJe_D4TMOuwb11_rXLWb_SNhd6Oq70lWWqVdHzenEr1mhnVTDAtcOufnc4CMlIxUiw",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(requestData),
+        }
+      )
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          return response.json();
+        })
+        .then((data) => {
+          dispatch(storeCartCount(userData.userId, userData.cartId));
+          setCartItems([]);
+          setModalIsOpen(false);
+          setFormData([]);
+          setName("");
+          setAge("");
+          setGender("");
+          setAddress("");
+          setMobileNumber("");
+          setPincode("");
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+    } else {
+      let error = "";
+      if (!pincode) {
+        error = "Pincode";
+      }
+      if (!mobileNumber) {
+        error = "Mobile Number";
+      }
+      if (address == "") {
+        error = "Address";
+      }
+      setErrorMessage(`Please enter ${error}`);
+    }
+  };
+
   return (
     <>
       <div className="cp-empty-cart-page-container">
         {isLoading ? (
           <div className="cp-cart-items-loading-container">Loading...</div>
-        ) : cartItems && cartItems?.cartItems.length > 0 ? (
+        ) : cartItems &&
+          cartItems?.cartItems &&
+          cartItems?.cartItems.length > 0 ? (
           <>
             <div className="cp-cart-items-container">
               <div className="cp-cart-items-main">
@@ -381,7 +453,7 @@ const CartPage = () => {
                       <input
                         type="text"
                         placeholder="Mobile Number"
-                        value={mobileNumber}
+                        value={mobileNumber == 0 ? "" : mobileNumber}
                         required
                         onChange={handleMobileNumberChange}
                         className="cp-modal-form-add-input"
@@ -389,14 +461,22 @@ const CartPage = () => {
                       <input
                         type="text"
                         placeholder="Pincode"
-                        value={pincode}
+                        value={pincode == 0 ? "" : pincode}
                         required
                         onChange={handlePincodeChange}
                         className="cp-modal-form-add-input"
                       />
                     </div>
+                    {errorMessage && (
+                      <span className="cp-modal-error-message">
+                        {errorMessage}
+                      </span>
+                    )}
                     <div className="cp-modal-confirm-booking-container">
-                      <button className="cp-modal-confirm-booking-button">
+                      <button
+                        className="cp-modal-confirm-booking-button"
+                        onClick={confirmBookingHandler}
+                      >
                         Confirm Booking
                       </button>
                     </div>

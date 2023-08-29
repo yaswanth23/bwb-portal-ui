@@ -291,3 +291,8 @@
   color: var(--color-preload-text);
   background: var(--primary-color);
 }
+.cp-modal-error-message {
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: var(--error-color);
+}
