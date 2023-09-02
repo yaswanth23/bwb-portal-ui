@@ -17,12 +17,18 @@ const BookDiagnosticsPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const userData = useSelector(selectUserData);
-  const userLocaiton = useSelector(selectUserLocationCaptured);
+  const userLocation = useSelector(selectUserLocationCaptured);
+
+  let initialPincode;
+  if (userLocation) {
+    initialPincode = userLocation;
+  } else {
+    initialPincode = userData.pharmacyPincode;
+  }
+
   const [pincodes, setPincodes] = useState(null);
   const [inputPincodeValue, setInputPincodeValue] = useState("");
-  const [selectedPincode, setSelectedPincode] = useState(
-    userLocaiton ? userLocaiton : userData.pharmacyPincode
-  );
+  const [selectedPincode, setSelectedPincode] = useState(initialPincode);
   const [openPincodeDropdown, setOpenPincodeDropdown] = useState(false);
   const [diagnostics, setDiagnostics] = useState(null);
   const [inputDiagnosticValue, setInputDiagnosticValue] = useState("");
@@ -232,7 +238,7 @@ const BookDiagnosticsPage = () => {
 
   const handleClearChanges = () => {
     setInputPincodeValue("");
-    setSelectedPincode(userLocaiton ? userLocaiton : userData.pharmacyPincode);
+    setSelectedPincode(initialPincode);
     setInputDiagnosticValue("");
     setSelectedDiagnostics("Select Test Name");
     setSelectedDiagnosticsTestId("");
