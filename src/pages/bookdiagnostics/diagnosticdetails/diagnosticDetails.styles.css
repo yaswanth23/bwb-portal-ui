@@ -1,67 +1,57 @@
+.dd-container {
+  border: 1px solid #99a8ff;
+  border-radius: 0.5rem;
+}
 .dd-first-container {
-  display: flex;
+  padding: 1rem;
+  display: grid;
 }
-.dd-first-types-main {
-  display: flex;
-  align-items: baseline;
-  width: 55%;
+.dd-heart-fill-icon {
+  font-size: 1.5rem;
+  color: #99a8ff;
 }
-.dd-first-temperature-main {
-  display: flex;
-  align-items: baseline;
-  width: 45%;
+.dd-f-test-header {
+  padding: 0.5rem 0;
 }
-.dd-first-types-main h3,
-.dd-first-temperature-main h3,
-.dd-second-remarks-main h3,
-.dd-third-schedule-main h3,
-.dd-third-tat-main h3 {
-  margin-left: 0.5rem;
-}
-.dd-first-types-main p,
-.dd-first-temperature-main p,
-.dd-third-schedule-main p,
-.dd-third-tat-main p {
-  margin-left: 0.5rem;
-  word-wrap: break-word;
-}
-.dd-second-container {
-  margin-top: 1.5rem;
-}
-.dd-second-remarks-main {
-  display: flex;
-  align-items: baseline;
-}
-.dd-second-remarks-main p {
-  margin-left: 0.5rem;
-  width: 90%;
-}
-.dd-third-container {
-  margin-top: 1.5rem;
-  display: flex;
-}
-.dd-third-schedule-main {
-  display: flex;
-  align-items: baseline;
-  width: 55%;
-}
-.dd-third-tat-main {
-  display: flex;
-  align-items: center;
-  width: 45%;
-}
-.dd-fourth-container {
+.dd-f-details-conainer {
   margin-top: 1rem;
+}
+.dd-f-test-tube-icon,
+.dd-f-temperature-icon,
+.dd-f-clock-icon,
+.dd-f-calander-icon {
+  font-size: 1.2rem;
+  color: #99a8ff;
+}
+.dd-f-details-st-m span,
+.dd-f-details-tt-m span,
+.dd-f-details-tat-m span,
+.dd-f-details-schedule-t-m span {
+  margin-left: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+.dd-f-details-st-m,
+.dd-f-details-tt-m,
+.dd-f-details-tat-m,
+.dd-f-details-schedule-t-m {
+  font-size: 0.85rem;
+}
+.dd-f-details-temperature-type,
+.dd-f-details-tat-type,
+.dd-f-details-schedule-type {
+  margin-top: 0.5rem;
   display: flex;
 }
-.dd-fourth-mrp-main {
+.dd-details-price {
   display: flex;
+  margin-top: 1rem;
   align-items: center;
 }
-.dd-fourth-mrp-symbol {
-  font-size: 3rem;
+.dd-price-symbol {
+  font-size: 1.8rem;
 }
-.dd-fourth-mrp-main p {
-  font-size: 2rem;
+.dd-details-price p {
+  font-size: 1.2rem;
   font-weight: 600;
 }

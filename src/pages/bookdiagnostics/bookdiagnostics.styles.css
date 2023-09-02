@@ -134,8 +134,9 @@
 .bdp-first-sub-two-container {
   margin: 1rem 1rem 0 1rem;
   padding: 1rem 0;
-  /* border-top: 1px solid var(--primary-color);
-  border-bottom: 1px solid var(--primary-color); */
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  grid-gap: 15px;
 }
 .bdp-first-patient-details-container {
   margin: 0 1rem;

@@ -34,10 +34,9 @@ const BookDiagnosticsPage = () => {
   const [inputDiagnosticValue, setInputDiagnosticValue] = useState("");
   const [selectedDiagnostics, setSelectedDiagnostics] =
     useState("Select Test Name");
-  const [selectedDiagnosticsTestId, setSelectedDiagnosticsTestId] =
-    useState("");
+  const [multiselectDiagnostics, setMultiselectDiagnostics] = useState([]);
   const [openDiagnosticDropdown, setOpenDiagnosticDropdown] = useState(false);
-  const [diagnosticsData, setDiagnosticsData] = useState(null);
+  const [diagnosticsData, setDiagnosticsData] = useState([]);
   const [isAddToCartToggle, setIsAddToCartToggle] = useState(false);
   const limit = 10;
 
@@ -98,32 +97,47 @@ const BookDiagnosticsPage = () => {
   }, [inputDiagnosticValue]);
 
   useEffect(() => {
-    if (selectedDiagnosticsTestId !== "") {
-      fetch(
-        `https://qar5m2k5ra.execute-api.ap-south-1.amazonaws.com/dev/api/v1/diagnostics/details/${selectedDiagnosticsTestId}`,
-        {
-          method: "GET",
-          headers: {
-            Authorization:
-              "eyJhbGciOiJIUzUxMiJ9.eyJzZWNyZXQiOiJiZmE3MzhhNjdkOGU5NGNmNDI4ZTdjZWE5Y2E1YzY3YiJ9.o4k544e1-NWMTBT28lOmEJe_D4TMOuwb11_rXLWb_SNhd6Oq70lWWqVdHzenEr1mhnVTDAtcOufnc4CMlIxUiw",
-            "Content-Type": "application/json",
-          },
-        }
-      )
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error("Network response was not ok");
-          }
-          return response.json();
-        })
-        .then((data) => {
-          setDiagnosticsData(data.data);
-        })
-        .catch((error) => {
-          console.error("There was a problem with the fetch operation:", error);
+    if (multiselectDiagnostics.length > 0) {
+      const selectedTests = multiselectDiagnostics.filter(
+        (multiselectItems) =>
+          !diagnosticsData.some(
+            (diagnosticItems) =>
+              diagnosticItems.testId === multiselectItems.testId
+          )
+      );
+
+      if (selectedTests.length > 0) {
+        selectedTests.map((item) => {
+          fetch(
+            `https://qar5m2k5ra.execute-api.ap-south-1.amazonaws.com/dev/api/v1/diagnostics/details/${item.testId}`,
+            {
+              method: "GET",
+              headers: {
+                Authorization:
+                  "eyJhbGciOiJIUzUxMiJ9.eyJzZWNyZXQiOiJiZmE3MzhhNjdkOGU5NGNmNDI4ZTdjZWE5Y2E1YzY3YiJ9.o4k544e1-NWMTBT28lOmEJe_D4TMOuwb11_rXLWb_SNhd6Oq70lWWqVdHzenEr1mhnVTDAtcOufnc4CMlIxUiw",
+                "Content-Type": "application/json",
+              },
+            }
+          )
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error("Network response was not ok");
+              }
+              return response.json();
+            })
+            .then((data) => {
+              setDiagnosticsData([...diagnosticsData, data.data]);
+            })
+            .catch((error) => {
+              console.error(
+                "There was a problem with the fetch operation:",
+                error
+              );
+            });
         });
+      }
     }
-  }, [selectedDiagnosticsTestId]);
+  }, [multiselectDiagnostics]);
 
   useEffect(() => {
     fetch(
@@ -199,12 +213,8 @@ const BookDiagnosticsPage = () => {
       const requestData = {
         userId: userData.userId,
         cartId: userData.cartId,
-        cartItems: [
-          {
-            diagnosticTestId: selectedDiagnosticsTestId,
-            pincode: selectedPincode,
-          },
-        ],
+        cartItems: multiselectDiagnostics,
+        selectedPincode: selectedPincode,
       };
 
       fetch(
@@ -241,9 +251,9 @@ const BookDiagnosticsPage = () => {
     setSelectedPincode(initialPincode);
     setInputDiagnosticValue("");
     setSelectedDiagnostics("Select Test Name");
-    setSelectedDiagnosticsTestId("");
-    setDiagnosticsData(null);
+    setDiagnosticsData([]);
     setIsAddToCartToggle(false);
+    setMultiselectDiagnostics([]);
   };
 
   return (
@@ -358,9 +368,22 @@ const BookDiagnosticsPage = () => {
                     onClick={() => {
                       if (item?.attributeValue !== selectedDiagnostics) {
                         setSelectedDiagnostics(item?.attributeValue);
-                        setSelectedDiagnosticsTestId(item?.testId);
                         setOpenDiagnosticDropdown(false);
                         setInputDiagnosticValue("");
+
+                        const itemAlreadyExists = multiselectDiagnostics.some(
+                          (existingItem) => existingItem.testId === item?.testId
+                        );
+
+                        if (!itemAlreadyExists) {
+                          setMultiselectDiagnostics([
+                            ...multiselectDiagnostics,
+                            {
+                              testName: item?.attributeValue,
+                              testId: item?.testId,
+                            },
+                          ]);
+                        }
                       }
                     }}
                   >
@@ -370,9 +393,14 @@ const BookDiagnosticsPage = () => {
               </ul>
             </div>
           </div>
-          {selectedDiagnosticsTestId && (
+          {diagnosticsData.length > 0 && (
             <div className="bdp-first-sub-two-container">
-              <DiagnosticDetailsCard diagnosticsData={diagnosticsData} />
+              {diagnosticsData.map((item) => (
+                <DiagnosticDetailsCard
+                  key={item.testId}
+                  diagnosticsData={item}
+                />
+              ))}
             </div>
           )}
           <div className="bdp-submit-button-container">
