@@ -1,5 +1,6 @@
 import { Fragment, memo, useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import "./sidebar.styles.css";
 
 import budget_b from "../../assets/icons/budget-blue.svg";
@@ -9,9 +10,50 @@ import home_w from "../../assets/icons/home-white.svg";
 import plane_b from "../../assets/icons/plane-blue.svg";
 import plane_w from "../../assets/icons/plane-white.svg";
 
+import { storeUserLocationCaptured } from "../../store/user/user.action";
+
 const Sidebar = () => {
+  const dispatch = useDispatch();
   const location = useLocation();
+  const [error, setError] = useState(null);
   const [activeLinkIdx, setActiveLinkIdx] = useState(1);
+
+  useEffect(() => {
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const apiKey = "AIzaSyAg1jbL4bRBmiqWx5ZQImooTyRSMQTOtcs";
+          const { latitude, longitude } = position.coords;
+          const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${apiKey}`;
+
+          fetch(url)
+            .then((response) => response.json())
+            .then((data) => {
+              if (data.status === "OK" && data.results.length > 0) {
+                const addressComponents = data.results[0].address_components;
+                const postalCodeObj = addressComponents.find((component) =>
+                  component.types.includes("postal_code")
+                );
+
+                if (postalCodeObj) {
+                  const postalCode = postalCodeObj.short_name;
+                  dispatch(storeUserLocationCaptured(postalCode));
+                  console.log(`Postal Code: ${postalCode}`);
+                }
+              }
+            })
+            .catch((error) => {
+              console.error("Error:", error);
+            });
+        },
+        (error) => {
+          setError(error.message);
+        }
+      );
+    } else {
+      setError("Geolocation is not available in your browser.");
+    }
+  }, []);
 
   useEffect(() => {
     if (location.pathname === "/book-diagnostics") {

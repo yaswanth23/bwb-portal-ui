@@ -11,3 +11,8 @@ export const selectIsUserLoggedIn = createSelector(
   [selectUserReducer],
   (user) => user.isUserloggedIn
 );
+
+export const selectUserLocationCaptured = createSelector(
+  [selectUserReducer],
+  (user) => user.capturedUserLocation
+);
