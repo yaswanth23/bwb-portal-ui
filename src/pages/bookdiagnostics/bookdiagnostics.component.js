@@ -8,15 +8,21 @@ import "./bookdiagnostics.styles.css";
 
 import DiagnosticDetailsCard from "./diagnosticdetails/diagnosticDetails.component";
 import { storeCartCount } from "../../store/cart/cart.action";
-import { selectUserData } from "../../store/user/user.selector";
+import {
+  selectUserData,
+  selectUserLocationCaptured,
+} from "../../store/user/user.selector";
 
 const BookDiagnosticsPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const userData = useSelector(selectUserData);
+  const userLocaiton = useSelector(selectUserLocationCaptured);
   const [pincodes, setPincodes] = useState(null);
   const [inputPincodeValue, setInputPincodeValue] = useState("");
-  const [selectedPincode, setSelectedPincode] = useState("Select Pincode");
+  const [selectedPincode, setSelectedPincode] = useState(
+    userLocaiton ? userLocaiton : userData.pharmacyPincode
+  );
   const [openPincodeDropdown, setOpenPincodeDropdown] = useState(false);
   const [diagnostics, setDiagnostics] = useState(null);
   const [inputDiagnosticValue, setInputDiagnosticValue] = useState("");
@@ -226,7 +232,7 @@ const BookDiagnosticsPage = () => {
 
   const handleClearChanges = () => {
     setInputPincodeValue("");
-    setSelectedPincode("Select Pincode");
+    setSelectedPincode(userLocaiton ? userLocaiton : userData.pharmacyPincode);
     setInputDiagnosticValue("");
     setSelectedDiagnostics("Select Test Name");
     setSelectedDiagnosticsTestId("");
