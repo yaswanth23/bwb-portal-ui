@@ -253,7 +253,7 @@ const CartPage = () => {
           <>
             <div className="cp-cart-items-container">
               <div className="cp-cart-items-main">
-                {cartItems.cartItems.map((item, index) => {
+                {cartItems.cartItems.map((item) => {
                   return (
                     <div className="cp-cart-items-main-box" key={item.itemId}>
                       <div className="cp-cart-items-box-container">

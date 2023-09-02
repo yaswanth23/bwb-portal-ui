@@ -64,10 +64,12 @@
 }
 .cp-cart-items-info-price-symbol {
   font-size: 2rem;
+  color: var(--primary-color);
 }
 .cp-cart-items-info-price-box p {
   font-size: 1.2rem;
   font-weight: 600;
+  color: var(--primary-color);
 }
 .cp-cart-items-info-price-box-container {
   margin-left: 2.5rem;
@@ -87,7 +89,7 @@
 }
 .cp-cart-items-remove-icon {
   font-size: 1.5rem;
-  color: #8093ff;
+  color: var(--color-light-blue);
   &:hover {
     cursor: pointer;
   }
@@ -114,8 +116,8 @@
 .cp-cart-items-pricing-box-two {
   margin: 1rem 0;
   padding: 0.5rem 0;
-  border-top: 1px dashed #8093ff;
-  border-bottom: 1px dashed #8093ff;
+  border-top: 1px dashed var(--color-light-blue);
+  border-bottom: 1px dashed var(--color-light-blue);
 }
 .cp-cart-items-pricing-box-two p {
   font-weight: 600;
@@ -179,7 +181,7 @@
 .cp-modal-form-remove-icon {
   margin-left: 1rem;
   font-size: 1.2rem;
-  color: #8093ff;
+  color: var(--color-light-blur);
   &:hover {
     cursor: pointer;
   }
@@ -240,7 +242,7 @@
 .cp-modal-form-add-more-text {
   text-transform: uppercase;
   font-weight: 800;
-  color: #8093ff;
+  color: var(--color-light-blur);
   display: flex;
   align-items: center;
   cursor: pointer;

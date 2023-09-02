@@ -1,5 +1,5 @@
 .dd-container {
-  border: 1px solid #99a8ff;
+  border: 1px solid var(--color-light-blue);
   border-radius: 0.5rem;
 }
 .dd-first-container {
@@ -8,7 +8,7 @@
 }
 .dd-heart-fill-icon {
   font-size: 1.5rem;
-  color: #99a8ff;
+  color: var(--color-light-blue);
 }
 .dd-f-test-header {
   padding: 0.5rem 0;
@@ -21,7 +21,7 @@
 .dd-f-clock-icon,
 .dd-f-calander-icon {
   font-size: 1.2rem;
-  color: #99a8ff;
+  color: var(--color-light-blue);
 }
 .dd-f-details-st-m span,
 .dd-f-details-tt-m span,
