@@ -256,6 +256,12 @@ const BookDiagnosticsPage = () => {
     setMultiselectDiagnostics([]);
   };
 
+  const handleRemoveDiagnosticsData = (testId) => {
+    setDiagnosticsData(
+      diagnosticsData.filter((item) => item.testId !== testId)
+    );
+  };
+
   return (
     <>
       <div className="bdp-container">
@@ -399,6 +405,7 @@ const BookDiagnosticsPage = () => {
                 <DiagnosticDetailsCard
                   key={item.testId}
                   diagnosticsData={item}
+                  triggerFunction={handleRemoveDiagnosticsData}
                 />
               ))}
             </div>

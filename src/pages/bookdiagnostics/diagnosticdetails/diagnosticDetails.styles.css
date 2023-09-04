@@ -10,6 +10,15 @@
   font-size: 1.5rem;
   color: var(--color-light-blue);
 }
+.dd-first-icon-main {
+  display: flex;
+  justify-content: space-between;
+}
+.dd-delete-icon {
+  font-size: 1.5rem;
+  color: var(--color-light-blue);
+  cursor: pointer;
+}
 .dd-f-test-header {
   padding: 0.5rem 0;
 }

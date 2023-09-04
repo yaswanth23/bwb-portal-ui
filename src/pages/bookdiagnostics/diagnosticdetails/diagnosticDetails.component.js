@@ -1,6 +1,7 @@
 import { memo } from "react";
 import { AiOutlineSchedule } from "react-icons/ai";
 import { BsThermometerHalf } from "react-icons/bs";
+import { RiDeleteBin6Line } from "react-icons/ri";
 import {
   PiHeartbeatFill,
   PiTestTubeFill,
@@ -8,12 +9,21 @@ import {
 } from "react-icons/pi";
 import "./diagnosticDetails.styles.css";
 
-const DiagnosticDetails = ({ diagnosticsData }) => {
+const DiagnosticDetails = ({ diagnosticsData, triggerFunction }) => {
+  const triggerDataRemoval = () => {
+    triggerFunction(diagnosticsData.testId);
+  };
   return (
     <>
       <div className="dd-container">
         <div className="dd-first-container">
-          <PiHeartbeatFill className="dd-heart-fill-icon" />
+          <div className="dd-first-icon-main">
+            <PiHeartbeatFill className="dd-heart-fill-icon" />
+            <RiDeleteBin6Line
+              onClick={triggerDataRemoval}
+              className="dd-delete-icon"
+            />
+          </div>
           <h4 className="dd-f-test-header">{diagnosticsData.testName}</h4>
           <div className="dd-f-details-conainer">
             <div className="dd-f-details-sample-type">
