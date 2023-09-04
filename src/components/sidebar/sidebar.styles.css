@@ -2,7 +2,8 @@
   background-color: var(--primary-color);
   width: 20%;
   max-height: 100vh;
-  overflow-y: auto;
+  position: fixed;
+  overflow-y: hidden;
 }
 .sb-logo-container {
   padding: 1rem 4rem;
