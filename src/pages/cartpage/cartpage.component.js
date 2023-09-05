@@ -1,5 +1,6 @@
 import { memo, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { FaHandHoldingHeart } from "react-icons/fa";
 import { BsPersonPlus } from "react-icons/bs";
 import { RiDeleteBin6Line } from "react-icons/ri";
@@ -14,6 +15,7 @@ import { selectUserData } from "../../store/user/user.selector";
 
 const CartPage = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const userData = useSelector(selectUserData);
   const [cartItems, setCartItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -223,6 +225,7 @@ const CartPage = () => {
           setAddress("");
           setMobileNumber("");
           setPincode("");
+          navigate("/booking-confirm", { state: data });
         })
         .catch((error) => {
           console.error("Error:", error);
