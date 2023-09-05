@@ -109,7 +109,7 @@ const Sidebar = () => {
             </li>
             <li className="sb-nav-item">
               <Link
-                to="/"
+                to="/my-bookings"
                 onClick={() => setActiveLinkIdx(3)}
                 className={`sb-nav-link ${
                   3 === activeLinkIdx ? "active" : null
@@ -120,7 +120,7 @@ const Sidebar = () => {
                   className="sb-nav-link-icon"
                   alt="transactions-icon"
                 />
-                <span className="sb-nav-link-text">Transactions</span>
+                <span className="sb-nav-link-text">My Bookings</span>
               </Link>
             </li>
           </ul>

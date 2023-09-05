@@ -6,7 +6,7 @@ import { BsCart3 } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import "./bookdiagnostics.styles.css";
 
-import DiagnosticDetailsCard from "./diagnosticdetails/diagnosticDetails.component";
+import DiagnosticDetailsCard from "./diagnostic-details/diagnosticDetails.component";
 import { storeCartCount } from "../../store/cart/cart.action";
 import {
   selectUserData,

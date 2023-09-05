@@ -6,11 +6,14 @@ import { selectIsUserLoggedIn } from "./store/user/user.selector";
 const Home = lazy(() => import("./routes/home/home.component"));
 const LoginPage = lazy(() => import("./pages/login/loginpage.component"));
 const BookDiagnosticsPage = lazy(() =>
-  import("./pages/bookdiagnostics/bookdiagnostics.component")
+  import("./pages/book-diagnostics/bookdiagnostics.component")
 );
 const CartPage = lazy(() => import("./pages/cartpage/cartpage.component"));
 const BookingConfirmationPage = lazy(() =>
   import("./pages/booking-confirm/booking-confirm-page.component")
+);
+const MyBookingsPage = lazy(() =>
+  import("./pages/my-bookings/my-bookings.component")
 );
 
 // const randomLoaderTexts = [
@@ -50,6 +53,7 @@ const App = () => {
           <Route path="/" element={isUserLoggedIn ? <Home /> : <LoginPage />}>
             <Route path="book-diagnostics" element={<BookDiagnosticsPage />} />
             <Route path="cart" element={<CartPage />} />
+            <Route path="my-bookings" element={<MyBookingsPage />} />
           </Route>
           <Route path="booking-confirm" element={<BookingConfirmationPage />} />
         </Routes>
