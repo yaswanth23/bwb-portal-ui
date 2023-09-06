@@ -123,7 +123,6 @@ const BookingConfirmation = () => {
                         className={index % 2 === 0 ? "even-row" : "odd-row"}
                       >
                         <td>{item.testName}</td>
-
                         <td colSpan="1"></td>
                         <td>{item.mrp}</td>
                       </tr>

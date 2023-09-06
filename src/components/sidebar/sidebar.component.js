@@ -38,7 +38,6 @@ const Sidebar = () => {
                 if (postalCodeObj) {
                   const postalCode = postalCodeObj.short_name;
                   dispatch(storeUserLocationCaptured(postalCode));
-                  console.log(`Postal Code: ${postalCode}`);
                 }
               }
             })
@@ -58,6 +57,8 @@ const Sidebar = () => {
   useEffect(() => {
     if (location.pathname === "/book-diagnostics") {
       setActiveLinkIdx(2);
+    } else if (location.pathname === "/my-bookings") {
+      setActiveLinkIdx(3);
     }
     document.body.style.backgroundColor = "#f2f2f2";
     return () => {
