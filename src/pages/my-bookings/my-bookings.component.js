@@ -83,7 +83,10 @@ const MyBookingsPage = () => {
                     >
                       <td>{item._id}</td>
                       <td>{formatCreatedOn(item.createdOn)}</td>
-                      <td>{item.totalPrice}</td>
+                      <td>
+                        <span className="m-bookings-price-symbol">&#8377;</span>
+                        {item.totalPrice}
+                      </td>
                       <td>{item.status}</td>
                     </tr>
                   ))}
