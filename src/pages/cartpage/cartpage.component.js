@@ -32,16 +32,34 @@ const CartPage = () => {
   const [modalStepperThreeFlag, setModalStepperThreeFlag] = useState(false);
   const [patientMobileNumber, setPatientMobileNumber] = useState("");
   const [patientDetails, setPatientDetails] = useState([]);
+  const [patientAddress, setPatientAddress] = useState([]);
   const [selectedPatients, setSelectedPatients] = useState([]);
+  const [selectedAddress, setSelectedAddress] = useState([]);
   const [searchErrorMessage, setSearchErrorMessage] = useState("");
   const [patientErrorMessage, setPatientErrorMessage] = useState("");
+  const [addressErrorMessage, setAddressErrorMessage] = useState("");
+  const [addressSubmitErrorMessage, setAddressSubmitErrorMessage] =
+    useState("");
   const [isAddNewPatientFlag, setIsAddNewPatientFlag] = useState(false);
+  const [addressInfo, setAddressInfo] = useState("");
+  const [pincode, setPincode] = useState("");
+  const [landmark, setLandmark] = useState("");
+  const [city, setCity] = useState("");
+  const [state, setState] = useState("");
+  const [addressType, setAddressType] = useState("");
+  const [isAddressDisplayFlag, setIsAddressDisplayFlag] = useState(false);
 
   useEffect(() => {
     if (selectedPatients.length > 0) {
       setPatientErrorMessage("");
     }
   }, [selectedPatients]);
+
+  useEffect(() => {
+    if (selectedAddress.length > 0) {
+      setAddressErrorMessage("");
+    }
+  }, [selectedAddress]);
 
   useEffect(() => {
     fetch(
@@ -171,9 +189,9 @@ const CartPage = () => {
         .then((data) => {
           if (data.data.patientInfo.length === 0) {
             setPatientDetails([]);
+            // setPatientAddress([]);
             setSearchErrorMessage("No Saved patients found for this Number");
           } else {
-            console.log("in");
             if (patientDetails.length > 0) {
               setPatientDetails([
                 ...patientDetails,
@@ -182,6 +200,7 @@ const CartPage = () => {
             } else {
               setPatientDetails(data.data.patientInfo.patientDetails);
             }
+            // setPatientAddress(data.data.patientInfo.addressDetails);
             setSearchErrorMessage("");
           }
         })
@@ -226,6 +245,105 @@ const CartPage = () => {
     } else {
       setPatientErrorMessage("Please select the patient");
     }
+  };
+
+  const handleStepTwoContinue = () => {
+    if (
+      addressInfo &&
+      pincode &&
+      city &&
+      state &&
+      patientMobileNumber &&
+      addressType
+    ) {
+      setModalStepperValue(3);
+      setModalStepperThreeFlag(true);
+      setModalHeaderLabel("Time Slots");
+    } else {
+      setAddressSubmitErrorMessage("Please fill and save the address form");
+    }
+  };
+
+  const handleInputPincode = (event) => {
+    const newPincode = +event.target.value;
+    if (!isNaN(newPincode)) {
+      if (newPincode.toString().length <= 6) {
+        setPincode(newPincode.toString());
+      }
+    }
+  };
+
+  const handleAddressInfoInputChange = (event) => {
+    setAddressInfo(event.target.value);
+  };
+
+  const handleLandmarkInputChange = (event) => {
+    setLandmark(event.target.value);
+  };
+
+  const handleCityInputChange = (event) => {
+    setCity(event.target.value);
+  };
+
+  const handleStateInputChange = (event) => {
+    setState(event.target.value);
+  };
+
+  const handleMobileInputChange = (event) => {
+    const newNumber = +event.target.value;
+    if (!isNaN(newNumber)) {
+      if (newNumber.toString().length <= 10) {
+        setPatientMobileNumber(newNumber.toString());
+      }
+    }
+  };
+
+  const handleAddressTypeChange = (e) => {
+    setAddressType(e.target.value);
+  };
+
+  const handleSaveAddress = () => {
+    if (!addressType) {
+      setAddressErrorMessage("Select one from Home, Office & Other");
+    }
+    if (!patientMobileNumber || patientMobileNumber == 0) {
+      setAddressErrorMessage("Please Enter Mobile Number");
+    }
+    if (!state) {
+      setAddressErrorMessage("Please Enter State");
+    }
+    if (!city) {
+      setAddressErrorMessage("Please Enter City");
+    }
+    if (!pincode || pincode == 0) {
+      setAddressErrorMessage("Please Enter Pincode");
+    }
+    if (!addressInfo) {
+      setAddressErrorMessage("Please Enter Flat Number, Building Name, Street");
+    }
+    if (
+      addressInfo &&
+      pincode &&
+      city &&
+      state &&
+      patientMobileNumber &&
+      addressType
+    ) {
+      setAddressErrorMessage("");
+      setAddressSubmitErrorMessage("");
+      setIsAddressDisplayFlag(true);
+    }
+  };
+
+  const handleClearAddress = () => {
+    setAddressInfo("");
+    setPincode("");
+    setLandmark("");
+    setCity("");
+    setState("");
+    setAddressType("");
+    setIsAddressDisplayFlag(false);
+    setAddressSubmitErrorMessage("");
   };
 
   return (
@@ -545,10 +663,155 @@ const CartPage = () => {
                               collect samples
                             </p>
                           </div>
+                          {isAddressDisplayFlag ? (
+                            <div className="cp-modal-address-form-container">
+                              <div className="cp-modal-address-form-main">
+                                <div>
+                                  <p>{addressInfo}</p>
+                                  {landmark && <p>{landmark}</p>}
+                                  <p>
+                                    {city}, {state}
+                                  </p>
+                                  <p>{pincode}</p>
+                                  <p>{patientMobileNumber}</p>
+                                </div>
+                                <div>
+                                  <RiDeleteBin6Line
+                                    className="cp-modal-form-remove-icon"
+                                    onClick={handleClearAddress}
+                                  />
+                                </div>
+                              </div>
+                            </div>
+                          ) : (
+                            <div className="cp-modal-address-form-container">
+                              <form className="cp-modal-af-main">
+                                <input
+                                  type="text"
+                                  required
+                                  value={addressInfo}
+                                  onChange={handleAddressInfoInputChange}
+                                  placeholder="Flat Number, Building Name, Street"
+                                  autoComplete="off"
+                                  className="cp-modal-af-input-main"
+                                />
+                                <input
+                                  type="text"
+                                  required
+                                  value={pincode == 0 ? "" : pincode}
+                                  onChange={handleInputPincode}
+                                  placeholder="Pincode"
+                                  autoComplete="off"
+                                  className="cp-modal-af-input-main"
+                                />
+                                <input
+                                  type="text"
+                                  required
+                                  value={landmark}
+                                  onChange={handleLandmarkInputChange}
+                                  placeholder="Landmark"
+                                  autoComplete="off"
+                                  className="cp-modal-af-input-main"
+                                />
+                                <input
+                                  type="text"
+                                  required
+                                  value={city}
+                                  onChange={handleCityInputChange}
+                                  placeholder="City"
+                                  autoComplete="off"
+                                  className="cp-modal-af-input-main"
+                                />
+                                <input
+                                  type="text"
+                                  required
+                                  value={state}
+                                  onChange={handleStateInputChange}
+                                  placeholder="State"
+                                  autoComplete="off"
+                                  className="cp-modal-af-input-main"
+                                />
+                                <input
+                                  type="text"
+                                  required
+                                  value={
+                                    patientMobileNumber == 0
+                                      ? ""
+                                      : patientMobileNumber
+                                  }
+                                  onChange={handleMobileInputChange}
+                                  placeholder="Mobile Number"
+                                  autoComplete="off"
+                                  className="cp-modal-af-input-main"
+                                />
+                                <div className="cp-modal-radio-btns">
+                                  <div>
+                                    <input
+                                      type="radio"
+                                      required
+                                      value="Home"
+                                      checked={addressType === "Home"}
+                                      onChange={handleAddressTypeChange}
+                                      className="cp-modal-radio-home"
+                                    />
+                                    Home
+                                  </div>
+                                  <div>
+                                    <input
+                                      type="radio"
+                                      required
+                                      value="Office"
+                                      checked={addressType === "Office"}
+                                      onChange={handleAddressTypeChange}
+                                      className="cp-modal-radio-office"
+                                    />
+                                    Office
+                                  </div>
+                                  <div>
+                                    <input
+                                      type="radio"
+                                      required
+                                      value="Other"
+                                      checked={addressType === "Other"}
+                                      onChange={handleAddressTypeChange}
+                                      className="cp-modal-radio-other"
+                                    />
+                                    Other
+                                  </div>
+                                </div>
+                                {addressErrorMessage && (
+                                  <span className="cp-modal-error-message">
+                                    {addressErrorMessage}
+                                  </span>
+                                )}
+                              </form>
+                              <div className="cp-modal-save-container">
+                                <button
+                                  className="cp-modal-save-button"
+                                  onClick={handleSaveAddress}
+                                >
+                                  save
+                                </button>
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                        {addressSubmitErrorMessage && (
+                          <span className="cp-modal-error-message">
+                            {addressSubmitErrorMessage}
+                          </span>
+                        )}
+                        <div className="cp-modal-address-continue-btn-container">
+                          <button
+                            className="cp-modal-address-continue-btn"
+                            onClick={handleStepTwoContinue}
+                          >
+                            Continue
+                          </button>
                         </div>
                       </div>
                     )}
-                    {modalStepperValue === 3 && <div>address</div>}
+                    {modalStepperValue === 3 && <div>Time Slot</div>}
                   </div>
                 </div>
               </div>
