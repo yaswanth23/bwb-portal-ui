@@ -2,10 +2,10 @@ import { memo, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { FaHandHoldingHeart } from "react-icons/fa";
-import { BsPersonPlus } from "react-icons/bs";
 import { RiDeleteBin6Line } from "react-icons/ri";
-import { MdOutlineCancel } from "react-icons/md";
-import { AiOutlineUserAdd, AiOutlineEdit } from "react-icons/ai";
+import { RxCross2 } from "react-icons/rx";
+import { PiFilesLight } from "react-icons/pi";
+import { AiOutlineUserAdd } from "react-icons/ai";
 import Modal from "react-modal";
 import "./cartpage.styles.css";
 
@@ -20,15 +20,28 @@ const CartPage = () => {
   const [cartItems, setCartItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [formData, setFormData] = useState([]);
+
   const [name, setName] = useState("");
   const [age, setAge] = useState("");
   const [gender, setGender] = useState("");
-  const [editIndex, setEditIndex] = useState(-1);
-  const [address, setAddress] = useState("");
-  const [mobileNumber, setMobileNumber] = useState("");
-  const [pincode, setPincode] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
+
+  const [modalHeaderLabel, setModalHeaderLabel] = useState("Patient Details");
+  const [modalStepperValue, setModalStepperValue] = useState(1);
+  const [modalStepperOneFlag, setModalStepperOneFlag] = useState(true);
+  const [modalStepperTwoFlag, setModalStepperTwoFlag] = useState(false);
+  const [modalStepperThreeFlag, setModalStepperThreeFlag] = useState(false);
+  const [patientMobileNumber, setPatientMobileNumber] = useState("");
+  const [patientDetails, setPatientDetails] = useState([]);
+  const [selectedPatients, setSelectedPatients] = useState([]);
+  const [searchErrorMessage, setSearchErrorMessage] = useState("");
+  const [patientErrorMessage, setPatientErrorMessage] = useState("");
+  const [isAddNewPatientFlag, setIsAddNewPatientFlag] = useState(false);
+
+  useEffect(() => {
+    if (selectedPatients.length > 0) {
+      setPatientErrorMessage("");
+    }
+  }, [selectedPatients]);
 
   useEffect(() => {
     fetch(
@@ -120,92 +133,33 @@ const CartPage = () => {
     setGender(e.target.value);
   };
 
-  const handleAddMore = () => {
-    if (name && age && gender) {
-      if (editIndex === -1) {
-        const newEntry = { name, age, gender };
-        setFormData([...formData, newEntry]);
-      } else {
-        const updatedData = [...formData];
-        updatedData[editIndex] = { name, age, gender };
-        setFormData(updatedData);
-        setEditIndex(-1);
-      }
-      setName("");
-      setAge("");
-      setGender("");
-    } else {
-      alert("Please enter all the fields name, age and gender.");
-    }
-  };
-
-  const handleEdit = (index) => {
-    const entryToEdit = formData[index];
-    setName(entryToEdit.name);
-    setAge(entryToEdit.age);
-    setGender(entryToEdit.gender);
-    setEditIndex(index);
-  };
-
   const handleDelete = (index) => {
-    const updatedData = [...formData];
+    const updatedData = [...patientDetails];
     updatedData.splice(index, 1);
-    setFormData(updatedData);
+    setPatientDetails(updatedData);
   };
 
-  const handleAddressChange = (event) => {
-    setAddress(event.target.value);
-  };
-
-  const handleMobileNumberChange = (event) => {
+  const handleInputPatientMobileNumber = (event) => {
     const newMobileNumber = +event.target.value;
+    setSearchErrorMessage("");
     if (!isNaN(newMobileNumber)) {
       if (newMobileNumber.toString().length <= 10) {
-        setMobileNumber(newMobileNumber.toString());
+        setPatientMobileNumber(newMobileNumber.toString());
       }
     }
   };
 
-  const handlePincodeChange = (event) => {
-    const newPincode = +event.target.value;
-    if (!isNaN(newPincode)) {
-      if (newPincode.toString().length <= 6) {
-        setPincode(newPincode.toString());
-      }
-    }
-  };
-
-  const confirmBookingHandler = () => {
-    if (
-      mobileNumber &&
-      mobileNumber !== 0 &&
-      pincode &&
-      pincode !== 0 &&
-      address &&
-      address !== ""
-    ) {
-      setErrorMessage("");
-      const requestData = {
-        userId: userData.userId,
-        cartId: userData.cartId,
-        cartItems: cartItems.cartItems,
-        patientDetails: formData,
-        address: address,
-        mobileNumber: mobileNumber,
-        pincode: pincode,
-        totalPrice: cartItems.totalPrice,
-      };
-
+  const fetchPatientDetails = () => {
+    if (patientMobileNumber.length === 10) {
       fetch(
-        "https://qar5m2k5ra.execute-api.ap-south-1.amazonaws.com/dev/api/v1/booking/diagnostics",
+        `https://qar5m2k5ra.execute-api.ap-south-1.amazonaws.com/dev/api/v1/patient/details/${patientMobileNumber}`,
         {
-          method: "POST",
+          method: "GET",
           headers: {
             Authorization:
               "eyJhbGciOiJIUzUxMiJ9.eyJzZWNyZXQiOiJiZmE3MzhhNjdkOGU5NGNmNDI4ZTdjZWE5Y2E1YzY3YiJ9.o4k544e1-NWMTBT28lOmEJe_D4TMOuwb11_rXLWb_SNhd6Oq70lWWqVdHzenEr1mhnVTDAtcOufnc4CMlIxUiw",
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(requestData),
         }
       )
         .then((response) => {
@@ -215,33 +169,62 @@ const CartPage = () => {
           return response.json();
         })
         .then((data) => {
-          dispatch(storeCartCount(userData.userId, userData.cartId));
-          setCartItems([]);
-          setModalIsOpen(false);
-          setFormData([]);
-          setName("");
-          setAge("");
-          setGender("");
-          setAddress("");
-          setMobileNumber("");
-          setPincode("");
-          navigate("/booking-confirm", { state: data });
+          if (data.data.patientInfo.length === 0) {
+            setPatientDetails([]);
+            setSearchErrorMessage("No Saved patients found for this Number");
+          } else {
+            console.log("in");
+            if (patientDetails.length > 0) {
+              setPatientDetails([
+                ...patientDetails,
+                ...data.data.patientInfo.patientDetails,
+              ]);
+            } else {
+              setPatientDetails(data.data.patientInfo.patientDetails);
+            }
+            setSearchErrorMessage("");
+          }
         })
         .catch((error) => {
-          console.error("Error:", error);
+          console.error("There was a problem with the fetch operation:", error);
         });
     } else {
-      let error = "";
-      if (!pincode) {
-        error = "Pincode";
-      }
-      if (!mobileNumber) {
-        error = "Mobile Number";
-      }
-      if (address == "") {
-        error = "Address";
-      }
-      setErrorMessage(`Please enter ${error}`);
+      setSearchErrorMessage("Invalid Mobile Number");
+    }
+  };
+
+  const handleCheckboxChange = (event, patient) => {
+    const { checked } = event.target;
+    if (checked) {
+      setSelectedPatients((prevSelected) => [...prevSelected, patient]);
+    } else {
+      setSelectedPatients((prevSelected) =>
+        prevSelected.filter((p) => p !== patient)
+      );
+    }
+  };
+
+  const handleAddNewPatientFlag = () => {
+    setIsAddNewPatientFlag(!isAddNewPatientFlag);
+  };
+
+  const handleSaveNewPatientData = () => {
+    if (name && age && gender) {
+      const newEntry = { name, age, gender };
+      setPatientDetails([...patientDetails, newEntry]);
+      setIsAddNewPatientFlag(!isAddNewPatientFlag);
+    } else {
+      alert("Please enter all the fields name, age and gender.");
+    }
+  };
+
+  const handleStepOneContinue = () => {
+    if (selectedPatients.length > 0) {
+      setModalStepperValue(2);
+      setModalStepperTwoFlag(true);
+      setModalHeaderLabel("Address Details");
+    } else {
+      setPatientErrorMessage("Please select the patient");
     }
   };
 
@@ -286,11 +269,12 @@ const CartPage = () => {
                           </span>
                           <p>{item.mrp}</p>
                         </div>
-                        <div className="cp-cart-items-info-patient-box">
+                        {/* diable patients count view */}
+                        {/* <div className="cp-cart-items-info-patient-box">
                           <BsPersonPlus className="cp-cart-items-info-patient-box-ap-icon" />
                           <p>{formData?.length}</p>
                           <p>{formData?.length > 1 ? "Patients" : "Patient"}</p>
-                        </div>
+                        </div> */}
                       </div>
                     </div>
                   );
@@ -338,6 +322,8 @@ const CartPage = () => {
                   backgroundColor: "rgba(0, 0, 0, 0.6)",
                 },
                 content: {
+                  padding: 0,
+                  border: "none",
                   top: "50%",
                   left: "50%",
                   right: "auto",
@@ -350,141 +336,221 @@ const CartPage = () => {
             >
               <div className="cp-modal-container">
                 <div className="cp-modal-header-main">
-                  <h3>Patient Details</h3>
-                  <MdOutlineCancel
+                  <h3>{modalHeaderLabel}</h3>
+                  <RxCross2
                     className="cp-modal-cancel-icon"
                     onClick={closeModal}
                   />
                 </div>
-                <div className="cp-modal-form-container">
-                  <form>
-                    {formData.map((entry, index) => (
-                      <div key={index} className="cp-modal-form-data-disp">
-                        <div>
-                          <p>{entry.name}</p>
-                          <p>
-                            {entry.age}, {entry.gender}
-                          </p>
-                        </div>
-                        <div className="cp-modal-form-update-items">
-                          <span
-                            className="cp-modal-form-edit-icon"
-                            onClick={() => handleEdit(index)}
-                          >
-                            Edit
-                          </span>
-                          <RiDeleteBin6Line
-                            className="cp-modal-form-remove-icon"
-                            onClick={() => handleDelete(index)}
-                          />
-                        </div>
-                      </div>
-                    ))}
-                    <div className="cp-modal-input-container">
-                      <input
-                        type="text"
-                        placeholder="Name"
-                        value={name}
-                        required
-                        onChange={handleNameChange}
-                        className="cp-modal-form-input"
-                      />
-                      <input
-                        type="text"
-                        placeholder="Age"
-                        value={age}
-                        required
-                        onChange={handleAgeChange}
-                        className="cp-modal-form-input-age"
-                      />
-                      <label className="cp-modal-form-gender-main">
-                        Gender:
-                        <input
-                          type="radio"
-                          required
-                          value="Male"
-                          checked={gender === "Male"}
-                          onChange={handleGenderChange}
-                          className="cp-modal-form-gender-male"
-                        />
-                        Male
-                        <input
-                          type="radio"
-                          required
-                          value="Female"
-                          checked={gender === "Female"}
-                          onChange={handleGenderChange}
-                          className="cp-modal-form-gender-female"
-                        />
-                        Female
-                      </label>
-                      <div className="cp-modal-form-add-more-sec">
-                        <span
-                          onClick={handleAddMore}
-                          className="cp-modal-form-add-more-text"
-                        >
-                          {editIndex === -1 ? (
-                            <>
-                              <AiOutlineUserAdd className="cp-modal-form-add-user-icon" />
-                              Add New Patient
-                            </>
-                          ) : (
-                            <>
-                              <AiOutlineEdit className="cp-modal-form-update-user-icon" />
-                              Update Details
-                            </>
-                          )}
-                        </span>
-                      </div>
-                    </div>
-                  </form>
+                <div className="cp-modal-stepper">
+                  <div
+                    className={
+                      modalStepperOneFlag
+                        ? "cp-modal-stepper-one active"
+                        : "cp-modal-stepper-one"
+                    }
+                  ></div>
+                  <div
+                    className={
+                      modalStepperTwoFlag
+                        ? "cp-modal-stepper-one active"
+                        : "cp-modal-stepper-two"
+                    }
+                  ></div>
+                  <div
+                    className={
+                      modalStepperThreeFlag
+                        ? "cp-modal-stepper-three active"
+                        : "cp-modal-stepper-three"
+                    }
+                  ></div>
                 </div>
-                {formData?.length > 0 && (
-                  <>
-                    <div className="cp-modal-address-container">
-                      <textarea
-                        placeholder="Address"
-                        value={address}
-                        onChange={handleAddressChange}
-                        required
-                        className="cp-modal-form-textarea"
-                        rows={4}
-                        cols={50}
-                      />
-                    </div>
-                    <div className="cp-modal-pincode-container">
-                      <input
-                        type="text"
-                        placeholder="Mobile Number"
-                        value={mobileNumber == 0 ? "" : mobileNumber}
-                        required
-                        onChange={handleMobileNumberChange}
-                        className="cp-modal-form-add-input"
-                      />
-                      <input
-                        type="text"
-                        placeholder="Pincode"
-                        value={pincode == 0 ? "" : pincode}
-                        required
-                        onChange={handlePincodeChange}
-                        className="cp-modal-form-add-input"
-                      />
-                    </div>
-                    {errorMessage && (
-                      <span className="cp-modal-error-message">
-                        {errorMessage}
-                      </span>
+                <div className="cp-modal-content-container">
+                  <div>
+                    {modalStepperValue === 1 && (
+                      <div>
+                        <div className="cp-modal-patient-details-info-sec">
+                          <h3>Step 1: Select Patient</h3>
+                          <div className="cp-modal-patient-info-sub">
+                            <p>
+                              1. Enter the patient's mobile number for details.
+                            </p>
+                            <p>
+                              2. If details aren't displayed, click "Add New
+                              Patient." Ensure all selected patients share the
+                              same address.
+                            </p>
+                          </div>
+                          <div className="cp-modal-patient-collect-number-container">
+                            <div className="cp-modal-patient-collect-number-main">
+                              <input
+                                type="text"
+                                value={
+                                  patientMobileNumber == 0
+                                    ? ""
+                                    : patientMobileNumber
+                                }
+                                onChange={handleInputPatientMobileNumber}
+                                placeholder="Mobile Number"
+                                className="cp-modal-patient-mb-number-container-input"
+                              />
+                              <button
+                                className="cp-modal-search-patient-btn"
+                                onClick={fetchPatientDetails}
+                              >
+                                Search Patient
+                              </button>
+                            </div>
+                            {searchErrorMessage && (
+                              <span className="cp-modal-error-message">
+                                {searchErrorMessage}
+                              </span>
+                            )}
+                          </div>
+                          {patientDetails.length > 0 ? (
+                            patientDetails.map((item, index) => (
+                              <div
+                                className="cp-modal-patients-view-container"
+                                key={index}
+                              >
+                                <div className="cp-modal-patients-view-disp-main">
+                                  <div className="cp-modal-patients-view-disp-sub-content">
+                                    <input
+                                      type="checkbox"
+                                      value={item.name}
+                                      checked={selectedPatients.includes(item)}
+                                      onChange={(e) =>
+                                        handleCheckboxChange(e, item)
+                                      }
+                                    />
+                                    <div className="cp-modal-pvd-ccontainer">
+                                      <p>{item.name}</p>
+                                      <p>
+                                        {item.age}, {item.gender}
+                                      </p>
+                                    </div>
+                                  </div>
+                                  <div className="cp-modal-form-update-items">
+                                    {/* currently edit functionality is not enabled */}
+                                    {/* <span
+                                      className="cp-modal-form-edit-icon"
+                                      onClick={() => handleEdit(index)}
+                                    >
+                                      Edit
+                                    </span> */}
+                                    <RiDeleteBin6Line
+                                      className="cp-modal-form-remove-icon"
+                                      onClick={() => handleDelete(index)}
+                                    />
+                                  </div>
+                                </div>
+                              </div>
+                            ))
+                          ) : (
+                            <div className="cp-modal-patients-view-container">
+                              <div className="cp-modal-patients-view-main">
+                                <PiFilesLight className="cp-modal-files-icon" />
+                                No Saved Patients
+                              </div>
+                            </div>
+                          )}
+                          <div className="cp-modal-patients-add-new-container">
+                            {isAddNewPatientFlag ? (
+                              <div className="cp-modal-patients-add-new-main">
+                                <input
+                                  type="text"
+                                  placeholder="Name"
+                                  value={name}
+                                  required
+                                  onChange={handleNameChange}
+                                  className="cp-modal-form-input"
+                                />
+                                <input
+                                  type="text"
+                                  placeholder="Age"
+                                  value={age}
+                                  required
+                                  onChange={handleAgeChange}
+                                  className="cp-modal-form-input-age"
+                                />
+                                <label className="cp-modal-form-gender-main">
+                                  Gender:
+                                  <input
+                                    type="radio"
+                                    required
+                                    value="Male"
+                                    checked={gender === "Male"}
+                                    onChange={handleGenderChange}
+                                    className="cp-modal-form-gender-male"
+                                  />
+                                  Male
+                                  <input
+                                    type="radio"
+                                    required
+                                    value="Female"
+                                    checked={gender === "Female"}
+                                    onChange={handleGenderChange}
+                                    className="cp-modal-form-gender-female"
+                                  />
+                                  Female
+                                </label>
+                                <div className="cp-modal-patient-form-btns">
+                                  <button
+                                    className="cp-modal-patient-cancel-btn"
+                                    onClick={handleAddNewPatientFlag}
+                                  >
+                                    cancel
+                                  </button>
+                                  <button
+                                    className="cp-modal-patient-save-btn"
+                                    onClick={handleSaveNewPatientData}
+                                  >
+                                    save
+                                  </button>
+                                </div>
+                              </div>
+                            ) : (
+                              <span
+                                onClick={handleAddNewPatientFlag}
+                                className="cp-modal-form-add-more-text"
+                              >
+                                <AiOutlineUserAdd className="cp-modal-form-add-user-icon" />
+                                Add New Patient
+                              </span>
+                            )}
+                          </div>
+                        </div>
+                        {patientErrorMessage && (
+                          <span className="cp-modal-error-message">
+                            {patientErrorMessage}
+                          </span>
+                        )}
+                        <div className="cp-modal-patient-continue-btn-container">
+                          <button
+                            className="cp-modal-patient-continue-btn"
+                            onClick={handleStepOneContinue}
+                          >
+                            Continue
+                          </button>
+                        </div>
+                      </div>
                     )}
-                    <div className="cp-modal-confirm-booking-container">
-                      <button
-                        className="cp-modal-confirm-booking-button"
-                        onClick={confirmBookingHandler}
-                      >
-                        Confirm Booking
-                      </button>
-                    </div>
-                  </>
-                )}
+                    {modalStepperValue === 2 && (
+                      <div>
+                        <div className="cp-modal-address-details-info-sec">
+                          <h3>Step 2: Select Address</h3>
+                          <div className="cp-modal-patient-info-sub">
+                            <p>
+                              Our Medical Agent will visit this address to
+                              collect samples
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                    {modalStepperValue === 3 && <div>address</div>}
+                  </div>
+                </div>
               </div>
             </Modal>
           </>

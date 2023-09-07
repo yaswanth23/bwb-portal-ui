@@ -41,59 +41,33 @@ const BookDiagnosticsPage = () => {
   const limit = 10;
 
   useEffect(() => {
-    if (inputPincodeValue !== "" && inputPincodeValue != 0) {
-      fetch(
-        `https://qar5m2k5ra.execute-api.ap-south-1.amazonaws.com/dev/api/v1/search/${inputPincodeValue}`,
-        {
-          method: "GET",
-          headers: {
-            Authorization:
-              "eyJhbGciOiJIUzUxMiJ9.eyJzZWNyZXQiOiJiZmE3MzhhNjdkOGU5NGNmNDI4ZTdjZWE5Y2E1YzY3YiJ9.o4k544e1-NWMTBT28lOmEJe_D4TMOuwb11_rXLWb_SNhd6Oq70lWWqVdHzenEr1mhnVTDAtcOufnc4CMlIxUiw",
-            "Content-Type": "application/json",
-          },
-        }
-      )
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error("Network response was not ok");
-          }
-          return response.json();
-        })
-        .then((data) => {
-          setPincodes(data.data);
-        })
-        .catch((error) => {
-          console.error("There was a problem with the fetch operation:", error);
-        });
-    }
+    const delay = 1000;
+    const debounceSearchPincodes = setTimeout(() => {
+      if (inputPincodeValue !== "" && inputPincodeValue != 0) {
+        searchTypedPincodes();
+      } else {
+        defaultSearchPincodes();
+      }
+    }, delay);
+
+    return () => {
+      clearTimeout(debounceSearchPincodes);
+    };
   }, [inputPincodeValue]);
 
   useEffect(() => {
-    if (inputDiagnosticValue !== "") {
-      fetch(
-        `https://qar5m2k5ra.execute-api.ap-south-1.amazonaws.com/dev/api/v1/search/diagnostics/${inputDiagnosticValue}`,
-        {
-          method: "GET",
-          headers: {
-            Authorization:
-              "eyJhbGciOiJIUzUxMiJ9.eyJzZWNyZXQiOiJiZmE3MzhhNjdkOGU5NGNmNDI4ZTdjZWE5Y2E1YzY3YiJ9.o4k544e1-NWMTBT28lOmEJe_D4TMOuwb11_rXLWb_SNhd6Oq70lWWqVdHzenEr1mhnVTDAtcOufnc4CMlIxUiw",
-            "Content-Type": "application/json",
-          },
-        }
-      )
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error("Network response was not ok");
-          }
-          return response.json();
-        })
-        .then((data) => {
-          setDiagnostics(data.data);
-        })
-        .catch((error) => {
-          console.error("There was a problem with the fetch operation:", error);
-        });
-    }
+    const delay = 1000;
+    const debounceSearchDiagnostics = setTimeout(() => {
+      if (inputDiagnosticValue !== "") {
+        searchTypedDiagnostics();
+      } else {
+        defaultSearchDiagnostics();
+      }
+    }, delay);
+
+    return () => {
+      clearTimeout(debounceSearchDiagnostics);
+    };
   }, [inputDiagnosticValue]);
 
   useEffect(() => {
@@ -140,6 +114,63 @@ const BookDiagnosticsPage = () => {
   }, [multiselectDiagnostics]);
 
   useEffect(() => {
+    defaultSearchPincodes();
+    defaultSearchDiagnostics();
+  }, []);
+
+  const searchTypedPincodes = async () => {
+    fetch(
+      `https://qar5m2k5ra.execute-api.ap-south-1.amazonaws.com/dev/api/v1/search/${inputPincodeValue}`,
+      {
+        method: "GET",
+        headers: {
+          Authorization:
+            "eyJhbGciOiJIUzUxMiJ9.eyJzZWNyZXQiOiJiZmE3MzhhNjdkOGU5NGNmNDI4ZTdjZWE5Y2E1YzY3YiJ9.o4k544e1-NWMTBT28lOmEJe_D4TMOuwb11_rXLWb_SNhd6Oq70lWWqVdHzenEr1mhnVTDAtcOufnc4CMlIxUiw",
+          "Content-Type": "application/json",
+        },
+      }
+    )
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setPincodes(data.data);
+      })
+      .catch((error) => {
+        console.error("There was a problem with the fetch operation:", error);
+      });
+  };
+
+  const searchTypedDiagnostics = async () => {
+    fetch(
+      `https://qar5m2k5ra.execute-api.ap-south-1.amazonaws.com/dev/api/v1/search/diagnostics/${inputDiagnosticValue}`,
+      {
+        method: "GET",
+        headers: {
+          Authorization:
+            "eyJhbGciOiJIUzUxMiJ9.eyJzZWNyZXQiOiJiZmE3MzhhNjdkOGU5NGNmNDI4ZTdjZWE5Y2E1YzY3YiJ9.o4k544e1-NWMTBT28lOmEJe_D4TMOuwb11_rXLWb_SNhd6Oq70lWWqVdHzenEr1mhnVTDAtcOufnc4CMlIxUiw",
+          "Content-Type": "application/json",
+        },
+      }
+    )
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setDiagnostics(data.data);
+      })
+      .catch((error) => {
+        console.error("There was a problem with the fetch operation:", error);
+      });
+  };
+
+  const defaultSearchPincodes = async () => {
     fetch(
       `https://qar5m2k5ra.execute-api.ap-south-1.amazonaws.com/dev/api/v1/get/pincodes?page=1&limit=${limit}`,
       {
@@ -163,7 +194,9 @@ const BookDiagnosticsPage = () => {
       .catch((error) => {
         console.error("There was a problem with the fetch operation:", error);
       });
+  };
 
+  const defaultSearchDiagnostics = async () => {
     fetch(
       `https://qar5m2k5ra.execute-api.ap-south-1.amazonaws.com/dev/api/v1/get/diagnostics?page=1&limit=${limit}`,
       {
@@ -187,7 +220,7 @@ const BookDiagnosticsPage = () => {
       .catch((error) => {
         console.error("There was a problem with the fetch operation:", error);
       });
-  }, []);
+  };
 
   const handleInputPincode = (event) => {
     const newPincode = +event.target.value;

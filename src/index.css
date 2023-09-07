@@ -48,11 +48,11 @@ html {
   scroll-behavior: smooth;
 }
 
-::-webkit-scrollbar {
+/* ::-webkit-scrollbar {
   display: none;
   width: 0px;
   background: transparent;
-}
+} */
 
 body {
   font-family: var(--main-font);

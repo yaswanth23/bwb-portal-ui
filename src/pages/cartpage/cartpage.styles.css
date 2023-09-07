@@ -155,28 +155,121 @@
   background: var(--primary-color);
 }
 .cp-modal-container {
+  background-color: #f2f2f2;
   width: 30rem;
 }
 .cp-modal-header-main {
   display: flex;
   justify-content: space-between;
+  padding: 1rem 1rem 0 1rem;
 }
-.cp-modal-cancel-icon {
-  font-size: 1.7rem;
-  &:hover {
-    cursor: pointer;
-  }
+.cp-modal-header-main h3 {
+  font-size: 1rem;
 }
-.cp-modal-form-container {
-  margin-top: 1rem;
+.cp-modal-stepper {
+  margin: 0.7rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
-.cp-modal-form-data-disp {
-  margin: 0.5rem 0;
-  border: 1px solid var(--primary-color);
+.cp-modal-stepper-one,
+.cp-modal-stepper-two,
+.cp-modal-stepper-three {
+  background-color: #c5c5c5;
+  height: 0.4rem;
+  width: 33%;
+}
+.cp-modal-stepper-one.active,
+.cp-modal-stepper-two.active,
+.cp-modal-stepper-three.active {
+  background-color: var(--primary-color);
+}
+.cp-modal-content-container {
+  padding: 1rem;
+}
+.cp-modal-patient-details-info-sec {
+  overflow: auto;
+  height: 400px;
+}
+.cp-modal-patient-details-info-sec h3 {
+  font-size: 1rem;
+}
+.cp-modal-patient-info-sub {
+  margin-top: 0.5rem;
+  background-color: var(--color-preload-text);
   padding: 0.5rem;
-  border-radius: 0.5rem;
+}
+.cp-modal-patient-info-sub p {
+  font-size: 0.9rem;
+}
+.cp-modal-patient-collect-number-container {
+  margin: 1rem 0;
+  padding: 1rem 0.5rem;
+  background-color: var(--color-white);
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
+}
+.cp-modal-patient-collect-number-main {
+  display: flex;
+  align-items: baseline;
+}
+.cp-modal-patient-mb-number-container-input {
+  font-family: var(--main-font);
+  width: 50%;
+  border: none;
+  border-bottom: 1px solid var(--primary-color);
+  outline: none;
+  background: transparent;
+  font-size: 1rem;
+  padding: 0.5rem;
+}
+.cp-modal-search-patient-btn {
+  margin-left: 0.5rem;
+  border: none;
+  text-decoration: none;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  font-weight: 600;
+  width: 10rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border-radius: 0.3rem;
+  height: 2rem;
+  color: var(--color-preload-text);
+  background: var(--primary-color);
+  font-family: var(--main-font);
+}
+.cp-modal-patients-view-container {
+  margin: 0.5rem 0;
+  padding: 0.5rem;
+  background-color: var(--color-white);
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
+}
+.cp-modal-patients-view-main {
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #bababa;
+}
+.cp-modal-patients-view-disp-main {
   display: flex;
   justify-content: space-between;
+}
+.cp-modal-pvd-ccontainer {
+  margin-left: 1rem;
+}
+.cp-modal-pvd-ccontainer p {
+  font-size: 0.9rem;
+}
+.cp-modal-files-icon {
+  font-size: 3rem;
+  color: #bababa;
+}
+.cp-modal-patients-view-disp-sub-content {
+  display: flex;
 }
 .cp-modal-form-remove-icon {
   margin-left: 1rem;
@@ -186,26 +279,12 @@
     cursor: pointer;
   }
 }
-.cp-modal-form-update-items {
-  display: flex;
-  align-items: flex-start;
-}
-.cp-modal-form-edit-icon {
-  font-size: 0.8rem;
-  font-weight: 700;
-  &:hover {
-    cursor: pointer;
-  }
-}
-.cp-modal-input-container {
-  margin-top: 1rem;
-  display: grid;
-}
 .cp-modal-form-input {
   width: 60%;
   height: 2rem;
   margin-bottom: 1rem;
   border: none;
+  font-family: var(--main-font);
   border-bottom: 1px solid var(--primary-color);
   outline: none;
   background: transparent;
@@ -220,6 +299,7 @@
   border-bottom: 1px solid var(--primary-color);
   outline: none;
   background: transparent;
+  font-family: var(--main-font);
   font-size: 1rem;
   padding: 0.5rem;
 }
@@ -227,6 +307,7 @@
   display: flex;
   align-items: center;
   margin-bottom: 1rem;
+  font-size: 0.9rem;
 }
 .cp-modal-form-gender-female,
 .cp-modal-form-gender-male {
@@ -235,48 +316,84 @@
     cursor: pointer;
   }
 }
-.cp-modal-form-add-more-sec {
-  display: flex;
-  justify-content: flex-end;
+.cp-modal-patients-add-new-container {
+  margin-top: 1rem;
 }
 .cp-modal-form-add-more-text {
+  font-size: 0.9rem;
   text-transform: uppercase;
-  font-weight: 800;
-  color: var(--color-light-blur);
+  font-weight: 500;
+  color: var(--primary-color);
   display: flex;
   align-items: center;
   cursor: pointer;
 }
-.cp-modal-form-add-user-icon,
-.cp-modal-form-update-user-icon {
-  font-size: 1.4rem;
+.cp-modal-form-add-user-icon {
+  font-size: 1.2rem;
   margin-right: 0.5rem;
+  color: var(--primary-color);
 }
-.cp-modal-form-textarea {
-  margin-top: 1rem;
-  width: 100%;
-  font-size: 1rem;
-  border: "1px solid #000";
-  border-radius: 0.5rem;
-  padding: 0.5rem;
+.cp-modal-error-message {
+  font-size: 0.7rem;
+  font-weight: bold;
+  color: var(--error-color);
 }
-.cp-modal-pincode-container {
-  margin-top: 1rem;
+.cp-modal-patients-add-new-main {
   display: grid;
-}
-.cp-modal-form-add-input {
-  font-family: var(--main-font);
-  border: 1px solid var(--primary-color);
-  border-radius: 0.5rem;
+  margin: 0.5rem 0;
   padding: 0.5rem;
-  width: 70%;
-  font-size: 1rem;
-  margin-bottom: 1rem;
+  background-color: var(--color-white);
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
 }
-.cp-modal-confirm-booking-container {
-  margin-top: 1rem;
+.cp-modal-patient-form-btns {
+  margin-bottom: 0.5rem;
+  display: flex;
 }
-.cp-modal-confirm-booking-button {
+.cp-modal-patient-cancel-btn {
+  margin-left: 0.5rem;
+  border: none;
+  text-decoration: none;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  font-weight: 600;
+  width: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border-radius: 0.3rem;
+  height: 2rem;
+  color: var(--primary-color);
+  background: transparent;
+  font-family: var(--main-font);
+}
+.cp-modal-patient-save-btn {
+  margin-left: 0.5rem;
+  border: none;
+  text-decoration: none;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  font-weight: 600;
+  width: 8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border-radius: 0.3rem;
+  height: 2rem;
+  color: var(--color-preload-text);
+  background: var(--primary-color);
+  font-family: var(--main-font);
+}
+.cp-modal-patient-continue-btn-container {
+  margin: 1rem -1rem -1rem -1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.cp-modal-patient-continue-btn {
   border: none;
   text-decoration: none;
   cursor: pointer;
@@ -288,13 +405,16 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  border-radius: 0.5rem;
-  height: 3rem;
+  height: 4rem;
+  letter-spacing: 0.1rem;
   color: var(--color-preload-text);
   background: var(--primary-color);
+  font-family: var(--main-font);
 }
-.cp-modal-error-message {
-  font-size: 0.8rem;
-  font-weight: bold;
-  color: var(--error-color);
+.cp-modal-address-details-info-sec {
+  overflow: auto;
+  height: 400px;
+}
+.cp-modal-address-details-info-sec h3 {
+  font-size: 1rem;
 }
