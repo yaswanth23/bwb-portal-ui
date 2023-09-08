@@ -574,3 +574,67 @@
 .cp-cart-items-remove-icon {
   margin-right: 0.3rem;
 }
+.cp-pd-disp-container {
+  border: 1px solid var(--color-light-blue);
+  width: 40rem;
+  margin-bottom: 1rem;
+}
+.cp-pd-disp-container-header {
+  padding: 1rem;
+  background-color: #e6e9ff;
+  margin-bottom: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+}
+.cp-pd-disp-container-header p {
+  text-transform: uppercase;
+  color: var(--primary-color);
+  font-size: 0.85rem;
+}
+.cp-pd-disp-container-header span {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--primary-color);
+}
+.cp-pd-disp-edit-icon {
+  font-size: 1rem;
+  margin-right: 0.3rem;
+}
+.cp-pd-disp-all-patient-details {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+}
+.user-plus-icon,
+.location-pin-icon,
+.calender-time-icon {
+  margin-right: 0.3rem;
+  font-size: 1rem;
+  color: var(--primary-color);
+}
+.cp-pd-patient-details-part-header span,
+.cp-pd-address-part-header span,
+.cp-pd-calender-part-header span {
+  display: flex;
+  align-items: center;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--primary-color);
+}
+.cp-pd-calender-part-content,
+.cp-pd-address-part-content,
+.cp-pd-patient-details-part-content {
+  margin-top: 1rem;
+}
+.cp-pd-calender-part-content p,
+.cp-pd-address-part-content p,
+.cp-pd-patient-details-part-sub-content p {
+  font-size: 0.8rem;
+}
+.cp-pd-patient-details-part-sub-content {
+  padding-bottom: 0.3rem;
+}

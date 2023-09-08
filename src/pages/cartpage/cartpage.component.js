@@ -1,12 +1,15 @@
 import { memo, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import Modal from "react-modal";
 import { useNavigate } from "react-router-dom";
-import { FaHandHoldingHeart } from "react-icons/fa";
+import { BiSolidEditAlt } from "react-icons/bi";
+import { LiaUserPlusSolid } from "react-icons/lia";
+import { TfiLocationPin } from "react-icons/tfi";
+import { TbCalendarTime } from "react-icons/tb";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { RxCross2 } from "react-icons/rx";
 import { PiFilesLight } from "react-icons/pi";
 import { AiOutlineUserAdd } from "react-icons/ai";
-import Modal from "react-modal";
 import "./cartpage.styles.css";
 
 import EmptyCartBanner from "../../assets/images/microscope.png";
@@ -462,6 +465,66 @@ const CartPage = () => {
           <>
             <div className="cp-cart-items-container">
               <div className="cp-cart-items-main">
+                {isCheckoutReady && (
+                  <div className="cp-pd-disp-container">
+                    <div className="cp-pd-disp-container-header">
+                      <p>Patient Details</p>
+                      <span onClick={openModal}>
+                        <BiSolidEditAlt className="cp-pd-disp-edit-icon" />
+                        edit details
+                      </span>
+                    </div>
+                    <div className="cp-pd-disp-all-patient-details">
+                      <div className="cp-pd-patient-details-part">
+                        <div className="cp-pd-patient-details-part-header">
+                          <span>
+                            <LiaUserPlusSolid className="user-plus-icon" />
+                            Patient
+                          </span>
+                        </div>
+                        <div className="cp-pd-patient-details-part-content">
+                          {selectedPatients.map((item) => (
+                            <div className="cp-pd-patient-details-part-sub-content">
+                              <p>{item.name}</p>
+                              <p>
+                                {item.age}, {item.gender}
+                              </p>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                      <div className="cp-pd-address-part">
+                        <div className="cp-pd-address-part-header">
+                          <span>
+                            <TfiLocationPin className="location-pin-icon" />
+                            Address
+                          </span>
+                        </div>
+                        <div className="cp-pd-address-part-content">
+                          <p>{addressInfo}</p>
+                          {landmark && <p>{landmark}</p>}
+                          <p>
+                            {city}, {state}
+                          </p>
+                          <p>{pincode}</p>
+                          <p>{patientMobileNumber}</p>
+                        </div>
+                      </div>
+                      <div className="cp-pd-calender-part">
+                        <div className="cp-pd-calender-part-header">
+                          <span>
+                            <TbCalendarTime className="calender-time-icon" />
+                            Time Slot
+                          </span>
+                        </div>
+                        <div className="cp-pd-calender-part-content">
+                          <p>{selectedDate}</p>
+                          <p>{selectedSlot}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
                 <div className="cp-cart-items-content-container">
                   <div className="cp-cart-items-content-container-header">
                     <p>Diagnostic Tests ({cartItems?.cartItems.length})</p>
@@ -987,7 +1050,9 @@ const CartPage = () => {
                                       ))}
                                     </ul>
                                   ) : (
-                                    <div className="cp-modal-ts-slider-slots-na">No slots available for the day</div>
+                                    <div className="cp-modal-ts-slider-slots-na">
+                                      No slots available for the day
+                                    </div>
                                   )}
                                 </div>
                               </div>
