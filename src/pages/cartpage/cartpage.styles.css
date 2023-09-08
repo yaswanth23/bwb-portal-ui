@@ -39,60 +39,10 @@
   background-color: var(--color-white);
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 }
-.cp-cart-items-main-box {
-  margin: 1.5rem 0;
-  width: 40rem;
-  /* height: 10rem; */
-  padding: 1rem;
-  border-radius: 0.5rem;
-  border: 1px solid var(--primary-color);
-}
-.cp-cart-items-box-container {
-  display: flex;
-  justify-content: space-between;
-}
-.cp-cart-items-icon {
-  color: var(--primary-color);
-}
-.cp-cart-items-info-box {
-  margin-left: 1rem;
-}
-.cp-cart-items-info-price-box {
-  margin-top: 3rem;
-  display: flex;
-  align-items: center;
-}
-.cp-cart-items-info-price-symbol {
-  font-size: 2rem;
-  color: var(--primary-color);
-}
-.cp-cart-items-info-price-box p {
-  font-size: 1.2rem;
-  font-weight: 600;
-  color: var(--primary-color);
-}
-.cp-cart-items-info-price-box-container {
-  margin-left: 2.5rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  cursor: pointer;
-}
-.cp-cart-items-box-header-container {
-  display: flex;
-  color: var(--primary-color);
-}
 .cp-cart-items-info-patient-box p {
   color: var(--primary-color);
   font-size: 0.7rem;
   font-weight: 600;
-}
-.cp-cart-items-remove-icon {
-  font-size: 1.5rem;
-  color: var(--color-light-blue);
-  &:hover {
-    cursor: pointer;
-  }
 }
 .cp-cart-items-pricing-main {
   margin: 1.5rem 0;
@@ -121,18 +71,6 @@
 }
 .cp-cart-items-pricing-box-two p {
   font-weight: 600;
-}
-.cp-cart-items-info-patient-box {
-  width: 6.5rem;
-  height: 2rem;
-  background-color: var(--color-preload-text);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.5rem 0.2rem;
-}
-.cp-cart-items-info-patient-box-ap-icon {
-  font-size: 1.2rem;
 }
 .cp-cart-items-checkout-box {
   margin-top: 2rem;
@@ -553,6 +491,11 @@
   background-color: var(--primary-color);
   color: var(--color-preload-text);
 }
+.cp-modal-ts-slider-slots-na {
+  font-size: 0.8rem;
+  display: flex;
+  justify-content: center;
+}
 .cp-modal-time-slot-dis-container {
   padding: 0.5rem 0;
   border-bottom: 1px solid var(--primary-color);
@@ -566,4 +509,68 @@
   cursor: default;
   font-size: 0.8rem;
   color: var(--color-light-blue);
+}
+.cp-cart-items-content-container {
+  border: 1px solid var(--color-light-blue);
+  width: 40rem;
+}
+.cp-cart-items-content-container-header {
+  padding: 1rem;
+  background-color: #e6e9ff;
+  margin-bottom: 0.5rem;
+}
+.cp-cart-items-content-container-header p {
+  text-transform: uppercase;
+  color: var(--primary-color);
+  font-size: 0.85rem;
+}
+.cp-cart-items-main-box-sub-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 0 1rem;
+}
+.cp-cart-items-main-box-sub-container h3 {
+  font-size: 0.85rem;
+  color: var(--primary-color);
+}
+.cp-cart-items-main-box-sub-container p {
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-light-blue);
+}
+.cp-cart-items-price-main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.cp-cart-items-info-price-symbol {
+  font-size: 1.3rem;
+  color: var(--primary-color);
+}
+.cp-cart-items-price-main p {
+  margin-top: 0;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--primary-color);
+}
+.cp-cart-items-main-box {
+  padding: 1rem 0;
+}
+.odd-box {
+  border-bottom: 1px solid var(--color-preload-text);
+}
+.cp-cart-items-remove-section span {
+  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  color: var(--color-light-blue);
+}
+.cp-cart-items-remove-section {
+  padding-top: 1rem;
+}
+.cp-cart-items-remove-icon {
+  margin-right: 0.3rem;
 }

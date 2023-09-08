@@ -462,46 +462,42 @@ const CartPage = () => {
           <>
             <div className="cp-cart-items-container">
               <div className="cp-cart-items-main">
-                {cartItems.cartItems.map((item) => {
-                  return (
-                    <div className="cp-cart-items-main-box" key={item.itemId}>
-                      <div className="cp-cart-items-box-container">
-                        <div className="cp-cart-items-box-header-container">
-                          <FaHandHoldingHeart
-                            size={25}
-                            className="cp-cart-items-icon"
-                          />
-                          <div className="cp-cart-items-info-box">
+                <div className="cp-cart-items-content-container">
+                  <div className="cp-cart-items-content-container-header">
+                    <p>Diagnostic Tests ({cartItems?.cartItems.length})</p>
+                  </div>
+                  {cartItems.cartItems.map((item, index) => {
+                    return (
+                      <div
+                        className={
+                          index === cartItems?.cartItems.length - 1
+                            ? "cp-cart-items-main-box"
+                            : "cp-cart-items-main-box odd-box"
+                        }
+                        key={item.itemId}
+                      >
+                        <div className="cp-cart-items-main-box-sub-container">
+                          <div>
                             <h3>{item.testName}</h3>
+                            {item?.disclaimer && <p>{item.disclaimer}</p>}
+                            <div className="cp-cart-items-remove-section">
+                              <span onClick={() => handleRemoveItem(item)}>
+                                <RiDeleteBin6Line className="cp-cart-items-remove-icon" />
+                                Remove
+                              </span>
+                            </div>
+                          </div>
+                          <div className="cp-cart-items-price-main">
+                            <span className="cp-cart-items-info-price-symbol">
+                              &#8377;
+                            </span>
+                            <p>{item.mrp}</p>
                           </div>
                         </div>
-                        <div>
-                          <RiDeleteBin6Line
-                            className="cp-cart-items-remove-icon"
-                            onClick={() => handleRemoveItem(item)}
-                          />
-                        </div>
                       </div>
-                      <div
-                        className="cp-cart-items-info-price-box-container"
-                        onClick={openModal}
-                      >
-                        <div className="cp-cart-items-info-price-box">
-                          <span className="cp-cart-items-info-price-symbol">
-                            &#8377;
-                          </span>
-                          <p>{item.mrp}</p>
-                        </div>
-                        {/* diable patients count view */}
-                        {/* <div className="cp-cart-items-info-patient-box">
-                          <BsPersonPlus className="cp-cart-items-info-patient-box-ap-icon" />
-                          <p>{formData?.length}</p>
-                          <p>{formData?.length > 1 ? "Patients" : "Patient"}</p>
-                        </div> */}
-                      </div>
-                    </div>
-                  );
-                })}
+                    );
+                  })}
+                </div>
               </div>
               <div className="cp-cart-items-pricing-main">
                 <div className="cp-cart-items-pricing-box">
@@ -964,31 +960,35 @@ const CartPage = () => {
                                   </button>
                                 </div>
                                 <div className="cp-modal-ts-slider-slots">
-                                  <ul>
-                                    {selectedTimeSlot.map((slot, index) => (
-                                      <li
-                                        key={index}
-                                        onClick={() =>
-                                          selectTimeSlot(
-                                            currentDateLabel,
-                                            slot.availableTimeSlots,
-                                            currentDateSelected
-                                          )
-                                        }
-                                        className={
-                                          selectedSlot ===
-                                            slot.availableTimeSlots &&
-                                          selectedDateLabel ===
-                                            currentDateLabel &&
-                                          selectedDate === currentDateSelected
-                                            ? "cp-modal-ts-slider-slots-li selected"
-                                            : "cp-modal-ts-slider-slots-li"
-                                        }
-                                      >
-                                        {slot.availableTimeSlots}
-                                      </li>
-                                    ))}
-                                  </ul>
+                                  {selectedTimeSlot.length > 0 ? (
+                                    <ul>
+                                      {selectedTimeSlot.map((slot, index) => (
+                                        <li
+                                          key={index}
+                                          onClick={() =>
+                                            selectTimeSlot(
+                                              currentDateLabel,
+                                              slot.availableTimeSlots,
+                                              currentDateSelected
+                                            )
+                                          }
+                                          className={
+                                            selectedSlot ===
+                                              slot.availableTimeSlots &&
+                                            selectedDateLabel ===
+                                              currentDateLabel &&
+                                            selectedDate === currentDateSelected
+                                              ? "cp-modal-ts-slider-slots-li selected"
+                                              : "cp-modal-ts-slider-slots-li"
+                                          }
+                                        >
+                                          {slot.availableTimeSlots}
+                                        </li>
+                                      ))}
+                                    </ul>
+                                  ) : (
+                                    <div className="cp-modal-ts-slider-slots-na">No slots available for the day</div>
+                                  )}
                                 </div>
                               </div>
                             </div>
