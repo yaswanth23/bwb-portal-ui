@@ -95,8 +95,17 @@ const BookingConfirmation = () => {
               <div className="bcp-patient-address-main">
                 <span className="bcp-patient-address-header">Address:</span>
                 <div className="bcp-sub-patient-address-main">
-                  <p>{bookingData[0].data.bookingData[0].address}</p>
-                  <p>{bookingData[0].data.bookingData[0].pincode}</p>
+                  <p>
+                    {bookingData[0].data.bookingData[0].address[0].addressInfo}
+                  </p>
+                  {bookingData[0].data.bookingData[0].address[0].landmark && (
+                    <p>
+                      {bookingData[0].data.bookingData[0].address[0].landmark}
+                    </p>
+                  )}
+                  <p>{bookingData[0].data.bookingData[0].address[0].city}</p>
+                  <p>{bookingData[0].data.bookingData[0].address[0].state}</p>
+                  <p>{bookingData[0].data.bookingData[0].address[0].pincode}</p>
                   <span>
                     <span className="bcp-sub-patient-address-phone-header">
                       Phone:{" "}
@@ -119,7 +128,7 @@ const BookingConfirmation = () => {
                   {bookingData[0].data.bookingData[0].cartItems.map(
                     (item, index) => (
                       <tr
-                        key={index}
+                        key={item.diagnosticTestId}
                         className={index % 2 === 0 ? "even-row" : "odd-row"}
                       >
                         <td>{item.testName}</td>

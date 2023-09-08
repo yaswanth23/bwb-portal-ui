@@ -332,9 +332,6 @@ const CartPage = () => {
   };
 
   const handleSaveAddress = () => {
-    console.log(patientMobileNumber)
-    console.log(patientMobileNumber)
-    console.log(patientMobileNumber == 0)
     if (!addressType) {
       setAddressErrorMessage("Select one from Home, Office & Other");
     }
@@ -420,7 +417,7 @@ const CartPage = () => {
       collectionDate: selectedDate,
       totalPrice: cartItems.totalPrice,
     };
-    console.log(requestData);
+
     fetch(
       "https://qar5m2k5ra.execute-api.ap-south-1.amazonaws.com/dev/api/v1/booking/diagnostics",
       {
@@ -440,7 +437,6 @@ const CartPage = () => {
         return response.json();
       })
       .then((data) => {
-        console.log(data);
         dispatch(storeCartCount(userData.userId, userData.cartId));
         setCartItems([]);
         setModalIsOpen(false);
