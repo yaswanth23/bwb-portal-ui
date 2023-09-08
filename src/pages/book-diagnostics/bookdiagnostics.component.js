@@ -405,6 +405,7 @@ const BookDiagnosticsPage = () => {
                         : "bdp-s-list"
                     }
                     onClick={() => {
+                      setIsAddToCartToggle(false);
                       if (item?.attributeValue !== selectedDiagnostics) {
                         setSelectedDiagnostics(item?.attributeValue);
                         setOpenDiagnosticDropdown(false);
