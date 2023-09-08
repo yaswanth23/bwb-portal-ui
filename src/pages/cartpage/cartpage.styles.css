@@ -156,7 +156,7 @@
 }
 .cp-modal-container {
   background-color: #f2f2f2;
-  width: 30rem;
+  width: 26rem;
 }
 .cp-modal-cancel-icon {
   font-size: 1.7rem;
@@ -195,7 +195,7 @@
 }
 .cp-modal-patient-details-info-sec {
   overflow: auto;
-  height: 400px;
+  height: 500px;
 }
 .cp-modal-patient-details-info-sec h3 {
   font-size: 1rem;
@@ -421,7 +421,7 @@
 }
 .cp-modal-address-details-info-sec {
   overflow: auto;
-  height: 400px;
+  height: 500px;
 }
 .cp-modal-address-details-info-sec h3 {
   font-size: 1rem;
@@ -444,7 +444,7 @@
   padding: 0.5rem;
 }
 .cp-modal-af-main {
-  padding: 0 2rem;
+  padding: 0 1rem;
 }
 .cp-modal-radio-btns {
   margin: 1rem 0;
@@ -455,12 +455,13 @@
 .cp-modal-radio-btns div {
   display: flex;
   align-items: center;
+  font-size: 0.9rem;
 }
 .cp-modal-radio-home,
 .cp-modal-radio-office,
 .cp-modal-radio-other {
-  width: 1rem;
-  height: 1rem;
+  width: 0.9rem;
+  height: 0.9rem;
   margin-right: 0.5rem;
   &:hover {
     cursor: pointer;
@@ -492,4 +493,77 @@
   display: flex;
   font-size: 0.9rem;
   justify-content: space-between;
+}
+.cp-modal-time-slot-details-info-sec {
+  overflow: auto;
+  height: 500px;
+}
+.cp-modal-time-slot-details-info-sec h3 {
+  font-size: 1rem;
+}
+.cp-modal-time-slot-info-sub {
+  margin-top: 0.5rem;
+  background-color: var(--color-preload-text);
+  padding: 0.5rem;
+}
+.cp-modal-time-slot-info-sub p {
+  font-size: 0.9rem;
+}
+.cp-modal-time-slot-container {
+  margin: 1rem 0;
+  padding: 1rem;
+  background-color: var(--color-white);
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
+}
+.cp-modal-ts-slider-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--color-light-blue);
+}
+.cp-modal-ts-slider-header button {
+  border: none;
+  background-color: transparent;
+  font-size: 1.5rem;
+  font-weight: bolder;
+  font-family: var(--main-font);
+  cursor: pointer;
+}
+.cp-modal-ts-slider-header p {
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+.cp-modal-ts-slider-slots {
+  margin-top: 1rem;
+}
+.cp-modal-ts-slider-slots ul {
+  list-style-type: none;
+}
+.cp-modal-ts-slider-slots-li {
+  padding: 0.5rem 0.3rem;
+  font-size: 0.8rem;
+  cursor: pointer;
+  color: var(--primary-color);
+  &:hover {
+    background-color: var(--color-preload-text);
+  }
+}
+.cp-modal-ts-slider-slots-li.selected {
+  background-color: var(--primary-color);
+  color: var(--color-preload-text);
+}
+.cp-modal-time-slot-dis-container {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--primary-color);
+}
+.cp-modal-time-slot-dis-container h4 {
+  cursor: default;
+  color: var(--primary-color);
+  font-size: 0.9rem;
+}
+.cp-modal-time-slot-dis-container p {
+  cursor: default;
+  font-size: 0.8rem;
+  color: var(--color-light-blue);
 }

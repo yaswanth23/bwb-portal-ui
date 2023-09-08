@@ -32,14 +32,13 @@ const CartPage = () => {
   const [modalStepperThreeFlag, setModalStepperThreeFlag] = useState(false);
   const [patientMobileNumber, setPatientMobileNumber] = useState("");
   const [patientDetails, setPatientDetails] = useState([]);
-  const [patientAddress, setPatientAddress] = useState([]);
   const [selectedPatients, setSelectedPatients] = useState([]);
-  const [selectedAddress, setSelectedAddress] = useState([]);
   const [searchErrorMessage, setSearchErrorMessage] = useState("");
   const [patientErrorMessage, setPatientErrorMessage] = useState("");
   const [addressErrorMessage, setAddressErrorMessage] = useState("");
   const [addressSubmitErrorMessage, setAddressSubmitErrorMessage] =
     useState("");
+  const [timeSlotErrorMessage, setTimeSlotErrorMessage] = useState("");
   const [isAddNewPatientFlag, setIsAddNewPatientFlag] = useState(false);
   const [addressInfo, setAddressInfo] = useState("");
   const [pincode, setPincode] = useState("");
@@ -48,18 +47,24 @@ const CartPage = () => {
   const [state, setState] = useState("");
   const [addressType, setAddressType] = useState("");
   const [isAddressDisplayFlag, setIsAddressDisplayFlag] = useState(false);
+  const [commonTimeSlots, setCommonTimeSlots] = useState([]);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [selectedSlot, setSelectedSlot] = useState(null);
+  const [selectedDateLabel, setSelectedDateLabel] = useState(null);
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [isCheckoutReady, setIsCheckoutReady] = useState(false);
+  const selectedTimeSlot =
+    commonTimeSlots.length > 0 ? commonTimeSlots[currentIndex].timeSlots : "";
+  const currentDateLabel =
+    commonTimeSlots.length > 0 ? commonTimeSlots[currentIndex].dateLabel : "";
+  const currentDateSelected =
+    commonTimeSlots.length > 0 ? commonTimeSlots[currentIndex].date : "";
 
   useEffect(() => {
     if (selectedPatients.length > 0) {
       setPatientErrorMessage("");
     }
   }, [selectedPatients]);
-
-  useEffect(() => {
-    if (selectedAddress.length > 0) {
-      setAddressErrorMessage("");
-    }
-  }, [selectedAddress]);
 
   useEffect(() => {
     fetch(
@@ -81,6 +86,7 @@ const CartPage = () => {
       })
       .then((data) => {
         setCartItems(data.data);
+        setCommonTimeSlots(data.data.commonTimeSlots);
         setIsLoading(false);
       })
       .catch((error) => {
@@ -123,6 +129,7 @@ const CartPage = () => {
       })
       .then((data) => {
         setCartItems(data.data);
+        setCommonTimeSlots(data.data.commonTimeSlots);
         setIsLoading(false);
         dispatch(storeCartCount(userData.userId, userData.cartId));
       })
@@ -189,7 +196,6 @@ const CartPage = () => {
         .then((data) => {
           if (data.data.patientInfo.length === 0) {
             setPatientDetails([]);
-            // setPatientAddress([]);
             setSearchErrorMessage("No Saved patients found for this Number");
           } else {
             if (patientDetails.length > 0) {
@@ -200,7 +206,6 @@ const CartPage = () => {
             } else {
               setPatientDetails(data.data.patientInfo.patientDetails);
             }
-            // setPatientAddress(data.data.patientInfo.addressDetails);
             setSearchErrorMessage("");
           }
         })
@@ -264,6 +269,30 @@ const CartPage = () => {
     }
   };
 
+  const handleStepThreeContinue = () => {
+    if (commonTimeSlots.length === 0) {
+      setModalHeaderLabel("Patient Details");
+      setModalStepperTwoFlag(false);
+      setModalStepperThreeFlag(false);
+      setModalStepperOneFlag(true);
+      setModalStepperValue(1);
+      setIsCheckoutReady(true);
+      setModalIsOpen(false);
+    } else if (commonTimeSlots.length > 0) {
+      if (selectedSlot && selectedDateLabel && selectedDate) {
+        setModalHeaderLabel("Patient Details");
+        setModalStepperTwoFlag(false);
+        setModalStepperThreeFlag(false);
+        setModalStepperOneFlag(true);
+        setModalStepperValue(1);
+        setIsCheckoutReady(true);
+        setModalIsOpen(false);
+      } else {
+        setTimeSlotErrorMessage("Please select one of the Time slots");
+      }
+    }
+  };
+
   const handleInputPincode = (event) => {
     const newPincode = +event.target.value;
     if (!isNaN(newPincode)) {
@@ -303,6 +332,9 @@ const CartPage = () => {
   };
 
   const handleSaveAddress = () => {
+    console.log(patientMobileNumber)
+    console.log(patientMobileNumber)
+    console.log(patientMobileNumber == 0)
     if (!addressType) {
       setAddressErrorMessage("Select one from Home, Office & Other");
     }
@@ -344,6 +376,83 @@ const CartPage = () => {
     setAddressType("");
     setIsAddressDisplayFlag(false);
     setAddressSubmitErrorMessage("");
+  };
+
+  const handlePreviousClick = () => {
+    if (currentIndex > 0) {
+      setCurrentIndex(currentIndex - 1);
+    }
+  };
+
+  const handleNextClick = () => {
+    if (currentIndex < commonTimeSlots.length - 1) {
+      setCurrentIndex(currentIndex + 1);
+    }
+  };
+
+  const selectTimeSlot = (currentDateLabel, slot, currentDateSelected) => {
+    setTimeSlotErrorMessage("");
+    setSelectedSlot(slot);
+    setSelectedDateLabel(currentDateLabel);
+    setSelectedDate(currentDateSelected);
+  };
+
+  const confirmBookingHandler = () => {
+    const requestData = {
+      userId: userData.userId,
+      cartId: userData.cartId,
+      cartItems: cartItems.cartItems,
+      patientDetails: selectedPatients,
+      address: [
+        {
+          addressInfo: addressInfo,
+          pincode: pincode,
+          landmark: landmark,
+          city: city,
+          state: state,
+          addressType: addressType,
+        },
+      ],
+      mobileNumber: patientMobileNumber,
+      pincode: pincode,
+      timeSlot: selectedSlot,
+      dateLabel: selectedDateLabel,
+      collectionDate: selectedDate,
+      totalPrice: cartItems.totalPrice,
+    };
+    console.log(requestData);
+    fetch(
+      "https://qar5m2k5ra.execute-api.ap-south-1.amazonaws.com/dev/api/v1/booking/diagnostics",
+      {
+        method: "POST",
+        headers: {
+          Authorization:
+            "eyJhbGciOiJIUzUxMiJ9.eyJzZWNyZXQiOiJiZmE3MzhhNjdkOGU5NGNmNDI4ZTdjZWE5Y2E1YzY3YiJ9.o4k544e1-NWMTBT28lOmEJe_D4TMOuwb11_rXLWb_SNhd6Oq70lWWqVdHzenEr1mhnVTDAtcOufnc4CMlIxUiw",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(requestData),
+      }
+    )
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log(data);
+        dispatch(storeCartCount(userData.userId, userData.cartId));
+        setCartItems([]);
+        setModalIsOpen(false);
+        setName("");
+        setAge("");
+        setGender("");
+        setPincode("");
+        navigate("/booking-confirm", { state: data });
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
   };
 
   return (
@@ -422,12 +531,21 @@ const CartPage = () => {
                   </div>
                 </div>
                 <div className="cp-cart-items-checkout-box">
-                  <button
-                    className="cp-cart-items-checkout-button"
-                    onClick={openModal}
-                  >
-                    Proceed
-                  </button>
+                  {isCheckoutReady ? (
+                    <button
+                      className="cp-cart-items-checkout-button"
+                      onClick={confirmBookingHandler}
+                    >
+                      Checkout
+                    </button>
+                  ) : (
+                    <button
+                      className="cp-cart-items-checkout-button"
+                      onClick={openModal}
+                    >
+                      Proceed
+                    </button>
+                  )}
                 </div>
               </div>
             </div>
@@ -811,7 +929,103 @@ const CartPage = () => {
                         </div>
                       </div>
                     )}
-                    {modalStepperValue === 3 && <div>Time Slot</div>}
+                    {modalStepperValue === 3 && (
+                      <div>
+                        <div className="cp-modal-time-slot-details-info-sec">
+                          <h3>
+                            Step 3: Select time slot for Sample Collection
+                          </h3>
+                          <div className="cp-modal-time-slot-info-sub">
+                            <p>
+                              1. Our Medical Agent will visit at Selected time
+                              to collect samples.
+                            </p>
+                            <p>
+                              2. When time slots are unavailable, Sample will be
+                              collected on designated test day between 6:00 am
+                              and 1:00 pm.
+                            </p>
+                            <p>
+                              3. The displayed time slots are valid for the
+                              upcoming 10 days.
+                            </p>
+                          </div>
+                          {commonTimeSlots.length > 0 ? (
+                            <div className="cp-modal-time-slot-container">
+                              <div className="cp-modal-ts-slider">
+                                <div className="cp-modal-ts-slider-header">
+                                  <button onClick={handlePreviousClick}>
+                                    &lt;
+                                  </button>
+                                  <div>
+                                    <p>
+                                      {commonTimeSlots[currentIndex].dateLabel}
+                                    </p>
+                                    <p>{commonTimeSlots[currentIndex].date}</p>
+                                  </div>
+                                  <button onClick={handleNextClick}>
+                                    &gt;
+                                  </button>
+                                </div>
+                                <div className="cp-modal-ts-slider-slots">
+                                  <ul>
+                                    {selectedTimeSlot.map((slot, index) => (
+                                      <li
+                                        key={index}
+                                        onClick={() =>
+                                          selectTimeSlot(
+                                            currentDateLabel,
+                                            slot.availableTimeSlots,
+                                            currentDateSelected
+                                          )
+                                        }
+                                        className={
+                                          selectedSlot ===
+                                            slot.availableTimeSlots &&
+                                          selectedDateLabel ===
+                                            currentDateLabel &&
+                                          selectedDate === currentDateSelected
+                                            ? "cp-modal-ts-slider-slots-li selected"
+                                            : "cp-modal-ts-slider-slots-li"
+                                        }
+                                      >
+                                        {slot.availableTimeSlots}
+                                      </li>
+                                    ))}
+                                  </ul>
+                                </div>
+                              </div>
+                            </div>
+                          ) : (
+                            <div className="cp-modal-time-slot-container">
+                              {cartItems.cartItems.map((item) => (
+                                <>
+                                  {item?.disclaimer && (
+                                    <div className="cp-modal-time-slot-dis-container">
+                                      <h4>{item.testName}</h4>
+                                      <p>{item.disclaimer}</p>
+                                    </div>
+                                  )}
+                                </>
+                              ))}
+                            </div>
+                          )}
+                        </div>
+                        {timeSlotErrorMessage && (
+                          <span className="cp-modal-error-message">
+                            {timeSlotErrorMessage}
+                          </span>
+                        )}
+                        <div className="cp-modal-address-continue-btn-container">
+                          <button
+                            className="cp-modal-address-continue-btn"
+                            onClick={handleStepThreeContinue}
+                          >
+                            Continue
+                          </button>
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
