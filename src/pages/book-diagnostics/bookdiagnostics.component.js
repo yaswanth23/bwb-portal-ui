@@ -290,6 +290,9 @@ const BookDiagnosticsPage = () => {
   };
 
   const handleRemoveDiagnosticsData = (testId) => {
+    setMultiselectDiagnostics(
+      diagnosticsData.filter((item) => item.testId !== testId)
+    );
     setDiagnosticsData(
       diagnosticsData.filter((item) => item.testId !== testId)
     );
