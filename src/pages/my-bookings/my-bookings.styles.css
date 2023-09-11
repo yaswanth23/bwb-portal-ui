@@ -55,6 +55,12 @@
 .m-bookings-table-main th:nth-child(4) {
   text-align: right;
 }
+.m-bookings-table-main td:nth-child(1) {
+  cursor: pointer;
+  &:hover {
+    font-weight: 600;
+  }
+}
 .m-bookings-table-main td:nth-child(3),
 .m-bookings-table-main td:nth-child(4) {
   text-align: right;
@@ -67,4 +73,84 @@
 }
 .m-bookings-price-symbol {
   font-size: 1.2rem;
+}
+.my-booking-modal-container {
+  width: 50rem;
+  padding: 1rem;
+}
+.my-booking-modal-header-main {
+  display: flex;
+  justify-content: space-between;
+}
+.my-booking-modal-header-main span {
+  font-size: 0.9rem;
+}
+.my-booking-modal-cancel-icon {
+  font-size: 1.7rem;
+  &:hover {
+    cursor: pointer;
+  }
+}
+.my-booking-stepper-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.my-booking-stepper-section {
+  margin: 2rem 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+}
+.step-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin: 0 1rem;
+}
+.step-item p {
+  padding-top: 0.5rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-align: center;
+  color: var(--primary-color);
+}
+.step-item:not(:first-child):before {
+  content: "";
+  background-color: #ccc;
+  position: absolute;
+  width: 60%;
+  height: 3px;
+  right: 20%;
+  top: 45%;
+}
+.step {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+  position: relative;
+  background-color: var(--primary-color);
+  border-radius: 50%;
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: var(--color-preload-text);
+}
+.active .step {
+  background-color: #3498db;
+}
+.complete .step {
+  background-color: #27ae60;
+}
+.complete:not(:first-child):before,
+.active:not(:first-child):before {
+  background-color: #27ae60;
+}
+.tick-icon {
+  font-size: 1.2rem;
+  color: var(--color-white);
 }

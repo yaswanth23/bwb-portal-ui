@@ -1,4 +1,7 @@
 import { memo, useState, useEffect } from "react";
+import Modal from "react-modal";
+import { TiTick } from "react-icons/ti";
+import { RxCross2 } from "react-icons/rx";
 import { useSelector } from "react-redux";
 import "./my-bookings.styles.css";
 
@@ -11,6 +14,9 @@ const MyBookingsPage = () => {
   const [metaData, setMetaData] = useState({});
   const [pageNumber, setPageNumber] = useState(1);
   const [limit, setLimit] = useState(10);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [bookingDetails, setBookingDetails] = useState({});
+  const [bookingStates, setBookingStates] = useState([]);
 
   const startBookingIndex = (pageNumber - 1) * limit + 1;
   const endBookingIndex =
@@ -58,6 +64,41 @@ const MyBookingsPage = () => {
     });
   };
 
+  const openModal = (bookingId) => {
+    fetchBookingDetails(bookingId);
+    setModalIsOpen(true);
+  };
+
+  const fetchBookingDetails = (bookingId) => {
+    const apiEndpoint =
+      apiUrl + `/details/diagnostics/bookings/${userData.userId}/${bookingId}`;
+    fetch(apiEndpoint, {
+      method: "GET",
+      headers: {
+        Authorization:
+          "eyJhbGciOiJIUzUxMiJ9.eyJzZWNyZXQiOiJiZmE3MzhhNjdkOGU5NGNmNDI4ZTdjZWE5Y2E1YzY3YiJ9.o4k544e1-NWMTBT28lOmEJe_D4TMOuwb11_rXLWb_SNhd6Oq70lWWqVdHzenEr1mhnVTDAtcOufnc4CMlIxUiw",
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setBookingDetails(data.data.bookingDetails[0]);
+        setBookingStates(data.data.bookingDetails[0].bookingStates);
+      })
+      .catch((error) => {
+        console.error("There was a problem with the fetch operation:", error);
+      });
+  };
+
+  const closeModal = () => {
+    setModalIsOpen(false);
+  };
+
   return (
     <>
       <div className="m-bookings-container">
@@ -82,7 +123,13 @@ const MyBookingsPage = () => {
                       key={index}
                       className={index % 2 === 0 ? "even-row" : "odd-row"}
                     >
-                      <td>{item._id}</td>
+                      <td
+                        onClick={() => {
+                          openModal(item._id);
+                        }}
+                      >
+                        {item._id}
+                      </td>
                       <td>{formatCreatedOn(item.createdOn)}</td>
                       <td>
                         <span className="m-bookings-price-symbol">&#8377;</span>
@@ -118,6 +165,66 @@ const MyBookingsPage = () => {
           <div>No Bookings</div>
         )}
       </div>
+      <Modal
+        isOpen={modalIsOpen}
+        onRequestClose={closeModal}
+        preventScroll={true}
+        style={{
+          overlay: {
+            backgroundColor: "rgba(0, 0, 0, 0.6)",
+          },
+          content: {
+            padding: 0,
+            border: "none",
+            top: "50%",
+            left: "50%",
+            right: "auto",
+            bottom: "auto",
+            marginRight: "-50%",
+            transform: "translate(-50%, -50%)",
+          },
+        }}
+        ariaHideApp={false}
+      >
+        <div className="my-booking-modal-container">
+          {bookingDetails && (
+            <>
+              <div className="my-booking-modal-header-main">
+                <span>Booking Id: {bookingDetails._id}</span>
+                <RxCross2
+                  className="my-booking-modal-cancel-icon"
+                  onClick={closeModal}
+                />
+              </div>
+              <div className="my-booking-stepper-container">
+                <div className="my-booking-stepper-section">
+                  {bookingStates.length > 0 && (
+                    <>
+                      {bookingStates.map((step, index) => (
+                        <div
+                          key={step.stateId}
+                          className={
+                            step.isActive ? "step-item complete" : "step-item"
+                          }
+                        >
+                          <div className="step">
+                            {step.isActive ? (
+                              <TiTick className="tick-icon" />
+                            ) : (
+                              index + 1
+                            )}
+                          </div>
+                          <p>{step.stateName}</p>
+                        </div>
+                      ))}
+                    </>
+                  )}
+                </div>
+              </div>
+            </>
+          )}
+        </div>
+      </Modal>
     </>
   );
 };
