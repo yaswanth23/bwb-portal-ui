@@ -3,7 +3,8 @@ import { createAction } from "../../utils/reducer/reducer.utils";
 
 const fetchCartCountFromAPI = async (userId, cartId) => {
   try {
-    const url = `https://qar5m2k5ra.execute-api.ap-south-1.amazonaws.com/dev/api/v1/cart/count?userId=${userId}&cartId=${cartId}`;
+    const apiUrl = process.env.REACT_APP_BE_LOGIN_API_URL;
+    const url = apiUrl + `/cart/count?userId=${userId}&cartId=${cartId}`;
     const response = await fetch(url, {
       headers: {
         Authorization:

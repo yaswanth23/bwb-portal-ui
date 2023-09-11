@@ -10,6 +10,7 @@ import MedicineBanner from "../../assets/images/medicines_banner.png";
 import "./login.styles.css";
 
 const LoginForm = () => {
+  const apiUrl = process.env.REACT_APP_BE_LOGIN_API_URL;
   const dispatch = useDispatch();
   const [mobileNumber, setMobileNumber] = useState("");
   const [password, setPassword] = useState("");
@@ -31,8 +32,7 @@ const LoginForm = () => {
   const handleVerifyLogin = async (event) => {
     event.preventDefault();
 
-    const apiEndpoint =
-      "https://qar5m2k5ra.execute-api.ap-south-1.amazonaws.com/dev/api/v1/pharmacy/user/login";
+    const apiEndpoint = apiUrl + "/pharmacy/user/login";
     const requestData = {
       mobileNumber: mobileNumber,
       password: password,

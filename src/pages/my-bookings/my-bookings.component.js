@@ -5,6 +5,7 @@ import "./my-bookings.styles.css";
 import { selectUserData } from "../../store/user/user.selector";
 
 const MyBookingsPage = () => {
+  const apiUrl = process.env.REACT_APP_BE_LOGIN_API_URL;
   const userData = useSelector(selectUserData);
   const [diagnosticBookings, setDiagnosticBookings] = useState([]);
   const [metaData, setMetaData] = useState({});
@@ -22,17 +23,17 @@ const MyBookingsPage = () => {
   }, [pageNumber]);
 
   const fetchDiagnosticBookings = () => {
-    fetch(
-      `https://qar5m2k5ra.execute-api.ap-south-1.amazonaws.com/dev/api/v1/get/diagnostics/bookings?userId=${userData.userId}&page=${pageNumber}&limit=${limit}`,
-      {
-        method: "GET",
-        headers: {
-          Authorization:
-            "eyJhbGciOiJIUzUxMiJ9.eyJzZWNyZXQiOiJiZmE3MzhhNjdkOGU5NGNmNDI4ZTdjZWE5Y2E1YzY3YiJ9.o4k544e1-NWMTBT28lOmEJe_D4TMOuwb11_rXLWb_SNhd6Oq70lWWqVdHzenEr1mhnVTDAtcOufnc4CMlIxUiw",
-          "Content-Type": "application/json",
-        },
-      }
-    )
+    const apiEndpoint =
+      apiUrl +
+      `/get/diagnostics/bookings?userId=${userData.userId}&page=${pageNumber}&limit=${limit}`;
+    fetch(apiEndpoint, {
+      method: "GET",
+      headers: {
+        Authorization:
+          "eyJhbGciOiJIUzUxMiJ9.eyJzZWNyZXQiOiJiZmE3MzhhNjdkOGU5NGNmNDI4ZTdjZWE5Y2E1YzY3YiJ9.o4k544e1-NWMTBT28lOmEJe_D4TMOuwb11_rXLWb_SNhd6Oq70lWWqVdHzenEr1mhnVTDAtcOufnc4CMlIxUiw",
+        "Content-Type": "application/json",
+      },
+    })
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");

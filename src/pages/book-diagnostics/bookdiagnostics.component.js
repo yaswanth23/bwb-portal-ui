@@ -14,6 +14,7 @@ import {
 } from "../../store/user/user.selector";
 
 const BookDiagnosticsPage = () => {
+  const apiUrl = process.env.REACT_APP_BE_LOGIN_API_URL;
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const userData = useSelector(selectUserData);
@@ -82,17 +83,15 @@ const BookDiagnosticsPage = () => {
 
       if (selectedTests.length > 0) {
         selectedTests.map((item) => {
-          fetch(
-            `https://qar5m2k5ra.execute-api.ap-south-1.amazonaws.com/dev/api/v1/diagnostics/details/${item.testId}`,
-            {
-              method: "GET",
-              headers: {
-                Authorization:
-                  "eyJhbGciOiJIUzUxMiJ9.eyJzZWNyZXQiOiJiZmE3MzhhNjdkOGU5NGNmNDI4ZTdjZWE5Y2E1YzY3YiJ9.o4k544e1-NWMTBT28lOmEJe_D4TMOuwb11_rXLWb_SNhd6Oq70lWWqVdHzenEr1mhnVTDAtcOufnc4CMlIxUiw",
-                "Content-Type": "application/json",
-              },
-            }
-          )
+          const apiEndpoint = apiUrl + `/diagnostics/details/${item.testId}`;
+          fetch(apiEndpoint, {
+            method: "GET",
+            headers: {
+              Authorization:
+                "eyJhbGciOiJIUzUxMiJ9.eyJzZWNyZXQiOiJiZmE3MzhhNjdkOGU5NGNmNDI4ZTdjZWE5Y2E1YzY3YiJ9.o4k544e1-NWMTBT28lOmEJe_D4TMOuwb11_rXLWb_SNhd6Oq70lWWqVdHzenEr1mhnVTDAtcOufnc4CMlIxUiw",
+              "Content-Type": "application/json",
+            },
+          })
             .then((response) => {
               if (!response.ok) {
                 throw new Error("Network response was not ok");
@@ -119,17 +118,15 @@ const BookDiagnosticsPage = () => {
   }, []);
 
   const searchTypedPincodes = async () => {
-    fetch(
-      `https://qar5m2k5ra.execute-api.ap-south-1.amazonaws.com/dev/api/v1/search/${inputPincodeValue}`,
-      {
-        method: "GET",
-        headers: {
-          Authorization:
-            "eyJhbGciOiJIUzUxMiJ9.eyJzZWNyZXQiOiJiZmE3MzhhNjdkOGU5NGNmNDI4ZTdjZWE5Y2E1YzY3YiJ9.o4k544e1-NWMTBT28lOmEJe_D4TMOuwb11_rXLWb_SNhd6Oq70lWWqVdHzenEr1mhnVTDAtcOufnc4CMlIxUiw",
-          "Content-Type": "application/json",
-        },
-      }
-    )
+    const apiEndpoint = apiUrl + `/search/${inputPincodeValue}`;
+    fetch(apiEndpoint, {
+      method: "GET",
+      headers: {
+        Authorization:
+          "eyJhbGciOiJIUzUxMiJ9.eyJzZWNyZXQiOiJiZmE3MzhhNjdkOGU5NGNmNDI4ZTdjZWE5Y2E1YzY3YiJ9.o4k544e1-NWMTBT28lOmEJe_D4TMOuwb11_rXLWb_SNhd6Oq70lWWqVdHzenEr1mhnVTDAtcOufnc4CMlIxUiw",
+        "Content-Type": "application/json",
+      },
+    })
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -145,17 +142,15 @@ const BookDiagnosticsPage = () => {
   };
 
   const searchTypedDiagnostics = async () => {
-    fetch(
-      `https://qar5m2k5ra.execute-api.ap-south-1.amazonaws.com/dev/api/v1/search/diagnostics/${inputDiagnosticValue}`,
-      {
-        method: "GET",
-        headers: {
-          Authorization:
-            "eyJhbGciOiJIUzUxMiJ9.eyJzZWNyZXQiOiJiZmE3MzhhNjdkOGU5NGNmNDI4ZTdjZWE5Y2E1YzY3YiJ9.o4k544e1-NWMTBT28lOmEJe_D4TMOuwb11_rXLWb_SNhd6Oq70lWWqVdHzenEr1mhnVTDAtcOufnc4CMlIxUiw",
-          "Content-Type": "application/json",
-        },
-      }
-    )
+    const apiEndpoint = apiUrl + `/search/diagnostics/${inputDiagnosticValue}`;
+    fetch(apiEndpoint, {
+      method: "GET",
+      headers: {
+        Authorization:
+          "eyJhbGciOiJIUzUxMiJ9.eyJzZWNyZXQiOiJiZmE3MzhhNjdkOGU5NGNmNDI4ZTdjZWE5Y2E1YzY3YiJ9.o4k544e1-NWMTBT28lOmEJe_D4TMOuwb11_rXLWb_SNhd6Oq70lWWqVdHzenEr1mhnVTDAtcOufnc4CMlIxUiw",
+        "Content-Type": "application/json",
+      },
+    })
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -171,17 +166,15 @@ const BookDiagnosticsPage = () => {
   };
 
   const defaultSearchPincodes = async () => {
-    fetch(
-      `https://qar5m2k5ra.execute-api.ap-south-1.amazonaws.com/dev/api/v1/get/pincodes?page=1&limit=${limit}`,
-      {
-        method: "GET",
-        headers: {
-          Authorization:
-            "eyJhbGciOiJIUzUxMiJ9.eyJzZWNyZXQiOiJiZmE3MzhhNjdkOGU5NGNmNDI4ZTdjZWE5Y2E1YzY3YiJ9.o4k544e1-NWMTBT28lOmEJe_D4TMOuwb11_rXLWb_SNhd6Oq70lWWqVdHzenEr1mhnVTDAtcOufnc4CMlIxUiw",
-          "Content-Type": "application/json",
-        },
-      }
-    )
+    const apiEndpoint = apiUrl + `/get/pincodes?page=1&limit=${limit}`;
+    fetch(apiEndpoint, {
+      method: "GET",
+      headers: {
+        Authorization:
+          "eyJhbGciOiJIUzUxMiJ9.eyJzZWNyZXQiOiJiZmE3MzhhNjdkOGU5NGNmNDI4ZTdjZWE5Y2E1YzY3YiJ9.o4k544e1-NWMTBT28lOmEJe_D4TMOuwb11_rXLWb_SNhd6Oq70lWWqVdHzenEr1mhnVTDAtcOufnc4CMlIxUiw",
+        "Content-Type": "application/json",
+      },
+    })
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -197,17 +190,15 @@ const BookDiagnosticsPage = () => {
   };
 
   const defaultSearchDiagnostics = async () => {
-    fetch(
-      `https://qar5m2k5ra.execute-api.ap-south-1.amazonaws.com/dev/api/v1/get/diagnostics?page=1&limit=${limit}`,
-      {
-        method: "GET",
-        headers: {
-          Authorization:
-            "eyJhbGciOiJIUzUxMiJ9.eyJzZWNyZXQiOiJiZmE3MzhhNjdkOGU5NGNmNDI4ZTdjZWE5Y2E1YzY3YiJ9.o4k544e1-NWMTBT28lOmEJe_D4TMOuwb11_rXLWb_SNhd6Oq70lWWqVdHzenEr1mhnVTDAtcOufnc4CMlIxUiw",
-          "Content-Type": "application/json",
-        },
-      }
-    )
+    const apiEndpoint = apiUrl + `/get/diagnostics?page=1&limit=${limit}`;
+    fetch(apiEndpoint, {
+      method: "GET",
+      headers: {
+        Authorization:
+          "eyJhbGciOiJIUzUxMiJ9.eyJzZWNyZXQiOiJiZmE3MzhhNjdkOGU5NGNmNDI4ZTdjZWE5Y2E1YzY3YiJ9.o4k544e1-NWMTBT28lOmEJe_D4TMOuwb11_rXLWb_SNhd6Oq70lWWqVdHzenEr1mhnVTDAtcOufnc4CMlIxUiw",
+        "Content-Type": "application/json",
+      },
+    })
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -249,19 +240,16 @@ const BookDiagnosticsPage = () => {
         cartItems: multiselectDiagnostics,
         selectedPincode: selectedPincode,
       };
-
-      fetch(
-        "https://qar5m2k5ra.execute-api.ap-south-1.amazonaws.com/dev/api/v1/cart/add/items",
-        {
-          method: "POST",
-          headers: {
-            Authorization:
-              "eyJhbGciOiJIUzUxMiJ9.eyJzZWNyZXQiOiJiZmE3MzhhNjdkOGU5NGNmNDI4ZTdjZWE5Y2E1YzY3YiJ9.o4k544e1-NWMTBT28lOmEJe_D4TMOuwb11_rXLWb_SNhd6Oq70lWWqVdHzenEr1mhnVTDAtcOufnc4CMlIxUiw",
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(requestData),
-        }
-      )
+      const apiEndpoint = apiUrl + "/cart/add/items";
+      fetch(apiEndpoint, {
+        method: "POST",
+        headers: {
+          Authorization:
+            "eyJhbGciOiJIUzUxMiJ9.eyJzZWNyZXQiOiJiZmE3MzhhNjdkOGU5NGNmNDI4ZTdjZWE5Y2E1YzY3YiJ9.o4k544e1-NWMTBT28lOmEJe_D4TMOuwb11_rXLWb_SNhd6Oq70lWWqVdHzenEr1mhnVTDAtcOufnc4CMlIxUiw",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(requestData),
+      })
         .then((response) => {
           if (!response.ok) {
             throw new Error("Network response was not ok");
