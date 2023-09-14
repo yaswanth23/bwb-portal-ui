@@ -17,7 +17,7 @@ import { storeCartCount } from "../../store/cart/cart.action";
 import { selectUserData } from "../../store/user/user.selector";
 
 const CartPage = () => {
-  const apiUrl = process.env.REACT_APP_BE_LOGIN_API_URL;
+  const apiUrl = process.env.REACT_APP_BE_API_URL;
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const userData = useSelector(selectUserData);

@@ -14,7 +14,7 @@ import {
 } from "../../store/user/user.selector";
 
 const BookDiagnosticsPage = () => {
-  const apiUrl = process.env.REACT_APP_BE_LOGIN_API_URL;
+  const apiUrl = process.env.REACT_APP_BE_API_URL;
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const userData = useSelector(selectUserData);

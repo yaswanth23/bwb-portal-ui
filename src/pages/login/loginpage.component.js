@@ -10,7 +10,7 @@ import MedicineBanner from "../../assets/images/medicines_banner.png";
 import "./login.styles.css";
 
 const LoginForm = () => {
-  const apiUrl = process.env.REACT_APP_BE_LOGIN_API_URL;
+  const apiUrl = process.env.REACT_APP_BE_API_URL;
   const dispatch = useDispatch();
   const [mobileNumber, setMobileNumber] = useState("");
   const [password, setPassword] = useState("");

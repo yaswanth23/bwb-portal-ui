@@ -8,7 +8,7 @@ import "./my-bookings.styles.css";
 import { selectUserData } from "../../store/user/user.selector";
 
 const MyBookingsPage = () => {
-  const apiUrl = process.env.REACT_APP_BE_LOGIN_API_URL;
+  const apiUrl = process.env.REACT_APP_BE_API_URL;
   const apiKey = process.env.REACT_APP_API_KEY;
   const userData = useSelector(selectUserData);
   const [diagnosticBookings, setDiagnosticBookings] = useState([]);

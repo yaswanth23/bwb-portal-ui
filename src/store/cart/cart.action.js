@@ -3,7 +3,7 @@ import { createAction } from "../../utils/reducer/reducer.utils";
 
 const fetchCartCountFromAPI = async (userId, cartId) => {
   try {
-    const apiUrl = process.env.REACT_APP_BE_LOGIN_API_URL;
+    const apiUrl = process.env.REACT_APP_BE_API_URL;
     const url = apiUrl + `/cart/count?userId=${userId}&cartId=${cartId}`;
     const response = await fetch(url, {
       headers: {
