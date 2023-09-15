@@ -59,6 +59,8 @@ const Sidebar = () => {
       setActiveLinkIdx(2);
     } else if (location.pathname === "/my-bookings") {
       setActiveLinkIdx(3);
+    } else if (location.pathname === "/doctor-consultation") {
+      setActiveLinkIdx(4);
     }
     document.body.style.backgroundColor = "#f2f2f2";
     return () => {
@@ -122,6 +124,22 @@ const Sidebar = () => {
                   alt="transactions-icon"
                 />
                 <span className="sb-nav-link-text">My Bookings</span>
+              </Link>
+            </li>
+            <li className="sb-nav-item">
+              <Link
+                to="/doctor-consultation"
+                onClick={() => setActiveLinkIdx(3)}
+                className={`sb-nav-link ${
+                  4 === activeLinkIdx ? "active" : null
+                }`}
+              >
+                <img
+                  src={4 === activeLinkIdx ? plane_b : plane_w}
+                  className="sb-nav-link-icon"
+                  alt="transactions-icon"
+                />
+                <span className="sb-nav-link-text">Consult Doctors</span>
               </Link>
             </li>
           </ul>

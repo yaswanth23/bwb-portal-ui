@@ -15,6 +15,9 @@ const BookingConfirmationPage = lazy(() =>
 const MyBookingsPage = lazy(() =>
   import("./pages/my-bookings/my-bookings.component")
 );
+const DoctorConsultationPage = lazy(() =>
+  import("./pages/doctor-consultation/doctor-consultation-page.component")
+);
 
 // const randomLoaderTexts = [
 //   "The greatest wealth is health.",
@@ -54,6 +57,10 @@ const App = () => {
             <Route path="book-diagnostics" element={<BookDiagnosticsPage />} />
             <Route path="cart" element={<CartPage />} />
             <Route path="my-bookings" element={<MyBookingsPage />} />
+            <Route
+              path="doctor-consultation"
+              element={<DoctorConsultationPage />}
+            />
           </Route>
           <Route path="booking-confirm" element={<BookingConfirmationPage />} />
         </Routes>
