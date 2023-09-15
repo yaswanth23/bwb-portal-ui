@@ -18,7 +18,6 @@ const MyBookingsPage = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [bookingDetails, setBookingDetails] = useState({});
   const [bookingStates, setBookingStates] = useState([]);
-  console.log(bookingDetails.reports);
 
   const startBookingIndex = (pageNumber - 1) * limit + 1;
   const endBookingIndex =
