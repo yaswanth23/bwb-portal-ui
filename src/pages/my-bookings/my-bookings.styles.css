@@ -117,7 +117,7 @@
   text-align: center;
   color: var(--primary-color);
 }
-.step-item:not(:first-child):before {
+/* .step-item:not(:first-child):before {
   content: "";
   background-color: #ccc;
   position: absolute;
@@ -125,7 +125,7 @@
   height: 3px;
   right: 20%;
   top: 45%;
-}
+} */
 .step {
   width: 30px;
   height: 30px;
@@ -153,4 +153,16 @@
 .tick-icon {
   font-size: 1.2rem;
   color: var(--color-white);
+}
+.my-booking-reports-section{
+  margin: 1rem 0;
+}
+.my-booking-report-header {
+  font-size: 0.9rem;
+}
+.my-booking-report-file-url {
+  font-size: 0.8rem;
+}
+.my-booking-reports-section ul {
+  list-style: none;
 }

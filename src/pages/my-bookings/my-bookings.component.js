@@ -18,6 +18,7 @@ const MyBookingsPage = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [bookingDetails, setBookingDetails] = useState({});
   const [bookingStates, setBookingStates] = useState([]);
+  console.log(bookingDetails.reports);
 
   const startBookingIndex = (pageNumber - 1) * limit + 1;
   const endBookingIndex =
@@ -220,6 +221,30 @@ const MyBookingsPage = () => {
                     </>
                   )}
                 </div>
+              </div>
+              <div className="my-booking-reports-section">
+                {bookingStates.length > 0 && (
+                  <>
+                    {bookingDetails.reports.length > 0 ? (
+                      <>
+                        <h2 className="my-booking-report-header">Report List</h2>
+                        <ul>
+                          {bookingDetails.reports.map((report, index) => (
+                            <li key={index}>
+                              <a href={report.url} download className="my-booking-report-file-url">
+                                {report.url.split("/").pop()}{" "}
+                              </a>
+                            </li>
+                          ))}
+                        </ul>
+                      </>
+                    ) : (
+                      <>
+                        <h2 className="my-booking-report-header">No Reports Available</h2>
+                      </>
+                    )}
+                  </>
+                )}
               </div>
             </>
           )}
