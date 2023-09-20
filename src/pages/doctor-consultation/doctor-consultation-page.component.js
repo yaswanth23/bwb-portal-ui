@@ -17,7 +17,7 @@ const DoctorConsultationPage = () => {
     <div className="doctor-consult-container">
       <div
         className="calendly-inline-widget"
-        data-url="https://calendly.com/bharatwellbeing/medical-consultation?background_color=ffffff&text_color=0b007b"
+        data-url="https://calendly.com/yaswanth-k23/test-doctor-consultation?background_color=ffffff&text_color=0b007b"
         style={{ minWidth: "320px", height: "700px" }}
       ></div>
     </div>
