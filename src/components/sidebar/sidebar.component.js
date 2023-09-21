@@ -2,6 +2,7 @@ import { Fragment, memo, useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { FaUserDoctor } from "react-icons/fa6";
+import { BsCalendar2CheckFill } from "react-icons/bs";
 import "./sidebar.styles.css";
 
 import budget_b from "../../assets/icons/budget-blue.svg";
@@ -62,6 +63,8 @@ const Sidebar = () => {
       setActiveLinkIdx(3);
     } else if (location.pathname === "/doctor-consultation") {
       setActiveLinkIdx(4);
+    } else if (location.pathname === "/my-appointments") {
+      setActiveLinkIdx(5);
     }
     document.body.style.backgroundColor = "#f2f2f2";
     return () => {
@@ -130,22 +133,33 @@ const Sidebar = () => {
             <li className="sb-nav-item">
               <Link
                 to="/doctor-consultation"
-                onClick={() => setActiveLinkIdx(3)}
+                onClick={() => setActiveLinkIdx(4)}
                 className={`sb-nav-link ${
                   4 === activeLinkIdx ? "active" : null
                 }`}
               >
-                {/* <img
-                  src={<FaUserDoctor />}
-                  className="sb-nav-link-icon"
-                  alt="user-doctor-icon"
-                /> */}
                 <FaUserDoctor
                   className={`sb-nav-link-doctor-icon ${
                     4 === activeLinkIdx ? "active" : null
                   }`}
                 />
                 <span className="sb-nav-link-text">Consult Doctors</span>
+              </Link>
+            </li>
+            <li className="sb-nav-item">
+              <Link
+                to="/my-appointments"
+                onClick={() => setActiveLinkIdx(5)}
+                className={`sb-nav-link ${
+                  5 === activeLinkIdx ? "active" : null
+                }`}
+              >
+                <BsCalendar2CheckFill
+                  className={`sb-nav-link-doctor-icon ${
+                    5 === activeLinkIdx ? "active" : null
+                  }`}
+                />
+                <span className="sb-nav-link-text">My Appointments</span>
               </Link>
             </li>
           </ul>
