@@ -1,6 +1,7 @@
 import { Fragment, memo, useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { FaUserDoctor } from "react-icons/fa6";
 import "./sidebar.styles.css";
 
 import budget_b from "../../assets/icons/budget-blue.svg";
@@ -134,10 +135,15 @@ const Sidebar = () => {
                   4 === activeLinkIdx ? "active" : null
                 }`}
               >
-                <img
-                  src={4 === activeLinkIdx ? plane_b : plane_w}
+                {/* <img
+                  src={<FaUserDoctor />}
                   className="sb-nav-link-icon"
-                  alt="transactions-icon"
+                  alt="user-doctor-icon"
+                /> */}
+                <FaUserDoctor
+                  className={`sb-nav-link-doctor-icon ${
+                    4 === activeLinkIdx ? "active" : null
+                  }`}
                 />
                 <span className="sb-nav-link-text">Consult Doctors</span>
               </Link>
