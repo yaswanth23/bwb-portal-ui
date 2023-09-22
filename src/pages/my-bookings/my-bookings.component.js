@@ -36,8 +36,7 @@ const MyBookingsPage = () => {
     fetch(apiEndpoint, {
       method: "GET",
       headers: {
-        Authorization:
-          "eyJhbGciOiJIUzUxMiJ9.eyJzZWNyZXQiOiJiZmE3MzhhNjdkOGU5NGNmNDI4ZTdjZWE5Y2E1YzY3YiJ9.o4k544e1-NWMTBT28lOmEJe_D4TMOuwb11_rXLWb_SNhd6Oq70lWWqVdHzenEr1mhnVTDAtcOufnc4CMlIxUiw",
+        Authorization: apiKey,
         "Content-Type": "application/json",
       },
     })
@@ -226,11 +225,17 @@ const MyBookingsPage = () => {
                   <>
                     {bookingDetails.reports.length > 0 ? (
                       <>
-                        <h2 className="my-booking-report-header">Report List</h2>
+                        <h2 className="my-booking-report-header">
+                          Report List
+                        </h2>
                         <ul>
                           {bookingDetails.reports.map((report, index) => (
                             <li key={index}>
-                              <a href={report.url} download className="my-booking-report-file-url">
+                              <a
+                                href={report.url}
+                                download
+                                className="my-booking-report-file-url"
+                              >
                                 {report.url.split("/").pop()}{" "}
                               </a>
                             </li>
@@ -239,7 +244,9 @@ const MyBookingsPage = () => {
                       </>
                     ) : (
                       <>
-                        <h2 className="my-booking-report-header">No Reports Available</h2>
+                        <h2 className="my-booking-report-header">
+                          No Reports Available
+                        </h2>
                       </>
                     )}
                   </>

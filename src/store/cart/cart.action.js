@@ -4,11 +4,11 @@ import { createAction } from "../../utils/reducer/reducer.utils";
 const fetchCartCountFromAPI = async (userId, cartId) => {
   try {
     const apiUrl = process.env.REACT_APP_BE_API_URL;
+    const apiKey = process.env.REACT_APP_API_KEY;
     const url = apiUrl + `/cart/count?userId=${userId}&cartId=${cartId}`;
     const response = await fetch(url, {
       headers: {
-        Authorization:
-          "eyJhbGciOiJIUzUxMiJ9.eyJzZWNyZXQiOiJiZmE3MzhhNjdkOGU5NGNmNDI4ZTdjZWE5Y2E1YzY3YiJ9.o4k544e1-NWMTBT28lOmEJe_D4TMOuwb11_rXLWb_SNhd6Oq70lWWqVdHzenEr1mhnVTDAtcOufnc4CMlIxUiw",
+        Authorization: apiKey,
       },
     });
 

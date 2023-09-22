@@ -15,6 +15,7 @@ import {
 
 const BookDiagnosticsPage = () => {
   const apiUrl = process.env.REACT_APP_BE_API_URL;
+  const apiKey = process.env.REACT_APP_API_KEY;
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const userData = useSelector(selectUserData);
@@ -87,8 +88,7 @@ const BookDiagnosticsPage = () => {
           fetch(apiEndpoint, {
             method: "GET",
             headers: {
-              Authorization:
-                "eyJhbGciOiJIUzUxMiJ9.eyJzZWNyZXQiOiJiZmE3MzhhNjdkOGU5NGNmNDI4ZTdjZWE5Y2E1YzY3YiJ9.o4k544e1-NWMTBT28lOmEJe_D4TMOuwb11_rXLWb_SNhd6Oq70lWWqVdHzenEr1mhnVTDAtcOufnc4CMlIxUiw",
+              Authorization: apiKey,
               "Content-Type": "application/json",
             },
           })
@@ -122,8 +122,7 @@ const BookDiagnosticsPage = () => {
     fetch(apiEndpoint, {
       method: "GET",
       headers: {
-        Authorization:
-          "eyJhbGciOiJIUzUxMiJ9.eyJzZWNyZXQiOiJiZmE3MzhhNjdkOGU5NGNmNDI4ZTdjZWE5Y2E1YzY3YiJ9.o4k544e1-NWMTBT28lOmEJe_D4TMOuwb11_rXLWb_SNhd6Oq70lWWqVdHzenEr1mhnVTDAtcOufnc4CMlIxUiw",
+        Authorization: apiKey,
         "Content-Type": "application/json",
       },
     })
@@ -146,8 +145,7 @@ const BookDiagnosticsPage = () => {
     fetch(apiEndpoint, {
       method: "GET",
       headers: {
-        Authorization:
-          "eyJhbGciOiJIUzUxMiJ9.eyJzZWNyZXQiOiJiZmE3MzhhNjdkOGU5NGNmNDI4ZTdjZWE5Y2E1YzY3YiJ9.o4k544e1-NWMTBT28lOmEJe_D4TMOuwb11_rXLWb_SNhd6Oq70lWWqVdHzenEr1mhnVTDAtcOufnc4CMlIxUiw",
+        Authorization: apiKey,
         "Content-Type": "application/json",
       },
     })
@@ -170,8 +168,7 @@ const BookDiagnosticsPage = () => {
     fetch(apiEndpoint, {
       method: "GET",
       headers: {
-        Authorization:
-          "eyJhbGciOiJIUzUxMiJ9.eyJzZWNyZXQiOiJiZmE3MzhhNjdkOGU5NGNmNDI4ZTdjZWE5Y2E1YzY3YiJ9.o4k544e1-NWMTBT28lOmEJe_D4TMOuwb11_rXLWb_SNhd6Oq70lWWqVdHzenEr1mhnVTDAtcOufnc4CMlIxUiw",
+        Authorization: apiKey,
         "Content-Type": "application/json",
       },
     })
@@ -194,8 +191,7 @@ const BookDiagnosticsPage = () => {
     fetch(apiEndpoint, {
       method: "GET",
       headers: {
-        Authorization:
-          "eyJhbGciOiJIUzUxMiJ9.eyJzZWNyZXQiOiJiZmE3MzhhNjdkOGU5NGNmNDI4ZTdjZWE5Y2E1YzY3YiJ9.o4k544e1-NWMTBT28lOmEJe_D4TMOuwb11_rXLWb_SNhd6Oq70lWWqVdHzenEr1mhnVTDAtcOufnc4CMlIxUiw",
+        Authorization: apiKey,
         "Content-Type": "application/json",
       },
     })
@@ -244,8 +240,7 @@ const BookDiagnosticsPage = () => {
       fetch(apiEndpoint, {
         method: "POST",
         headers: {
-          Authorization:
-            "eyJhbGciOiJIUzUxMiJ9.eyJzZWNyZXQiOiJiZmE3MzhhNjdkOGU5NGNmNDI4ZTdjZWE5Y2E1YzY3YiJ9.o4k544e1-NWMTBT28lOmEJe_D4TMOuwb11_rXLWb_SNhd6Oq70lWWqVdHzenEr1mhnVTDAtcOufnc4CMlIxUiw",
+          Authorization: apiKey,
           "Content-Type": "application/json",
         },
         body: JSON.stringify(requestData),
