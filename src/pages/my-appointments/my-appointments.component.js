@@ -98,8 +98,8 @@ const MyAppointmentsPage = () => {
   };
 
   const getStatus = (startTime, status) => {
-    const currentIST = DateTime.now().setZone("Asia/Kolkata"); // Get current time in IST
-    const startTimeUTC = DateTime.fromISO(startTime, { zone: "utc" }); // Convert startTime to DateTime object in UTC
+    const currentIST = DateTime.now().setZone("Asia/Kolkata");
+    const startTimeUTC = DateTime.fromISO(startTime, { zone: "utc" });
 
     if (status === "canceled") {
       return "cancelled";
