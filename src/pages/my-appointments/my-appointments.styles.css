@@ -40,6 +40,13 @@
   margin-bottom: 1rem;
   display: flex;
 }
+.my-ad-details-first-section-container {
+  display: flex;
+}
+.my-ad-details-section-container.active {
+  display: flex;
+  justify-content: space-between;
+}
 .my-ad-date-section {
   padding: 0 1.5rem 0 0.5rem;
   box-sizing: border-box;
@@ -113,6 +120,24 @@
   cursor: default;
 }
 .my-ad-third-section span {
-    color: var(--primary-color);
-    text-transform: capitalize;
+  color: var(--primary-color);
+  text-transform: capitalize;
+}
+.my-ad-view-prescription-btn {
+  padding: 1rem;
+  border: none;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border-radius: 0.2rem;
+  height: 2rem;
+  letter-spacing: 1px;
+  font-family: var(--main-font);
+  color: var(--color-preload-text);
+  background: var(--primary-color);
 }

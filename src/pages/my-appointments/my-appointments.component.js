@@ -14,6 +14,7 @@ const MyAppointmentsPage = () => {
   const [allAppointments, setAllAppointments] = useState([]);
   const [metaData, setMetaData] = useState({});
   const [pageNumber, setPageNumber] = useState(1);
+  console.log(allAppointments);
 
   const startBookingIndex = (pageNumber - 1) * limit + 1;
   const endBookingIndex =
@@ -123,35 +124,51 @@ const MyAppointmentsPage = () => {
               const dateRange = convertUTCtoIST(item.startTime, item.endTime);
               const status = getStatus(item.startTime, item.status);
               return (
-                <div key={item._id} className="my-ad-details-section-container">
-                  <div className="my-ad-date-section">
-                    <p>{dateInfo.day}</p>
-                    <h3>{dateInfo.date}</h3>
-                    <p>{dateInfo.month}</p>
-                  </div>
-                  <div className="my-ad-second-section">
-                    <div className="my-ad-time-section">
-                      <BsFillClockFill className="my-ad-clock-icon" />
-                      <p className="my-ad-time-text">{dateRange}</p>
+                <div
+                  key={item._id}
+                  className={
+                    item.prescriptionDetails.length > 0
+                      ? "my-ad-details-section-container active"
+                      : "my-ad-details-section-container"
+                  }
+                >
+                  <div className="my-ad-details-first-section-container">
+                    <div className="my-ad-date-section">
+                      <p>{dateInfo.day}</p>
+                      <h3>{dateInfo.date}</h3>
+                      <p>{dateInfo.month}</p>
                     </div>
-                    <div
-                      className={
-                        status === "cancelled"
-                          ? "my-ad-status-sec cancelled"
-                          : "my-ad-status-sec"
-                      }
-                    >
-                      <p>{status}</p>
+                    <div className="my-ad-second-section">
+                      <div className="my-ad-time-section">
+                        <BsFillClockFill className="my-ad-clock-icon" />
+                        <p className="my-ad-time-text">{dateRange}</p>
+                      </div>
+                      <div
+                        className={
+                          status === "cancelled"
+                            ? "my-ad-status-sec cancelled"
+                            : "my-ad-status-sec"
+                        }
+                      >
+                        <p>{status}</p>
+                      </div>
+                    </div>
+                    <div className="my-ad-third-section">
+                      <h4>{item.scheduledEventName}</h4>
+                      <h3>Dr. {item.doctorName}</h3>
+                      <p>
+                        <span>Patient:</span> {item.patientName},{" "}
+                        {item.patientMobileNumber}
+                      </p>
                     </div>
                   </div>
-                  <div className="my-ad-third-section">
-                    <h4>{item.scheduledEventName}</h4>
-                    <h3>Dr. {item.doctorName}</h3>
-                    <p>
-                      <span>Patient:</span> {item.patientName},{" "}
-                      {item.patientMobileNumber}
-                    </p>
-                  </div>
+                  {item.prescriptionDetails.length > 0 && (
+                    <>
+                      <button className="my-ad-view-prescription-btn">
+                        View Prescription
+                      </button>
+                    </>
+                  )}
                 </div>
               );
             })}
