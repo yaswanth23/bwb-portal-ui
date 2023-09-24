@@ -21,8 +21,6 @@ const MyBookingsPage = () => {
   const [activeStepperCount, setActiveStepperCount] = useState(1);
   const [activeStepperItems, setActiveStepperItems] = useState([]);
 
-  console.log(activeStepperItems);
-
   const startBookingIndex = (pageNumber - 1) * limit + 1;
   const endBookingIndex =
     diagnosticBookings.length > 0
