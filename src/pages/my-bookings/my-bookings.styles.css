@@ -92,69 +92,9 @@
   }
 }
 .my-booking-stepper-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  margin: 1rem 2rem;
 }
-.my-booking-stepper-section {
-  margin: 2rem 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 80%;
-}
-.step-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  margin: 0 1rem;
-}
-.step-item p {
-  padding-top: 0.5rem;
-  font-size: 0.7rem;
-  font-weight: 600;
-  text-align: center;
-  color: var(--primary-color);
-}
-/* .step-item:not(:first-child):before {
-  content: "";
-  background-color: #ccc;
-  position: absolute;
-  width: 60%;
-  height: 3px;
-  right: 20%;
-  top: 45%;
-} */
-.step {
-  width: 30px;
-  height: 30px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 10;
-  position: relative;
-  background-color: var(--primary-color);
-  border-radius: 50%;
-  font-size: 0.9rem;
-  font-weight: bold;
-  color: var(--color-preload-text);
-}
-.active .step {
-  background-color: #3498db;
-}
-.complete .step {
-  background-color: #27ae60;
-}
-.complete:not(:first-child):before,
-.active:not(:first-child):before {
-  background-color: #27ae60;
-}
-.tick-icon {
-  font-size: 1.2rem;
-  color: var(--color-white);
-}
-.my-booking-reports-section{
+.my-booking-reports-section {
   margin: 1rem 0;
 }
 .my-booking-report-header {

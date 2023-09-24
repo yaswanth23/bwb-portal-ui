@@ -3,6 +3,7 @@ import Modal from "react-modal";
 import { TiTick } from "react-icons/ti";
 import { RxCross2 } from "react-icons/rx";
 import { useSelector } from "react-redux";
+import { Steps } from "antd";
 import "./my-bookings.styles.css";
 
 import { selectUserData } from "../../store/user/user.selector";
@@ -17,7 +18,10 @@ const MyBookingsPage = () => {
   const [limit, setLimit] = useState(10);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [bookingDetails, setBookingDetails] = useState({});
-  const [bookingStates, setBookingStates] = useState([]);
+  const [activeStepperCount, setActiveStepperCount] = useState(1);
+  const [activeStepperItems, setActiveStepperItems] = useState([]);
+
+  console.log(activeStepperItems);
 
   const startBookingIndex = (pageNumber - 1) * limit + 1;
   const endBookingIndex =
@@ -87,7 +91,19 @@ const MyBookingsPage = () => {
       })
       .then((data) => {
         setBookingDetails(data.data.bookingDetails[0]);
-        setBookingStates(data.data.bookingDetails[0].bookingStates);
+        let count = 0;
+        let getBookingStates = data.data.bookingDetails[0].bookingStates.map(
+          (item) => {
+            if (item.isActive) {
+              count++;
+            }
+            return {
+              description: item.stateName,
+            };
+          }
+        );
+        setActiveStepperCount(count);
+        setActiveStepperItems(getBookingStates);
       })
       .catch((error) => {
         console.error("There was a problem with the fetch operation:", error);
@@ -196,32 +212,15 @@ const MyBookingsPage = () => {
                 />
               </div>
               <div className="my-booking-stepper-container">
-                <div className="my-booking-stepper-section">
-                  {bookingStates.length > 0 && (
-                    <>
-                      {bookingStates.map((step, index) => (
-                        <div
-                          key={step.stateId}
-                          className={
-                            step.isActive ? "step-item complete" : "step-item"
-                          }
-                        >
-                          <div className="step">
-                            {step.isActive ? (
-                              <TiTick className="tick-icon" />
-                            ) : (
-                              index + 1
-                            )}
-                          </div>
-                          <p>{step.stateName}</p>
-                        </div>
-                      ))}
-                    </>
-                  )}
-                </div>
+                <Steps
+                  size="small"
+                  labelPlacement="vertical"
+                  current={activeStepperCount}
+                  items={activeStepperItems}
+                />
               </div>
               <div className="my-booking-reports-section">
-                {bookingStates.length > 0 && (
+                {activeStepperItems.length > 0 && (
                   <>
                     {bookingDetails.reports.length > 0 ? (
                       <>

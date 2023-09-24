@@ -14,7 +14,6 @@ const MyAppointmentsPage = () => {
   const [allAppointments, setAllAppointments] = useState([]);
   const [metaData, setMetaData] = useState({});
   const [pageNumber, setPageNumber] = useState(1);
-  console.log(allAppointments);
 
   const startBookingIndex = (pageNumber - 1) * limit + 1;
   const endBookingIndex =
