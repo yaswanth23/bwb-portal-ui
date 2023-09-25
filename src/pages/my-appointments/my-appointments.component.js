@@ -1,5 +1,6 @@
 import { memo, useState, useEffect } from "react";
 import { DateTime } from "luxon";
+import { Link } from "react-router-dom";
 import { BsFillClockFill } from "react-icons/bs";
 import { useSelector } from "react-redux";
 import "./my-appointments.styles.css";
@@ -163,9 +164,13 @@ const MyAppointmentsPage = () => {
                   </div>
                   {item.prescriptionDetails.length > 0 && (
                     <>
-                      <button className="my-ad-view-prescription-btn">
+                      <Link
+                        to={`/prescription/${item._id}`}
+                        className="my-ad-view-prescription-btn"
+                        target="_blank"
+                      >
                         View Prescription
-                      </button>
+                      </Link>
                     </>
                   )}
                 </div>

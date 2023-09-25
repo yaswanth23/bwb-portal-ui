@@ -1,0 +1,82 @@
+.vp-container {
+  margin: 0 20%;
+  padding: 0 5%;
+}
+.vp-logo-container {
+  margin-top: 5%;
+}
+.vp-logo {
+  font-family: var(--main-font);
+  font-size: 1.5rem;
+  letter-spacing: -1px;
+  color: var(--primary-color);
+  line-height: 2.8rem;
+}
+.vp-sub-logo-name {
+  font-family: var(--main-font-bold);
+  font-size: 1.5rem;
+}
+.vp-invoice-container {
+  margin-top: 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+.vp-invoice-container span,
+.vp-invoice-details-container span {
+  font-size: 1rem;
+}
+.vp-invoice-booking-id,
+.vp-invoice-issued-on,
+.vp-patient-details-header,
+.vp-patient-address-header {
+  font-weight: bold;
+}
+.vp-invoice-details-container {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+.vp-patient-details-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1.5rem;
+}
+.vp-sub-patient-details-main {
+  padding: 0.5rem 0;
+}
+.vp-download-receipt-main {
+  margin-top: 10rem;
+  margin-bottom: 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.vp-download-receipt-button {
+  border: none;
+  text-decoration: none;
+  cursor: pointer;
+  /* text-transform: uppercase; */
+  font-size: 1rem;
+  font-weight: 500;
+  width: 15rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border-radius: 0.5rem;
+  height: 3rem;
+  color: var(--color-preload-text);
+  background: var(--primary-color);
+}
+.vp-download-icon {
+  font-size: 1.2rem;
+  margin-right: 0.5rem;
+}
+.vp-items-description-container {
+  margin-top: 5rem;
+}
+.vp-c-patient-details-main {
+  margin-top: 1rem;
+}
