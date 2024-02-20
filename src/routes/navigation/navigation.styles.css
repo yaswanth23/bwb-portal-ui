@@ -1,0 +1,22 @@
+.logo-container {
+  margin: 2rem 4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.logo-container a {
+  text-decoration: none;
+}
+.logo {
+  font-family: var(--main-font);
+  font-size: 1.5rem;
+  letter-spacing: -1px;
+  /* font-weight: 100; */
+  color: var(--color-black);
+  line-height: 2.8rem;
+}
+.sub-logo-name {
+  font-family: var(--main-font-bold);
+  font-size: 1.5rem;
+  /* font-weight: 700; */
+}

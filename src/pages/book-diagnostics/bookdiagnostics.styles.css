@@ -1,0 +1,247 @@
+.bdp-container {
+  margin: 3rem;
+  border-radius: 0.5rem;
+}
+.bdp-first-container {
+  border-radius: 0.5rem;
+  padding: 1rem;
+  background-color: var(--color-white);
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+.bdp-first-sub-one-container {
+  display: flex;
+}
+.bdp-search-container {
+  width: 20rem;
+  margin: 1rem;
+}
+.bdp-diagnostics-container {
+  width: 30rem;
+  margin: 1rem 1rem 1rem 2rem;
+}
+.bdp-search-main {
+  background-color: var(--color-white);
+  width: 100%;
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid var(--primary-color);
+  border-radius: 0.5rem;
+  color: var(--color-grey);
+  cursor: pointer;
+}
+.bdp-diagnostics-main {
+  background-color: var(--color-white);
+  width: 100%;
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid var(--primary-color);
+  border-radius: 0.5rem;
+  color: var(--color-grey);
+  cursor: pointer;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.bdp-search-main.selected,
+.bdp-diagnostics-main.selected {
+  color: black;
+}
+.bdp-chevron-rotate {
+  transform: rotate(180deg);
+}
+.bdp-search-label,
+.bdp-diagnostics-label {
+  font-size: 1rem;
+}
+.bdp-ul-s-list {
+  background-color: var(--color-white);
+  margin-top: 0.5rem;
+  border-radius: 0.5rem;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  max-height: 15rem;
+  overflow-y: auto;
+  position: absolute;
+  z-index: 10;
+  width: 20rem;
+}
+.bdp-ul-s-list.close {
+  max-height: 0;
+}
+.bdp-ul-d-list {
+  background-color: var(--color-white);
+  margin-top: 0.5rem;
+  border-radius: 0.5rem;
+  /* box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); */
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  max-height: 15rem;
+  overflow-y: auto;
+  position: absolute;
+  z-index: 10;
+  width: 30rem;
+}
+.bdp-ul-d-list.close {
+  max-height: 0;
+}
+.bdp-s-list {
+  padding: 0.5rem;
+  font-size: 1rem;
+  transition: background-color 0.3s, color 0.3s;
+  &:hover {
+    cursor: pointer;
+    background-color: #00b0ff;
+    color: var(--color-white);
+  }
+}
+.bdp-s-list.p-selected {
+  background-color: #00b0ff;
+  color: var(--color-white);
+}
+.bdp-u-s-list {
+  display: flex;
+  align-items: center;
+  padding-left: 0.5rem;
+  position: sticky;
+  top: 0;
+  background-color: var(--color-white);
+}
+.bdp-u-search-icon {
+  color: var(--color-grey);
+}
+.bdp-u-search-text {
+  background-color: var(--color-white);
+  font-size: 0.9rem;
+  font-family: var(--main-font);
+  padding: 0.5rem;
+  outline: none;
+  border: none;
+  width: 100%;
+}
+.bdp-u-search-text::placeholder {
+  color: var(--color-grey);
+}
+.bdp-diagnostics-tests-text {
+  width: 27rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.bdp-first-sub-two-container {
+  margin: 1rem 1rem 0 1rem;
+  padding: 1rem 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  grid-gap: 15px;
+}
+.bdp-first-patient-details-container {
+  margin: 0 1rem;
+  padding: 1rem 0;
+}
+.bdp-first-patient-details-label {
+  border-bottom: 1px solid var(--primary-color);
+  cursor: default;
+}
+.bdp-first-patient-details-f-inputs,
+.bdp-first-patient-details-s-inputs {
+  margin-top: 1.5rem;
+  display: flex;
+  align-items: center;
+}
+.bdp-p-name-field {
+  margin-top: 0.5rem;
+  border: 1px solid var(--primary-color);
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  caret-color: var(--primary-color);
+  font-family: var(--main-font);
+  /* outline: none; */
+  width: 20rem;
+  font-size: 1rem;
+}
+.bdp-first-patient-details-f-mobile,
+.bdp-first-patient-details-s-gender {
+  margin-left: 3rem;
+}
+.bdp-p-mobile-field {
+  margin-top: 0.5rem;
+  border: 1px solid var(--primary-color);
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  caret-color: var(--primary-color);
+  font-family: var(--main-font);
+  /* outline: none; */
+  width: 20rem;
+  font-size: 1rem;
+}
+.bdp-p-age-field {
+  margin-top: 0.5rem;
+  border: 1px solid var(--primary-color);
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  caret-color: var(--primary-color);
+  font-family: var(--main-font);
+  /* outline: none; */
+  width: 20rem;
+  font-size: 1rem;
+}
+.bdp-p-gender-main {
+  display: flex;
+  margin-top: 0.5rem;
+  width: 12rem;
+  justify-content: space-between;
+}
+.bdp-p-gender-sub {
+  display: flex;
+}
+.bdp-p-gender-field {
+  margin-right: 0.5rem;
+  cursor: pointer;
+}
+.bdp-submit-button-container {
+  display: flex;
+}
+.bdp-submit-button-container {
+  margin: 1rem;
+}
+.bdp-submit-add-to-cart {
+  border: none;
+  text-decoration: none;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-size: 1rem;
+  font-weight: 600;
+  width: 17rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border-radius: 0.5rem;
+  height: 3rem;
+  color: var(--color-preload-text);
+  background: var(--primary-color);
+}
+.bdp-submit-add-to-cart-icon {
+  font-size: 1.5rem;
+  margin-right: 0.5rem;
+}
+.bdp-submit-clear-button {
+  text-decoration: none;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-size: 1rem;
+  font-weight: 600;
+  width: 17rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border-radius: 0.5rem;
+  height: 3rem;
+  background: var(--color-white);
+  margin-right: 2rem;
+}

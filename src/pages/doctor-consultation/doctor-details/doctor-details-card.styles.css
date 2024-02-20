@@ -1,0 +1,83 @@
+.dc-card-container {
+  padding: 1rem;
+  border: 1px solid var(--color-light-blue);
+  border-radius: 0.5rem;
+}
+.dc-card-first-container {
+  display: flex;
+}
+.dc-card-user-avatar {
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  width: 5rem;
+  height: 5rem;
+}
+.dc-card-avatar-image {
+  border-radius: 50%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.dc-card-user-online-indicator {
+  position: absolute;
+  width: 1rem;
+  height: 1rem;
+  background-color: #4caf50;
+  border-radius: 50%;
+  bottom: 0.1rem;
+  right: 0.5rem;
+  border: 2px solid #ffffff;
+}
+.dc-card-user-details {
+  margin-left: 1rem;
+}
+.dc-card-user-details h3 {
+  text-transform: capitalize;
+  font-size: 1rem;
+}
+.dc-card-user-speciality {
+  margin: 0.5rem 0;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: capitalize;
+  color: var(--color-grey);
+}
+.dc-card-work-icon {
+  font-size: 1.2rem;
+  color: var(--primary-color);
+}
+.dc-card-user-experience {
+  display: flex;
+  align-items: center;
+}
+.dc-card-user-experience-text {
+  margin-left: 0.5rem;
+  font-size: 0.8rem;
+  color: var(--color-grey);
+  font-weight: 700;
+}
+.dc-card-appointment-btn-container {
+  margin-top: 1rem;
+}
+.dc-card-appointment-btn {
+  border: none;
+  text-decoration: none;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border-radius: 0.3rem;
+  height: 3rem;
+  font-family: var(--main-font);
+  color: var(--color-preload-text);
+  background: var(--primary-color);
+}
+.dc-card-calender-icon {
+  font-size: 1.2rem;
+  margin-right: 0.5rem;
+}

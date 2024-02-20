@@ -1,0 +1,108 @@
+.m-bookings-container {
+  margin: 3rem;
+  border-radius: 0.5rem;
+  padding: 2rem;
+  background-color: var(--color-white);
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+.m-bookings-main-header {
+  cursor: default;
+}
+.m-booking-bottom-nav {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: flex-end;
+}
+.m-booking-showing-text-label span {
+  font-size: 0.8rem;
+  color: #8c8c8c;
+}
+.m-booking-previous-btn {
+  margin-left: 2rem;
+}
+.m-booking-next-btn {
+  margin-left: 0.5rem;
+}
+.m-booking-previous-btn,
+.m-booking-next-btn {
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 0.1rem 0.5rem;
+}
+.m-bookings-item-container {
+  margin: 1rem 0;
+}
+.m-bookings-table-main {
+  margin-top: 2rem;
+  border-collapse: collapse;
+  width: 100%;
+}
+.m-bookings-table-main th {
+  font-size: 1rem;
+  color: var(--primary-color);
+  background-color: var(--color-preload-text);
+  padding: 0.5rem;
+  text-align: left;
+  border-bottom: 1px solid var(--primary-color);
+}
+.m-bookings-table-main td {
+  font-size: 0.9rem;
+  padding: 0.5rem;
+  text-align: left;
+}
+.m-bookings-table-main th:nth-child(3),
+.m-bookings-table-main th:nth-child(4) {
+  text-align: right;
+}
+.m-bookings-table-main td:nth-child(1) {
+  cursor: pointer;
+  &:hover {
+    font-weight: 600;
+  }
+}
+.m-bookings-table-main td:nth-child(3),
+.m-bookings-table-main td:nth-child(4) {
+  text-align: right;
+}
+.even-row {
+  background-color: #fbfbfb;
+}
+.odd-row {
+  background-color: #e6e9ff;
+}
+.m-bookings-price-symbol {
+  font-size: 1.2rem;
+}
+.my-booking-modal-container {
+  width: 50rem;
+  padding: 1rem;
+}
+.my-booking-modal-header-main {
+  display: flex;
+  justify-content: space-between;
+}
+.my-booking-modal-header-main span {
+  font-size: 0.9rem;
+}
+.my-booking-modal-cancel-icon {
+  font-size: 1.7rem;
+  &:hover {
+    cursor: pointer;
+  }
+}
+.my-booking-stepper-container {
+  margin: 1rem 2rem;
+}
+.my-booking-reports-section {
+  margin: 1rem 0;
+}
+.my-booking-report-header {
+  font-size: 0.9rem;
+}
+.my-booking-report-file-url {
+  font-size: 0.8rem;
+}
+.my-booking-reports-section ul {
+  list-style: none;
+}

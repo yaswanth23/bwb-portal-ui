@@ -1,0 +1,640 @@
+.cp-empty-cart-page-container {
+  margin: 3rem;
+  border-radius: 0.5rem;
+}
+.cp-empty-cart-main {
+  border-radius: 0.5rem;
+  padding: 1rem;
+  background-color: #fff;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+.cp-empty-cart-image-main {
+  width: 30rem;
+  height: 30rem;
+  object-fit: contain;
+}
+.cp-empty-cart-img {
+  display: flex;
+  justify-content: center;
+}
+.cp-empty-cart-img-label {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+  color: var(--primary-color);
+}
+.cp-cart-items-container {
+  display: flex;
+  justify-content: space-between;
+  border-radius: 0.5rem;
+  padding: 2rem;
+  background-color: var(--color-white);
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+.cp-cart-items-loading-container {
+  display: flex;
+  justify-content: center;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  background-color: var(--color-white);
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+.cp-cart-items-info-patient-box p {
+  color: var(--primary-color);
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+.cp-cart-items-pricing-main {
+  margin: 1.5rem 0;
+  width: 25rem;
+}
+.cp-cart-items-pricing-box-one,
+.cp-cart-items-pricing-box-two {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.cp-cart-items-pricing-symbol-box-one,
+.cp-cart-items-pricing-symbol-box-two {
+  font-size: 1.3rem;
+  font-weight: 100;
+}
+.cp-cart-items-pricing-box-one-tp,
+.cp-cart-items-pricing-box-two-tp {
+  font-weight: 600;
+}
+.cp-cart-items-pricing-box-two {
+  margin: 1rem 0;
+  padding: 0.5rem 0;
+  border-top: 1px dashed var(--color-light-blue);
+  border-bottom: 1px dashed var(--color-light-blue);
+}
+.cp-cart-items-pricing-box-two p {
+  font-weight: 600;
+}
+.cp-cart-items-checkout-box {
+  margin-top: 2rem;
+}
+.cp-cart-items-checkout-button {
+  border: none;
+  text-decoration: none;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-size: 1rem;
+  font-weight: 600;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border-radius: 0.5rem;
+  height: 3rem;
+  color: var(--color-preload-text);
+  background: var(--primary-color);
+}
+.cp-modal-container {
+  background-color: #f2f2f2;
+  width: 26rem;
+}
+.cp-modal-cancel-icon {
+  font-size: 1.7rem;
+  &:hover {
+    cursor: pointer;
+  }
+}
+.cp-modal-header-main {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 1rem 0 1rem;
+}
+.cp-modal-header-main h3 {
+  font-size: 1rem;
+}
+.cp-modal-stepper {
+  margin: 0.7rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.cp-modal-stepper-one,
+.cp-modal-stepper-two,
+.cp-modal-stepper-three {
+  background-color: #c5c5c5;
+  height: 0.4rem;
+  width: 33%;
+}
+.cp-modal-stepper-one.active,
+.cp-modal-stepper-two.active,
+.cp-modal-stepper-three.active {
+  background-color: var(--primary-color);
+}
+.cp-modal-content-container {
+  padding: 1rem;
+}
+.cp-modal-patient-details-info-sec {
+  overflow: auto;
+  height: 500px;
+}
+.cp-modal-patient-details-info-sec h3 {
+  font-size: 1rem;
+}
+.cp-modal-patient-info-sub {
+  margin-top: 0.5rem;
+  background-color: var(--color-preload-text);
+  padding: 0.5rem;
+}
+.cp-modal-patient-info-sub p {
+  font-size: 0.8rem;
+}
+.cp-modal-patient-collect-number-container {
+  margin: 1rem 0;
+  padding: 1rem 0.5rem;
+  background-color: var(--color-white);
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
+}
+.cp-modal-patient-collect-number-main {
+  display: flex;
+  align-items: baseline;
+}
+.cp-modal-patient-mb-number-container-input {
+  font-family: var(--main-font);
+  width: 50%;
+  border: none;
+  border-bottom: 1px solid var(--primary-color);
+  outline: none;
+  background: transparent;
+  font-size: 1rem;
+  padding: 0.5rem;
+}
+.cp-modal-search-patient-btn {
+  margin-left: 0.5rem;
+  border: none;
+  text-decoration: none;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  font-weight: 600;
+  width: 10rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border-radius: 0.3rem;
+  height: 2rem;
+  color: var(--color-preload-text);
+  background: var(--primary-color);
+  font-family: var(--main-font);
+}
+.cp-modal-patients-view-container {
+  margin: 0.5rem 0;
+  padding: 0.5rem;
+  background-color: var(--color-white);
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
+}
+.cp-modal-patients-view-main {
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #bababa;
+}
+.cp-modal-patients-view-disp-main {
+  display: flex;
+  justify-content: space-between;
+}
+.cp-modal-pvd-ccontainer {
+  margin-left: 1rem;
+}
+.cp-modal-pvd-ccontainer p {
+  font-size: 0.9rem;
+}
+.cp-modal-files-icon {
+  font-size: 3rem;
+  color: #bababa;
+}
+.cp-modal-patients-view-disp-sub-content {
+  display: flex;
+}
+.cp-modal-form-remove-icon {
+  margin-left: 1rem;
+  font-size: 1.2rem;
+  color: var(--color-light-blue);
+  &:hover {
+    cursor: pointer;
+  }
+}
+.cp-modal-form-input {
+  width: 60%;
+  height: 2rem;
+  margin-bottom: 1rem;
+  border: none;
+  font-family: var(--main-font);
+  border-bottom: 1px solid var(--primary-color);
+  outline: none;
+  background: transparent;
+  font-size: 1rem;
+  padding: 0.5rem;
+}
+.cp-modal-form-input-age {
+  width: 20%;
+  height: 2rem;
+  margin-bottom: 1rem;
+  border: none;
+  border-bottom: 1px solid var(--primary-color);
+  outline: none;
+  background: transparent;
+  font-family: var(--main-font);
+  font-size: 1rem;
+  padding: 0.5rem;
+}
+.cp-modal-form-gender-main {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+.cp-modal-form-gender-female,
+.cp-modal-form-gender-male {
+  margin: 0 0.5rem;
+  &:hover {
+    cursor: pointer;
+  }
+}
+.cp-modal-patients-add-new-container {
+  margin-top: 1rem;
+}
+.cp-modal-form-add-more-text {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--primary-color);
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+.cp-modal-form-add-user-icon {
+  font-size: 1.2rem;
+  margin-right: 0.5rem;
+  color: var(--primary-color);
+}
+.cp-modal-error-message {
+  font-size: 0.7rem;
+  font-weight: bold;
+  color: var(--error-color);
+}
+.cp-modal-patients-add-new-main {
+  display: grid;
+  margin: 0.5rem 0;
+  padding: 0.5rem;
+  background-color: var(--color-white);
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
+}
+.cp-modal-patient-form-btns {
+  margin-bottom: 0.5rem;
+  display: flex;
+}
+.cp-modal-patient-cancel-btn {
+  margin-left: 0.5rem;
+  border: none;
+  text-decoration: none;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  font-weight: 600;
+  width: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border-radius: 0.3rem;
+  height: 2rem;
+  color: var(--primary-color);
+  background: transparent;
+  font-family: var(--main-font);
+}
+.cp-modal-patient-save-btn {
+  margin-left: 0.5rem;
+  border: none;
+  text-decoration: none;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  font-weight: 600;
+  width: 8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border-radius: 0.3rem;
+  height: 2rem;
+  color: var(--color-preload-text);
+  background: var(--primary-color);
+  font-family: var(--main-font);
+}
+.cp-modal-patient-continue-btn-container,
+.cp-modal-address-continue-btn-container {
+  margin: 1rem -1rem -1rem -1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.cp-modal-patient-continue-btn,
+.cp-modal-address-continue-btn {
+  border: none;
+  text-decoration: none;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-size: 1rem;
+  font-weight: 600;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 4rem;
+  letter-spacing: 0.1rem;
+  color: var(--color-preload-text);
+  background: var(--primary-color);
+  font-family: var(--main-font);
+}
+.cp-modal-address-details-info-sec {
+  overflow: auto;
+  height: 500px;
+}
+.cp-modal-address-details-info-sec h3 {
+  font-size: 1rem;
+}
+.cp-modal-address-form-container {
+  margin: 1rem 0;
+  padding: 1rem 0.5rem;
+  background-color: var(--color-white);
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
+}
+.cp-modal-af-input-main {
+  margin-top: 0.5rem;
+  font-family: var(--main-font);
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid var(--primary-color);
+  outline: none;
+  background: transparent;
+  font-size: 0.9rem;
+  padding: 0.5rem;
+}
+.cp-modal-af-main {
+  padding: 0 1rem;
+}
+.cp-modal-radio-btns {
+  margin: 1rem 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.cp-modal-radio-btns div {
+  display: flex;
+  align-items: center;
+  font-size: 0.9rem;
+}
+.cp-modal-radio-home,
+.cp-modal-radio-office,
+.cp-modal-radio-other {
+  width: 0.9rem;
+  height: 0.9rem;
+  margin-right: 0.5rem;
+  &:hover {
+    cursor: pointer;
+  }
+}
+.cp-modal-save-container {
+  margin: 1rem 0 0 1rem;
+}
+.cp-modal-save-button {
+  margin-left: 0.5rem;
+  border: none;
+  text-decoration: none;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  font-weight: 600;
+  width: 8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border-radius: 0.3rem;
+  height: 2rem;
+  color: var(--color-preload-text);
+  background: var(--primary-color);
+  font-family: var(--main-font);
+}
+.cp-modal-address-form-main {
+  display: flex;
+  font-size: 0.9rem;
+  justify-content: space-between;
+}
+.cp-modal-time-slot-details-info-sec {
+  overflow: auto;
+  height: 500px;
+}
+.cp-modal-time-slot-details-info-sec h3 {
+  font-size: 1rem;
+}
+.cp-modal-time-slot-info-sub {
+  margin-top: 0.5rem;
+  background-color: var(--color-preload-text);
+  padding: 0.5rem;
+}
+.cp-modal-time-slot-info-sub p {
+  font-size: 0.9rem;
+}
+.cp-modal-time-slot-container {
+  margin: 1rem 0;
+  padding: 1rem;
+  background-color: var(--color-white);
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
+}
+.cp-modal-ts-slider-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--color-light-blue);
+}
+.cp-modal-ts-slider-header button {
+  border: none;
+  background-color: transparent;
+  font-size: 1.5rem;
+  font-weight: bolder;
+  font-family: var(--main-font);
+  cursor: pointer;
+}
+.cp-modal-ts-slider-header p {
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+.cp-modal-ts-slider-slots {
+  margin-top: 1rem;
+}
+.cp-modal-ts-slider-slots ul {
+  list-style-type: none;
+}
+.cp-modal-ts-slider-slots-li {
+  padding: 0.5rem 0.3rem;
+  font-size: 0.8rem;
+  cursor: pointer;
+  color: var(--primary-color);
+  &:hover {
+    background-color: var(--color-preload-text);
+  }
+}
+.cp-modal-ts-slider-slots-li.selected {
+  background-color: var(--primary-color);
+  color: var(--color-preload-text);
+}
+.cp-modal-ts-slider-slots-na {
+  font-size: 0.8rem;
+  display: flex;
+  justify-content: center;
+}
+.cp-modal-time-slot-dis-container {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--primary-color);
+}
+.cp-modal-time-slot-dis-container h4 {
+  cursor: default;
+  color: var(--primary-color);
+  font-size: 0.9rem;
+}
+.cp-modal-time-slot-dis-container p {
+  cursor: default;
+  font-size: 0.8rem;
+  color: var(--color-light-blue);
+}
+.cp-cart-items-content-container {
+  border: 1px solid var(--color-light-blue);
+  width: 40rem;
+}
+.cp-cart-items-content-container-header {
+  padding: 1rem;
+  background-color: #e6e9ff;
+  margin-bottom: 0.5rem;
+}
+.cp-cart-items-content-container-header p {
+  text-transform: uppercase;
+  color: var(--primary-color);
+  font-size: 0.85rem;
+}
+.cp-cart-items-main-box-sub-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 0 1rem;
+}
+.cp-cart-items-main-box-sub-container h3 {
+  font-size: 0.85rem;
+  color: var(--primary-color);
+}
+.cp-cart-items-main-box-sub-container p {
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-light-blue);
+}
+.cp-cart-items-price-main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.cp-cart-items-info-price-symbol {
+  font-size: 1.3rem;
+  color: var(--primary-color);
+}
+.cp-cart-items-price-main p {
+  margin-top: 0;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--primary-color);
+}
+.cp-cart-items-main-box {
+  padding: 1rem 0;
+}
+.odd-box {
+  border-bottom: 1px solid var(--color-preload-text);
+}
+.cp-cart-items-remove-section span {
+  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  color: var(--color-light-blue);
+}
+.cp-cart-items-remove-section {
+  padding-top: 1rem;
+}
+.cp-cart-items-remove-icon {
+  margin-right: 0.3rem;
+}
+.cp-pd-disp-container {
+  border: 1px solid var(--color-light-blue);
+  width: 40rem;
+  margin-bottom: 1rem;
+}
+.cp-pd-disp-container-header {
+  padding: 1rem;
+  background-color: #e6e9ff;
+  margin-bottom: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+}
+.cp-pd-disp-container-header p {
+  text-transform: uppercase;
+  color: var(--primary-color);
+  font-size: 0.85rem;
+}
+.cp-pd-disp-container-header span {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--primary-color);
+}
+.cp-pd-disp-edit-icon {
+  font-size: 1rem;
+  margin-right: 0.3rem;
+}
+.cp-pd-disp-all-patient-details {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+}
+.user-plus-icon,
+.location-pin-icon,
+.calender-time-icon {
+  margin-right: 0.3rem;
+  font-size: 1rem;
+  color: var(--primary-color);
+}
+.cp-pd-patient-details-part-header span,
+.cp-pd-address-part-header span,
+.cp-pd-calender-part-header span {
+  display: flex;
+  align-items: center;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--primary-color);
+}
+.cp-pd-calender-part-content,
+.cp-pd-address-part-content,
+.cp-pd-patient-details-part-content {
+  margin-top: 1rem;
+}
+.cp-pd-calender-part-content p,
+.cp-pd-address-part-content p,
+.cp-pd-patient-details-part-sub-content p {
+  font-size: 0.8rem;
+}
+.cp-pd-patient-details-part-sub-content {
+  padding-bottom: 0.3rem;
+}

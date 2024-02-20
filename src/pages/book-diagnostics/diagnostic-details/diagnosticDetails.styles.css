@@ -1,0 +1,66 @@
+.dd-container {
+  border: 1px solid var(--color-light-blue);
+  border-radius: 0.5rem;
+}
+.dd-first-container {
+  padding: 1rem;
+  display: grid;
+}
+.dd-heart-fill-icon {
+  font-size: 1.5rem;
+  color: var(--color-light-blue);
+}
+.dd-first-icon-main {
+  display: flex;
+  justify-content: space-between;
+}
+.dd-delete-icon {
+  font-size: 1.5rem;
+  color: var(--color-light-blue);
+  cursor: pointer;
+}
+.dd-f-test-header {
+  padding: 0.5rem 0;
+}
+.dd-f-details-conainer {
+  margin-top: 1rem;
+}
+.dd-f-test-tube-icon,
+.dd-f-temperature-icon,
+.dd-f-clock-icon,
+.dd-f-calander-icon {
+  font-size: 1.2rem;
+  color: var(--color-light-blue);
+}
+.dd-f-details-st-m span,
+.dd-f-details-tt-m span,
+.dd-f-details-tat-m span,
+.dd-f-details-schedule-t-m span {
+  margin-left: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+.dd-f-details-st-m,
+.dd-f-details-tt-m,
+.dd-f-details-tat-m,
+.dd-f-details-schedule-t-m {
+  font-size: 0.85rem;
+}
+.dd-f-details-temperature-type,
+.dd-f-details-tat-type,
+.dd-f-details-schedule-type {
+  margin-top: 0.5rem;
+  display: flex;
+}
+.dd-details-price {
+  display: flex;
+  margin-top: 1rem;
+  align-items: center;
+}
+.dd-price-symbol {
+  font-size: 1.8rem;
+}
+.dd-details-price p {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
